@@ -246,6 +246,7 @@ export default function HideAppBar(props: Props) {
             }));
 
             setNavItems(updatedNavItems); // Update the state with the new array
+            setHoveredNavItem([]);
           }}
           sx={{ boxShadow: 0 }}
           color="inherit"
@@ -254,6 +255,7 @@ export default function HideAppBar(props: Props) {
             sx={{
               display: "flex",
               justifyContent: !isMobileView ? "space-between" : "start",
+              p: isMobileView ? 0 : 2,
             }}
           >
             <Box
@@ -391,7 +393,7 @@ export default function HideAppBar(props: Props) {
               <MenuIcon />
             </IconButton>
           </Toolbar>
-          {navItems.filter((item) => item.isExpanded === true).length > 0 && (
+          {hoveredNavItem.length > 0 && (
             <Grow
               in
               // style={{ transformOrigin: "0 0 0" }}
@@ -440,7 +442,7 @@ export default function HideAppBar(props: Props) {
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              // width: "70%",
+              width: "70%",
             },
           }}
         >
