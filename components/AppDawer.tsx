@@ -13,6 +13,8 @@ import {
   Drawer,
   Fab,
   Fade,
+  Grow,
+  Icon,
   IconButton,
   Link,
   List,
@@ -24,8 +26,11 @@ import {
 } from "@mui/material";
 import { usePathname } from "next/navigation";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import Image from "next/image";
+import ExpandLessRoundedIcon from "@mui/icons-material/ExpandLessRounded";
+import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 
 interface Props {
   /**
@@ -88,33 +93,86 @@ function ScrollTop(props: Props) {
   );
 }
 const drawerWidth = 240;
-const navItems: { name: string; url: string }[] = [
-  {
-    name: "Who we are",
-    url: "/",
-  },
-  {
-    name: "Products",
-    url: "/products",
-  },
-  {
-    name: "Verified",
-    url: "/verified",
-  },
-  {
-    name: "Young Champion",
-    url: "/champion",
-  },
-];
+
 export default function HideAppBar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
+  const [hoveredNavItem, setHoveredNavItem] = React.useState<
+    { name: string; url: string }[]
+  >([]);
   const pathname = usePathname();
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  const [navItems, setNavItems] = React.useState<
+    {
+      name: string;
+      url: string;
+      hasMore: boolean;
+      isExpanded?: boolean;
+      more?: { name: string; url: string }[];
+    }[]
+  >([
+    {
+      name: "Who we are",
+      url: "/company-info",
+      hasMore: true,
+      isExpanded: false,
+      more: [
+        {
+          name: "Our Initiatives",
+          url: "/our-initiatives",
+        },
+        {
+          name: "Our Team",
+          url: "/our-team",
+        },
+        {
+          name: "Our Partners",
+          url: "our-parterns",
+        },
+      ],
+    },
+    {
+      name: "Programmes",
+      url: "/programms",
+      hasMore: true,
+      more: [
+        {
+          name: "Programming/Codedust",
+          url: "/codedust",
+        },
+        {
+          name: "Leap",
+          url: "/leap",
+        },
+        {
+          name: "",
+          url: "",
+        },
+      ],
+    },
+    {
+      name: "Blogs",
+      url: "/blogs",
+      hasMore: false,
+    },
+    {
+      name: "Stories",
+      url: "/stories",
+      hasMore: false,
+    },
+    {
+      name: "Get involved",
+      url: "/join",
+      hasMore: false,
+    },
+  ]);
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   const drawer = (
     <Box sx={{ textAlign: "center" }}>
@@ -136,11 +194,12 @@ export default function HideAppBar(props: Props) {
             component="h5"
             sx={{
               flexGrow: 1,
-              color: (theme) => theme.palette.primary.main,
+              color: (theme) => theme.palette.success.main,
               fontWeight: 700,
+              letterSpacing: 3,
             }}
           >
-            Open Gates
+            SIR
           </Typography>
         </Box>
         <IconButton
@@ -174,28 +233,34 @@ export default function HideAppBar(props: Props) {
     </Box>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
   return (
     <React.Fragment>
       <CssBaseline />
+
       <HideOnScroll {...props}>
-        <AppBar sx={{ boxShadow: 0, p:2 }} color="inherit">
-          <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
+        <AppBar
+          onMouseLeave={() => {
+            const updatedNavItems = navItems.map((item) => ({
+              ...item,
+              isExpanded: false, // Set isExpanded to false when the mouse leaves AppBar
+            }));
+
+            setNavItems(updatedNavItems); // Update the state with the new array
+          }}
+          sx={{ boxShadow: 0 }}
+          color="inherit"
+        >
+          <Toolbar
+            sx={{
+              display: "flex",
+              justifyContent: !isMobileView ? "space-between" : "start",
+            }}
+          >
             <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
-                marginLeft: isMobileView ? "auto" : "0",
+                // marginLeft: isMobileView ? "auto" : "0",
                 marginRight: isMobileView ? "auto" : "0",
                 gap: 2,
               }}
@@ -221,6 +286,7 @@ export default function HideAppBar(props: Props) {
                     flexGrow: 1,
                     color: (theme) => theme.palette.success.main,
                     fontWeight: 700,
+                    letterSpacing: 3,
                   }}
                 >
                   SIR
@@ -231,32 +297,137 @@ export default function HideAppBar(props: Props) {
                   sx={{
                     flexGrow: 1,
                     color: "text.primary",
+                    letterSpacing: 2,
                   }}
                 >
-                  Learn, Earn, Inovate
+                  Learn, Earn, Innovate
                 </Typography>
               </Box>
             </Box>
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              {navItems.map((item) => (
-                <Button
-                  href={item.url}
-                  key={item.name}
-                  sx={{
-                    color: "text.secondary",
-                    textTransform: "none",
-                    ml: 0.5,
+            <Box
+              sx={{
+                display: { xs: "none", sm: "flex" },
+                gap: 5,
+                alignItems: "center",
+              }}
+            >
+              {navItems.map((item, index) => (
+                <div
+                  onMouseOver={() => {
+                    if (!item.hasMore || !item.more) return;
+                    const updatedNavItems = [...navItems]; // Create a copy of the original array
+                    updatedNavItems[index] = {
+                      ...item,
+                      isExpanded: true, // Set isExpanded to true on mouse over
+                    };
+                    setHoveredNavItem(item.more);
+                    setNavItems(updatedNavItems); // Update the state with the new array
                   }}
-                  variant={item.url === pathname ? "outlined" : "text"}
+                  onMouseOut={() => {
+                    if (!item.hasMore) return;
+
+                    if (
+                      !navItems.filter((item) => item.isExpanded === true)[0]
+                        .hasMore
+                    )
+                      return;
+
+                    const updatedNavItems = [...navItems]; // Create a copy of the original array
+                    updatedNavItems[index] = {
+                      ...item,
+                      isExpanded: false, // Set isExpanded to false on mouse out
+                    };
+                    setNavItems(updatedNavItems); // Update the state with the new array
+                  }}
+                  key={item.name}
                 >
-                  {item.name}
-                </Button>
+                  <Link
+                    href={item.url}
+                    sx={{
+                      color: "text.secondary",
+                      textTransform: "none",
+                      ml: 0.5,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
+                    }}
+                    underline="hover"
+                  >
+                    {item.name}
+                    {item.hasMore && (
+                      <>
+                        <Icon>
+                          {item.isExpanded ? (
+                            <ExpandLessRoundedIcon />
+                          ) : (
+                            <ExpandMoreRoundedIcon />
+                          )}
+                        </Icon>
+                      </>
+                    )}
+                  </Link>
+                </div>
               ))}
+              <Button
+                variant="contained"
+                color="success"
+                sx={{
+                  textTransform: "none",
+                  borderRadius: 5,
+                }}
+                href="/donate"
+                startIcon={<VolunteerActivismRoundedIcon />}
+              >
+                Donate
+              </Button>
             </Box>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 1, display: { sm: "none" } }}
+            >
+              <MenuIcon />
+            </IconButton>
           </Toolbar>
+          {navItems.filter((item) => item.isExpanded === true).length > 0 && (
+            <Grow
+              in
+              // style={{ transformOrigin: "0 0 0" }}
+              {...{ timeout: 1000 }}
+            >
+              <Toolbar
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(100px,300px))",
+                  alignContent: "center",
+                }}
+              >
+                {hoveredNavItem.map((item) => (
+                  <Box key={item.name}>
+                    <Link
+                      href={item.url}
+                      sx={{
+                        color: "text.secondary",
+                        textTransform: "none",
+                        ml: 0.5,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                      }}
+                      underline="hover"
+                    >
+                      {item.name}
+                    </Link>
+                  </Box>
+                ))}
+              </Toolbar>
+            </Grow>
+          )}
         </AppBar>
       </HideOnScroll>
-      <Box component="nav">
+      <Box component="nav" bgcolor={theme.palette.action.active}>
         <Drawer
           container={container}
           variant="temporary"
@@ -269,7 +440,7 @@ export default function HideAppBar(props: Props) {
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: "100%",
+              // width: "70%",
             },
           }}
         >
