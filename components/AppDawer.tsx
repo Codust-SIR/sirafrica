@@ -255,7 +255,7 @@ export default function HideAppBar(props: Props) {
             sx={{
               display: "flex",
               justifyContent: !isMobileView ? "space-between" : "start",
-              p: isMobileView ? 0 : 2,
+              p: isMobileView ? 1 : 2,
             }}
           >
             <Box

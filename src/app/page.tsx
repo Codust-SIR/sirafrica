@@ -309,6 +309,17 @@ export default function Home() {
             </Carousel>
             ;
           </Box>
+          {/* Stories News & Blogs */}
+          <Box
+            sx={{
+              alignItems: "center",
+              justifyContent: "center",
+              p: isMobileView ? 1 : 10,
+            }}
+            bgcolor={theme.palette.action.hover}
+          >
+            <Typography variant="h4">Latest Stories & Blogs</Typography>
+          </Box>
         </Box>
       </HideAppBar>
     </ThemeProvider>
