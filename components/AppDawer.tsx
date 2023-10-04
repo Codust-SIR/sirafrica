@@ -240,6 +240,7 @@ export default function HideAppBar(props: Props) {
 
       <HideOnScroll {...props}>
         <AppBar
+          color="transparent"
           onMouseLeave={() => {
             const updatedNavItems = navItems.map((item) => ({
               ...item,
@@ -249,14 +250,27 @@ export default function HideAppBar(props: Props) {
             setNavItems(updatedNavItems); // Update the state with the new array
             setHoveredNavItem([]);
           }}
-          sx={{ boxShadow: 0 }}
-          color="inherit"
+          sx={{
+            zIndex: (theme) => theme.zIndex.drawer + 1,
+            bgcolor: theme.palette.action.hover,
+            backdropFilter: "blur(7px)",
+            boxShadow: 0,
+            borderBottom: `1px solid ${theme.palette.divider}`,
+            border: "none",
+            height: hoveredNavItem.length > 0 ? "100vh" : "auto",
+            // display: "flex",
+            // flexDirection: "column",
+            // justifyContent: "space-between",
+            // alignItems: "center",
+            // p: 1,
+          }}
         >
           <Toolbar
             sx={{
               display: "flex",
               justifyContent: !isMobileView ? "space-between" : "start",
               p: isMobileView ? 1 : 2,
+              bgcolor: theme.palette.background.default,
             }}
           >
             <Box
@@ -413,8 +427,20 @@ export default function HideAppBar(props: Props) {
           {hoveredNavItem.length > 0 && (
             <Grow
               in
-              // style={{ transformOrigin: "0 0 0" }}
+              style={{
+                transformOrigin: "0 0 0",
+                backgroundColor: theme.palette.background.default,
+              }}
               {...{ timeout: 1000 }}
+              onMouseLeave={() => {
+                const updatedNavItems = navItems.map((item) => ({
+                  ...item,
+                  isExpanded: false, // Set isExpanded to false when the mouse leaves AppBar
+                }));
+
+                setNavItems(updatedNavItems); // Update the state with the new array
+                setHoveredNavItem([]);
+              }}
             >
               <Toolbar
                 sx={{
