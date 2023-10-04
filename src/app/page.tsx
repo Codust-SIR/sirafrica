@@ -16,10 +16,13 @@ import {
   Card,
   CardMedia,
   CardContent,
+  useTheme,
 } from "@mui/material";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { useMemo } from "react";
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
+import { styled } from "@mui/system";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 export default function Home() {
   const theme = useMemo(
@@ -340,7 +343,7 @@ export default function Home() {
               <MediaCard />
               <MediaCard />
             </Carousel>
-            ;
+            
           </Box>
           {/* Stories News & Blogs */}
           <Box
@@ -363,12 +366,23 @@ export default function Home() {
               <StoryBlogCard />
             </Carousel>
           </Box>
+          {/* Our Parters */}
+          <CenteredBox sx={{ p: isMobileView ? 1 : 10 }}>
+            <Typography variant="h4">Our Parterns</Typography>
+            <br />
+            <Parterns />
+          </CenteredBox>
         </Box>
       </HideAppBar>
     </ThemeProvider>
   );
 }
 
+const CenteredBox = styled(Box)`
+  display: grid;
+  height: auto;
+  text-align: center;
+`;
 function MediaCard() {
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -393,8 +407,10 @@ function MediaCard() {
   );
 }
 function StoryBlogCard() {
+  const theme = useTheme();
+  const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
   return (
-    <Card sx={{ maxWidth: 670, display: "flex" }}>
+    <Card sx={{ maxWidth: 670, display: isMobileView ? "block" : "flex" }}>
       <CardMedia
         component="img"
         alt="green iguana"
@@ -425,5 +441,90 @@ function StoryBlogCard() {
         </Button>
       </CardContent>
     </Card>
+  );
+}
+
+function Parterns() {
+  const theme = useTheme();
+  const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
+  const partners: { name: string; url: string; image: string }[] = [
+    {
+      name: "Source Humanitarian Network",
+      url: "https://source-network.org/",
+      image: "/shn_logo.png",
+    },
+    {
+      name: "Humanitarian OpenStreetMap Team",
+      url: "",
+      image: "/hot_logo.png",
+    },
+    {
+      name: "WUSC",
+      url: "",
+      image: "/wusc_logo.png",
+    },
+    {
+      name: "Don Bosco Kakuma",
+      url: "",
+      image: "/donbosco_logo.png",
+    },
+    {
+      name: "Danish Refugees Council",
+      url: "",
+      image: "/drc_logo.jpg",
+    },
+    {
+      name: "Cohere",
+      url: "",
+      image: "/cohere_logo.png",
+    },
+    {
+      name: "GIZ",
+      url: "",
+      image: "/giz_logo.jpeg",
+    },
+  ];
+  return (
+    <Box sx={{ flexGrow: 1, p: 2 }}>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          "--Grid-borderWidth": "1px",
+          borderTop: "var(--Grid-borderWidth) solid",
+          borderLeft: "var(--Grid-borderWidth) solid",
+          borderColor: "divider",
+          "& > div": {
+            borderRight: "var(--Grid-borderWidth) solid",
+            borderBottom: "var(--Grid-borderWidth) solid",
+            borderColor: "divider",
+          },
+        }}
+      >
+        {partners.map((item, index) => (
+          <Grid
+            key={index}
+            {...{ xs: 12, sm: 6, md: 4, lg: 3 }}
+            minHeight={160}
+          >
+            <Image
+              src={item.image}
+              height={500}
+              width={500}
+              style={{
+                borderRadius: 1,
+                width: isMobileView ? "100%" : "auto",
+                maxHeight: isMobileView ? 90 : 90,
+                maxWidth: isMobileView ? 90 : 250,
+              }}
+              alt="Image"
+            />
+            <Typography variant="subtitle2" color={"text.secondary"}>
+              {item.name}
+            </Typography>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 }

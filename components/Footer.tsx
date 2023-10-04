@@ -11,7 +11,7 @@ const Footer = () => {
         sx={{
           display: isMobileView ? "flex" : "grid",
           flexDirection: "column",
-          gap:5,
+          gap: 5,
           gridTemplateColumns: "repeat(auto-fit, minmax(100px,1fr))",
           alignContent: "center",
           p: isMobileView ? 1 : 10,
@@ -31,7 +31,7 @@ const Footer = () => {
           <br />
 
           <Link
-            href="mail:soliref12@gmail.com"
+            href="mailto:soliref12@gmail.com"
             color="inherit"
             underline="hover"
           >
@@ -39,11 +39,11 @@ const Footer = () => {
           </Link>
           <br />
           <Link
-            href="tel:soliref12@gmail.com"
+            href="mailto:info@sirafrica.org"
             color="inherit"
             underline="hover"
           >
-            soliref12@gmail.com
+            info@sirafrica.org
           </Link>
         </Box>
         <Box>

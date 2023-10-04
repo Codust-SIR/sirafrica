@@ -384,15 +384,31 @@ export default function HideAppBar(props: Props) {
                 Donate
               </Button>
             </Box>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 1, display: { sm: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
+            <Box display={{ sm: "none", xs: "flex" }} gap={3}>
+              <Button
+                variant="contained"
+                color="success"
+                sx={{
+                  textTransform: "none",
+                  borderRadius: 5,
+                  display: { sm: "none" },
+                }}
+                href="/donate"
+                startIcon={<VolunteerActivismRoundedIcon />}
+                size="small"
+              >
+                Donate
+              </Button>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 1, display: { sm: "none" } }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Box>
           </Toolbar>
           {hoveredNavItem.length > 0 && (
             <Grow
@@ -459,7 +475,7 @@ export default function HideAppBar(props: Props) {
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
-      <Footer/>
+      <Footer />
     </React.Fragment>
   );
 }
