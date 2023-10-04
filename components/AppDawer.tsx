@@ -101,7 +101,7 @@ export default function HideAppBar(props: Props) {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
   const [hoveredNavItem, setHoveredNavItem] = React.useState<
-    { name: string; url: string }[]
+    { name: string; url: string; lerarnMore: string; pageName: string }[]
   >([]);
   const pathname = usePathname();
   const handleDrawerToggle = () => {
@@ -347,7 +347,16 @@ export default function HideAppBar(props: Props) {
                       ...item,
                       isExpanded: true, // Set isExpanded to true on mouse over
                     };
-                    setHoveredNavItem(item.more);
+                    setHoveredNavItem(
+                      item.more.map((i) => {
+                        return {
+                          lerarnMore: item.url,
+                          name: i.name,
+                          url: i.url,
+                          pageName: item.name,
+                        };
+                      })
+                    );
                     setNavItems(updatedNavItems); // Update the state with the new array
                   }}
                   onMouseOut={() => {
@@ -477,6 +486,20 @@ export default function HideAppBar(props: Props) {
                     </Link>
                   </Box>
                 ))}
+                <Link
+                  color={theme.palette.success.main}
+                  href={hoveredNavItem[0].lerarnMore}
+                  underline="hover"
+                  sx={{
+                    fontWeight: 700,
+                    // "&:hover": {
+                    //   textDecoration: "underline", // Add underline on hover
+                    //   transition: "text-decoration 0.3s ease", // Add animation
+                    // },
+                  }}
+                >
+                  Learn about {hoveredNavItem[0].pageName.toLowerCase()}
+                </Link>
               </Toolbar>
             </Grow>
           )}
