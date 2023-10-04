@@ -314,6 +314,7 @@ export default function Home() {
             sx={{
               alignItems: "center",
               justifyContent: "center",
+           
               p: isMobileView ? 1 : 10,
             }}
             bgcolor={theme.palette.action.hover}

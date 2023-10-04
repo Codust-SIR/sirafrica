@@ -31,6 +31,7 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import Image from "next/image";
 import ExpandLessRoundedIcon from "@mui/icons-material/ExpandLessRounded";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
+import Footer from "./Footer";
 
 interface Props {
   /**
@@ -458,6 +459,7 @@ export default function HideAppBar(props: Props) {
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
+      <Footer/>
     </React.Fragment>
   );
 }
