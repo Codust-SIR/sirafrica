@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { useMemo } from "react";
+import EastRoundedIcon from "@mui/icons-material/EastRounded";
 
 export default function Home() {
   const theme = useMemo(
@@ -40,6 +41,25 @@ export default function Home() {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+  const responsive2 = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 2,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -83,9 +103,18 @@ export default function Home() {
                 Transforming Lives in Kakuma: Empowering Refugee and Local Youth
                 for a Dignified Future
               </Typography>
-              <Link color="inherit" underline="hover">
+              <Button
+                color="success"
+                sx={{
+                  textTransform: "none",
+                  borderRadius: 2,
+                  mt: 3,
+                }}
+                variant="contained"
+                endIcon={<EastRoundedIcon />}
+              >
                 Learn more
-              </Link>
+              </Button>
             </Box>
           </Box>
           <Box
@@ -276,15 +305,19 @@ export default function Home() {
                 </Box>
               </Box>
             </Box>
-
-            <Link
-              pt={isMobileView ? 4 : 0}
+            <Button
+              color="success"
+              sx={{
+                textTransform: "none",
+                borderRadius: 2,
+                mt: 3,
+              }}
               href="/programs"
-              underline="hover"
-              color={"inherit"}
+              variant="contained"
+              endIcon={<EastRoundedIcon />}
             >
               Learn more
-            </Link>
+            </Button>
           </Box>
 
           {/* Feedbacks */}
@@ -314,12 +347,21 @@ export default function Home() {
             sx={{
               alignItems: "center",
               justifyContent: "center",
-           
+
               p: isMobileView ? 1 : 10,
             }}
             bgcolor={theme.palette.action.hover}
           >
             <Typography variant="h4">Latest Stories & Blogs</Typography>
+            <br />
+            <Carousel responsive={responsive2}>
+              <StoryBlogCard />
+              <StoryBlogCard />
+              <StoryBlogCard />
+              <StoryBlogCard />
+              <StoryBlogCard />
+              <StoryBlogCard />
+            </Carousel>
           </Box>
         </Box>
       </HideAppBar>
@@ -346,6 +388,41 @@ function MediaCard() {
           Lizards are a widespread group of squamate reptiles, with over 6,000
           species, ranging across all continents except Antarctica
         </Typography>
+      </CardContent>
+    </Card>
+  );
+}
+function StoryBlogCard() {
+  return (
+    <Card sx={{ maxWidth: 670, display: "flex" }}>
+      <CardMedia
+        component="img"
+        alt="green iguana"
+        height="280"
+        style={{ maxHeight: 280, width: "100%", objectFit: "cover" }}
+        image="https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&cs=tinysrgb&w=600"
+        title="green iguana"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Lizard
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Lizards are a widespread group of squamate reptiles, with over 6,000
+          species, ranging across all continents except Antarctica
+        </Typography>
+        <Button
+          color="success"
+          sx={{
+            textTransform: "none",
+            borderRadius: 2,
+            mt: 3,
+          }}
+          variant="contained"
+          endIcon={<EastRoundedIcon />}
+        >
+          Read more
+        </Button>
       </CardContent>
     </Card>
   );
