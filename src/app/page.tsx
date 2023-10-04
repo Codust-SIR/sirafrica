@@ -23,6 +23,7 @@ import { useMemo } from "react";
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
 
 export default function Home() {
   const theme = useMemo(
@@ -343,7 +344,6 @@ export default function Home() {
               <MediaCard />
               <MediaCard />
             </Carousel>
-            
           </Box>
           {/* Stories News & Blogs */}
           <Box
@@ -372,6 +372,84 @@ export default function Home() {
             <br />
             <Parterns />
           </CenteredBox>
+          {/* Get involved */}
+          <Box p={2} bgcolor={theme.palette.action.hover}>
+            <Box
+              sx={{
+                height: isMobileView ? 300 : 400,
+                width: isMobileView ? "100%" : 900,
+                backgroundImage:
+                  "url(https://images.pexels.com/photos/7386009/pexels-photo-7386009.jpeg?auto=compress&cs=tinysrgb&w=1200)",
+                backgroundSize: "cover", // Initially set for larger screens
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "start",
+                justifyContent: "center",
+                color: "white",
+                pl: 6,
+                borderRadius: 1,
+                objectFit: "fill",
+              }}
+            >
+              <Typography
+                fontWeight={700}
+                variant={isMobileView ? "subtitle2" : "subtitle1"}
+                sx={{
+                  // textAlign: "center",
+                  width: isMobileView ? "100%" : "40%",
+
+                  color: (theme) => theme.palette.success.main,
+                  fontWeight: 700,
+                  letterSpacing: 3,
+                }}
+              >
+                SIR - Learn, Earn, Innovate
+              </Typography>
+              <br />
+              <Typography
+                fontWeight={700}
+                sx={{
+                  width: isMobileView ? "100%" : "40%",
+                }}
+                variant={isMobileView ? "h5" : "h4"}
+              >
+                Get Involved
+              </Typography>
+              <br />
+              <Typography
+                variant={isMobileView ? "body1" : "subtitle1"}
+                sx={{
+                  width: isMobileView ? "100%" : "30%",
+                }}
+              >
+                At SIR, we&rsquo;re committed to empowering Kakuma&rsquo;s youth
+                through digital education and training, founded by young
+                refugees in 2016.
+              </Typography>
+              <Typography
+                variant={isMobileView ? "body1" : "subtitle1"}
+                sx={{
+                  width: isMobileView ? "100%" : "30%",
+                }}
+              >
+                But we need your help
+              </Typography>
+              <br />
+              <Button
+                variant="contained"
+                color="success"
+                sx={{
+                  textTransform: "none",
+                  borderRadius: 5,
+                }}
+                size="large"
+                href="/donate"
+                startIcon={<VolunteerActivismRoundedIcon />}
+              >
+                Donate
+              </Button>
+            </Box>
+          </Box>
         </Box>
       </HideAppBar>
     </ThemeProvider>

@@ -15,7 +15,7 @@ const Footer = () => {
           gridTemplateColumns: "repeat(auto-fit, minmax(100px,1fr))",
           alignContent: "center",
           p: isMobileView ? 1 : 10,
-          bgcolor: "black",
+          bgcolor: "#303846",
           color: "white",
         }}
       >
