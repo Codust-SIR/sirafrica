@@ -331,7 +331,17 @@ export default function HideAppBar(props: Props) {
               {navItems.map((item, index) => (
                 <div
                   onMouseOver={() => {
-                    if (!item.hasMore || !item.more) return;
+                    if (!item.hasMore || !item.more) {
+                      const updatedNavItems = navItems.map((item) => ({
+                        ...item,
+                        isExpanded: false, // Set isExpanded to false when the mouse leaves AppBar
+                      }));
+
+                      setNavItems(updatedNavItems); // Update the state with the new array
+                      setHoveredNavItem([]);
+
+                      return;
+                    }
                     const updatedNavItems = [...navItems]; // Create a copy of the original array
                     updatedNavItems[index] = {
                       ...item,
