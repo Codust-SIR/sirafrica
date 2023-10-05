@@ -61,6 +61,7 @@ export default function Donate() {
               >
                 Kenya Board
               </Typography>
+              <br />
             </Box>
             <Box flex={0.8}>
               <Box>
@@ -72,8 +73,8 @@ export default function Donate() {
                     }
                     sx={{
                       borderRadius: 0.5,
-                      width: isMobileView ? "90%" : 100,
-                      height: isMobileView ? "90%" : 100,
+                      width: 100,
+                      height: 100,
                     }}
                   />
                   <Box>
