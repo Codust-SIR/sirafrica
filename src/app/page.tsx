@@ -104,8 +104,8 @@ export default function Home() {
                   width: isMobileView ? "100%" : "40%",
                 }}
               >
-                Transforming Lives in Kakuma: Empowering Refugee and Local Youth
-                for a Dignified Future
+                Transforming Lives: Empowering Refugee and Local Youth for a
+                Dignified Future
               </Typography>
               <Button
                 color="success"
@@ -148,12 +148,19 @@ export default function Home() {
               >
                 Solidarity Initiative for Refugees (SIR) is a local
                 community-based organization founded in 2016 by a dedicated
-                group of young refugees. Our mission is to harness the power of
-                technology to equip refugees in Kakuma with the essential skills
-                and tools needed to forge a brighter future. At SIR, we empower
-                the youth of Kakuma by providing access to education and
-                livelihood training, all delivered through innovative digital
-                learning methods.
+                group of young refugees.
+              </Typography>
+              <br />
+              <Typography
+                sx={{
+                  width: isMobileView ? "100%" : "80%",
+                }}
+              >
+                Our mission is to harness the power of technology to equip
+                refugees in Kakuma with the essential skills and tools needed to
+                forge a brighter future. At SIR, we empower the youth of Kakuma
+                by providing access to education and livelihood training, all
+                delivered through innovative digital learning methods.
               </Typography>
             </Box>
             <Box flex={0.3}>
