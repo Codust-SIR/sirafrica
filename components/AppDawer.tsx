@@ -124,12 +124,16 @@ export default function HideAppBar(props: Props) {
       isExpanded: false,
       more: [
         {
-          name: "Our Initiatives",
-          url: "/our-initiatives",
+          name: "Our Mission and vision",
+          url: "/our-mission-vision",
         },
         {
           name: "Our Team",
           url: "/our-team",
+        },
+        {
+          name: "Our Board",
+          url: "/our-board",
         },
         {
           name: "Our Partners",
@@ -169,16 +173,35 @@ export default function HideAppBar(props: Props) {
     {
       name: "Get involved",
       url: "/join",
-      hasMore: false,
+      hasMore: true,
+      isExpanded: false,
+      more: [
+        {
+          name: "Volunteer",
+          url: "/join/volunteer",
+        },
+        {
+          name: "Donate",
+          url: "/donate",
+        },
+        {
+          name: "Fundraise",
+          url: "/join/fundraise",
+        },
+        {
+          name: "Careers",
+          url: "/join/carrers",
+        },
+      ],
     },
   ]);
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
   const drawer = (
-    <Box sx={{ textAlign: "center" }}>
+    <Box>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Box display={"flex"} gap={1}>
+        <Box display={"flex"} pt={2} gap={1}>
           <Image
             height={100}
             width={100}
@@ -189,19 +212,31 @@ export default function HideAppBar(props: Props) {
               width: 30,
             }}
           />
+          <Box>
+            <Typography
+              variant="h5"
+              component="h5"
+              sx={{
+                flexGrow: 1,
+                color: (theme) => theme.palette.success.main,
+                fontWeight: 700,
+                letterSpacing: 3,
+              }}
+            >
+              SIR
+            </Typography>
+            <Typography
+              variant="caption"
+              component="p"
+              sx={{
+                color: "text.primary",
 
-          <Typography
-            variant="h5"
-            component="h5"
-            sx={{
-              flexGrow: 1,
-              color: (theme) => theme.palette.success.main,
-              fontWeight: 700,
-              letterSpacing: 3,
-            }}
-          >
-            SIR
-          </Typography>
+                fontSize: 14,
+              }}
+            >
+              Learn, Earn, Innovate
+            </Typography>
+          </Box>
         </Box>
         <IconButton
           color="inherit"
@@ -251,7 +286,6 @@ export default function HideAppBar(props: Props) {
             setHoveredNavItem([]);
           }}
           sx={{
-            zIndex: (theme) => theme.zIndex.drawer + 1,
             bgcolor: theme.palette.action.hover,
             backdropFilter: "blur(7px)",
             boxShadow: 0,
@@ -464,7 +498,7 @@ export default function HideAppBar(props: Props) {
               <Toolbar
                 sx={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(100px,300px))",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(90px,200px))",
                   alignContent: "center",
                 }}
               >
