@@ -34,25 +34,40 @@ export async function getBlogs() {
   return blogs;
 }
 
-
-export async function getNews() {
-  const news = await client.fetch(`
-    *[_type == "news"] {
-      author-> {
-        fullName,
-        position,
-        profile {
-          asset-> {
-            url
-          }
-        }
-      },
-      title,
-      description,
-      body
-    }
-  `);
-
-  return news;
+export interface Team {
+  _type: 'teams';
+  name: string;
+  _id: string;
+  _updatedAt: string;
+  _createdAt: string;
+  members: Member[];
 }
 
+interface Member {
+  _type: 'memberImage';
+  caption: string;
+  _key: string;
+  memberImage: MemberImage;
+}
+
+interface MemberImage {
+  // Define the properties of the memberImage object as needed
+  // For example, if you have properties like URL, dimensions, etc.
+  // You can add them here.
+  // Example:
+  url: string;
+  dimensions: {
+    width: number;
+    height: number;
+  };
+  // Add other properties if necessary
+}
+
+
+export async function getTeam(teamName: string):Promise<Team> {
+  const team:Team = await client.fetch(`
+    *[_type == "teams" && name == $teamName][0]
+  `, { teamName });
+
+  return team;
+}

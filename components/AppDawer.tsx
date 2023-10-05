@@ -523,7 +523,7 @@ export default function HideAppBar(props: Props) {
                 <Link
                   color={theme.palette.success.main}
                   href={hoveredNavItem[0].lerarnMore}
-                  underline="hover"
+                  // underline="hover"
                   sx={{
                     fontWeight: 700,
                     // "&:hover": {
