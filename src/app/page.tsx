@@ -17,6 +17,7 @@ import {
   CardMedia,
   CardContent,
   useTheme,
+  Avatar,
 } from "@mui/material";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { useMemo } from "react";
@@ -137,8 +138,14 @@ export default function Home() {
                 }}
                 variant={isMobileView ? "h5" : "h4"}
               >
-                SIR: Pioneering Change in Kakuma Through Technology and
-                Education
+                <span
+                  style={{
+                    color: theme.palette.success.main,
+                  }}
+                >
+                  SIR:{" "}
+                </span>
+                Pioneering Change Through Technology and Education
               </Typography>
               <br />
               <Typography
@@ -157,10 +164,10 @@ export default function Home() {
                 }}
               >
                 Our mission is to harness the power of technology to equip
-                refugees in Kakuma with the essential skills and tools needed to
-                forge a brighter future. At SIR, we empower the youth of Kakuma
-                by providing access to education and livelihood training, all
-                delivered through innovative digital learning methods.
+                refugees with the essential skills and tools needed to forge a
+                brighter future. At SIR, we empower the youth providing access
+                to education and livelihood training, all delivered through
+                innovative digital learning methods.
               </Typography>
             </Box>
             <Box flex={0.3}>
@@ -470,25 +477,21 @@ const CenteredBox = styled(Box)`
 `;
 function MediaCard() {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        alt="green iguana"
-        height="140"
-        style={{ maxHeight: 140, width: "100%", objectFit: "cover" }}
-        image="https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&cs=tinysrgb&w=600"
-        title="green iguana"
+    <Box sx={{ maxWidth: 345 }}>
+      <Avatar
+        sx={{ height: 200, width: 200, borderRadius: 1 }}
+        src="https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&cs=tinysrgb&w=600"
       />
-      <CardContent>
+      <Box>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          Name
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Lizards are a widespread group of squamate reptiles, with over 6,000
           species, ranging across all continents except Antarctica
         </Typography>
-      </CardContent>
-    </Card>
+      </Box>
+    </Box>
   );
 }
 function StoryBlogCard() {

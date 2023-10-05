@@ -35,126 +35,126 @@ export default function Donate() {
     []
   );
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-  const responsive2 = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 2,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <HideAppBar>
-        <Box>
-          {/* Get involved */}
-          <Box p={2} bgcolor={theme.palette.action.hover}>
-            <Box
-              sx={{
-                height: isMobileView ? 300 : 400,
-                width: isMobileView ? "100%" : 900,
-                backgroundImage:
-                  "url(https://images.pexels.com/photos/7386009/pexels-photo-7386009.jpeg?auto=compress&cs=tinysrgb&w=1200)",
-                backgroundSize: "cover", // Initially set for larger screens
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",
-                justifyContent: "center",
-                color: "white",
-                pl: 6,
-                borderRadius: 1,
-                objectFit: "fill",
-              }}
-            >
+        <Box p={isMobileView ? 1 : 15} pt={1}>
+          <Typography variant="h3">Mission and Vision</Typography>
+          <br />
+          <Box
+            bgcolor={theme.palette.action.hover}
+            sx={{
+              p: 2,
+              display: isMobileView ? "block" : "flex",
+              flex: 1,
+              alignItems: "center",
+              gap: 4,
+            }}
+          >
+            <Box flex={0.5}>
               <Typography
-                fontWeight={700}
-                variant={isMobileView ? "subtitle2" : "subtitle1"}
                 sx={{
-                  // textAlign: "center",
-                  width: isMobileView ? "100%" : "40%",
-
-                  color: (theme) => theme.palette.success.main,
-                  fontWeight: 700,
-                  letterSpacing: 3,
-                }}
-              >
-                SIR - Learn, Earn, Innovate
-              </Typography>
-              <br />
-              <Typography
-                fontWeight={700}
-                sx={{
-                  width: isMobileView ? "100%" : "40%",
+                  width: isMobileView ? "100%" : "80%",
+                  color: theme.palette.success.main,
                 }}
                 variant={isMobileView ? "h5" : "h4"}
               >
-                Get Involved
+                Our Vision
               </Typography>
               <br />
               <Typography
-                variant={isMobileView ? "body1" : "subtitle1"}
                 sx={{
-                  width: isMobileView ? "100%" : "30%",
+                  width: isMobileView ? "100%" : "80%",
                 }}
               >
-                At SIR, we&rsquo;re committed to empowering Kakuma&rsquo;s youth
-                through digital education and training, founded by young
-                refugees in 2016.
+                We aim to enhance/improve people’s lives through Education and
+                livelihood with the use of digital Technology as a major key to
+                influence positive change in order to guarantee more human
+                conditions to all living beings.
               </Typography>
-              <Typography
-                variant={isMobileView ? "body1" : "subtitle1"}
-                sx={{
-                  width: isMobileView ? "100%" : "30%",
-                }}
-              >
-                But we need your help
-              </Typography>
-              <br />
-              <Button
-                variant="contained"
-                color="success"
-                sx={{
-                  textTransform: "none",
-                  borderRadius: 5,
-                }}
-                size="large"
-                href="/donate"
-                startIcon={<VolunteerActivismRoundedIcon />}
-              >
-                Donate
-              </Button>
             </Box>
+            <Box flex={0.5}>
+              <Image
+                src={
+                  "https://images.pexels.com/photos/6476602/pexels-photo-6476602.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                }
+                height={500}
+                width={1200}
+                style={{
+                  borderRadius: 1,
+                  width: isMobileView ? "100%" : "auto",
+                }}
+                alt="Image"
+              />
+            </Box>
+          </Box>
+          <br />
+          <Box
+            bgcolor={theme.palette.action.hover}
+            sx={{
+              p: 2,
+              display: isMobileView ? "block" : "flex",
+              flex: 1,
+              alignItems: "center",
+              gap: 4,
+              flexDirection: isMobileView ? "column-reverse" : "unset",
+            }}
+          >
+            {!isMobileView && (
+              <Box flex={0.5}>
+                <Image
+                  src={
+                    "https://images.pexels.com/photos/6476602/pexels-photo-6476602.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  }
+                  height={500}
+                  width={1200}
+                  style={{
+                    borderRadius: 1,
+                    width: isMobileView ? "100%" : "auto",
+                  }}
+                  alt="Image"
+                />
+              </Box>
+            )}
+            <Box flex={0.5}>
+              <Typography
+                sx={{
+                  width: isMobileView ? "100%" : "80%",
+                  color: theme.palette.success.main,
+                }}
+                variant={isMobileView ? "h5" : "h4"}
+              >
+                Our Mission
+              </Typography>
+              <br />
+              <Typography
+                sx={{
+                  width: isMobileView ? "100%" : "80%",
+                }}
+              >
+                Our mission is to support youth (both men and women equally)
+                back to the path of regaining what insecurity, discrimination,
+                war, and disaster took away from them.
+              </Typography>
+            </Box>
+            {isMobileView && (
+              <Box flex={0.5}>
+                <Image
+                  src={
+                    "https://images.pexels.com/photos/6476602/pexels-photo-6476602.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  }
+                  height={500}
+                  width={1200}
+                  style={{
+                    borderRadius: 1,
+                    width: isMobileView ? "100%" : "auto",
+                  }}
+                  alt="Image"
+                />
+              </Box>
+            )}
           </Box>
         </Box>
       </HideAppBar>
