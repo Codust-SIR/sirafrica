@@ -161,12 +161,12 @@ export default function HideAppBar(props: Props) {
       ],
     },
     {
-      name: "Blogs",
+      name: "Blogs & News",
       url: "/blogs",
       hasMore: false,
     },
     {
-      name: "Stories",
+      name: "Impact Stories",
       url: "/stories",
       hasMore: false,
     },
