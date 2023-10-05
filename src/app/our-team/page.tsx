@@ -25,7 +25,7 @@ import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
-import { Team, getTeam } from "../../../services/sentry";
+import { Team, client, getTeam } from "../../../services/sentry";
 
 export default function Donate() {
   const theme = useMemo(
@@ -56,53 +56,10 @@ export default function Donate() {
 function BoardMember() {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
-  const partners: { name: string; url: string; image: string }[] = [
-    {
-      name: "Source Humanitarian Network",
-      url: "https://source-network.org/",
-      image:
-        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
-    },
-    {
-      name: "Humanitarian OpenStreetMap Team",
-      url: "",
-      image:
-        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
-    },
-    {
-      name: "WUSC",
-      url: "",
-      image:
-        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
-    },
-    {
-      name: "Don Bosco Kakuma",
-      url: "",
-      image:
-        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
-    },
-    {
-      name: "Danish Refugees Council",
-      url: "",
-      image:
-        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
-    },
-    {
-      name: "Cohere",
-      url: "",
-      image:
-        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
-    },
-    {
-      name: "GIZ",
-      url: "",
-      image:
-        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
-    },
-  ];
 
   const [managers, setManagers] = useState<Team>();
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     getTeam("Managers").then((teams) => {
       setManagers(teams);
@@ -112,6 +69,8 @@ function BoardMember() {
       setLoading(true);
     };
   }, []);
+  console.log("Managers :>>", managers);
+
   return (
     <Box sx={{ flexGrow: 1, p: 2 }}>
       {loading ? (
@@ -142,25 +101,28 @@ function BoardMember() {
             }
           }
         >
-          {managers?.members.map((item, index) => (
-            <Grid
-              key={index}
-              {...{ xs: 12, sm: 6, md: 4, lg: 3, mt: 5 }}
-              minHeight={200}
-            >
-              <Avatar
-                src={item.memberImage.url}
-                sx={{
-                  borderRadius: 0.5,
-                  width: isMobileView ? "100%" : 200,
-                  height: isMobileView ? "100%" : 200,
-                }}
-              />
-              <Typography variant="subtitle1" pt={1}>
-                {item.caption}
-              </Typography>
-            </Grid>
-          ))}
+          {managers?.members &&
+            managers?.members.map((item, index) => {
+              return (
+                <Grid
+                  key={index}
+                  {...{ xs: 12, sm: 6, md: 4, lg: 3, mt: 5 }}
+                  minHeight={200}
+                >
+                  <Avatar
+                    src={item.memberImage.asset.url}
+                    sx={{
+                      borderRadius: 0.5,
+                      width: isMobileView ? "90%" : 300,
+                      height: isMobileView ? "90%" : 300,
+                    }}
+                  />
+                  <Typography variant="subtitle1" pt={1}>
+                    {item.caption}
+                  </Typography>
+                </Grid>
+              );
+            })}
         </Grid>
       )}
     </Box>

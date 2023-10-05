@@ -33,9 +33,8 @@ export async function getBlogs() {
 
   return blogs;
 }
-
 export interface Team {
-  _type: 'teams';
+  _type: "teams";
   name: string;
   _id: string;
   _updatedAt: string;
@@ -43,31 +42,56 @@ export interface Team {
   members: Member[];
 }
 
-interface Member {
-  _type: 'memberImage';
+export interface Member {
+  _type: "memberImage"; // Specify the type as "memberImage"
   caption: string;
   _key: string;
   memberImage: MemberImage;
 }
 
-interface MemberImage {
-  // Define the properties of the memberImage object as needed
-  // For example, if you have properties like URL, dimensions, etc.
-  // You can add them here.
-  // Example:
-  url: string;
-  dimensions: {
-    width: number;
-    height: number;
+export interface MemberImage {
+  asset: {
+    url: string;
+    _ref:string
   };
-  // Add other properties if necessary
 }
 
-
-export async function getTeam(teamName: string):Promise<Team> {
-  const team:Team = await client.fetch(`
+export async function getTeam(teamName: string): Promise<Team> {
+  let team: Team = await client.fetch(
+    `
     *[_type == "teams" && name == $teamName][0]
-  `, { teamName });
+  `,
+    { teamName }
+  );
+
+  const imageUrl = async (_ref: string): Promise<string> => {
+    // Fetch the asset using the reference
+    const asset = await client.fetch(`*[_id == $ref][0]`, {
+      ref: _ref,
+    });
+
+    return asset.url;
+  };
+
+  const updatedMembers: Member[] = await Promise.all(
+    team.members.map(async (member) => {
+      const imageUrlValue = await imageUrl(member.memberImage.asset._ref);
+      const updatedMember: Member = {
+        _type: "memberImage",
+        caption: member.caption,
+        _key: member._key,
+        memberImage: {
+          asset: { url: imageUrlValue, _ref:member.memberImage.asset._ref },
+        },
+      };
+      return updatedMember;
+    })
+  );
+
+  team.members = updatedMembers;
+
+  console.log("Updated Team:", team); // Log the updated team with image URLs
 
   return team;
 }
+
