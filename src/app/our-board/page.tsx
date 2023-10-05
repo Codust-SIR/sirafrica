@@ -19,13 +19,14 @@ import {
   Avatar,
 } from "@mui/material";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
+import { getBoardMember } from "../../../services/sentry";
 
-export default function Donate() {
+export default function OurBoard() {
   const theme = useMemo(
     () =>
       createTheme({
@@ -36,7 +37,18 @@ export default function Donate() {
     []
   );
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
-
+  const [boardMembers, setBoardMembers] = useState()
+  const [loading, setLoading] = useState(true)
+ useEffect(() => {
+   getBoardMember("Kenya").then((teams) => {
+     setBoardMembers(teams);
+     setLoading(false);
+   });
+   return () => {
+     setLoading(true);
+   };
+ }, []);
+ console.log("boardMembers :>>", boardMembers);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

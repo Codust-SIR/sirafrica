@@ -95,3 +95,40 @@ export async function getTeam(teamName: string): Promise<Team> {
   return team;
 }
 
+export async function getBoardMember(boardName: string): Promise<Team> {
+  let board: Team = await client.fetch(
+    `
+    *[_type == "board_members" && name == $board_name][0]
+  `,
+    { board_name:boardName }
+  );
+
+  const imageUrl = async (_ref: string): Promise<string> => {
+    // Fetch the asset using the reference
+    const asset = await client.fetch(`*[_id == $ref][0]`, {
+      ref: _ref,
+    });
+
+    return asset.url;
+  };
+
+  // const updatedMembers: Member[] = await Promise.all(
+  //   team.members.map(async (member) => {
+  //     const imageUrlValue = await imageUrl(member.memberImage.asset._ref);
+  //     const updatedMember: Member = {
+  //       _type: "memberImage",
+  //       caption: member.caption,
+  //       _key: member._key,
+  //       memberImage: {
+  //         asset: { url: imageUrlValue, _ref:member.memberImage.asset._ref },
+  //       },
+  //     };
+  //     return updatedMember;
+  //   })
+  // );
+
+  // team.members = updatedMembers;
+
+  return board;
+}
+
