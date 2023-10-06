@@ -17,6 +17,7 @@ import {
   CardContent,
   useTheme,
   Avatar,
+  CircularProgress,
 } from "@mui/material";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { useEffect, useMemo, useState } from "react";
@@ -24,7 +25,7 @@ import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
-import { getBoardMember } from "../../../services/sentry";
+import { BoardMember, getBoardMember } from "../../../services/sentry";
 
 export default function OurBoard() {
   const theme = useMemo(
@@ -37,18 +38,17 @@ export default function OurBoard() {
     []
   );
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
-  const [boardMembers, setBoardMembers] = useState()
-  const [loading, setLoading] = useState(true)
- useEffect(() => {
-   getBoardMember("Kenya").then((teams) => {
-     setBoardMembers(teams);
-     setLoading(false);
-   });
-   return () => {
-     setLoading(true);
-   };
- }, []);
- console.log("boardMembers :>>", boardMembers);
+  const [boardMembers, setBoardMembers] = useState<BoardMember[]>([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    getBoardMember("Kenya").then((teams) => {
+      setBoardMembers(teams);
+      setLoading(false);
+    });
+    return () => {
+      setLoading(true);
+    };
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -76,46 +76,64 @@ export default function OurBoard() {
               <br />
             </Box>
             <Box flex={0.8}>
-              <Box>
-                {/* Person */}
-                <Box display={"flex"} gap={2}>
-                  <Avatar
-                    src={
-                      "https://cdn.sanity.io/images/fzwmuftm/production/014300963f5264d2efbdb3e910b74eccb2421385-800x800.jpg"
-                    }
-                    sx={{
-                      borderRadius: 0.5,
-                      width: 100,
-                      height: 100,
-                    }}
+              {loading ? (
+                <Box
+                  display={"grid"}
+                  sx={{
+                    placeItems: "center",
+                    heigh: "100%",
+                  }}
+                >
+                  <CircularProgress
+                    color="success"
+                    size={isMobileView ? 20 : 30}
                   />
-                  <Box>
-                    <Typography variant="h6">Bahana Hydrogen</Typography>
-                    <Typography variant="caption" color={"text.secondary"}>
-                      Board Chairperson
-                    </Typography>
-                  </Box>
                 </Box>
-                <br />
-                <Typography variant="body1">
-                  With a background in technology and a deep passion for refugee
-                  rights, our founder has a track record of successful project
-                  management and a strong understanding of the challenges faced
-                  by refugee youth. Lorem ipsum, dolor sit amet consectetur
-                  adipisicing elit. Vero veritatis quo minima. Sit deserunt amet
-                  nulla saepe similique id libero maxime dolor voluptatibus
-                  dolore? Facere incidunt ipsam natus voluptatem, autem cum aut
-                  quos illo vero eligendi quia repellendus. Cum odit officiis
-                  iste, ea dicta possimus velit, totam corrupti autem quisquam
-                  dolores itaque eveniet magnam? Dicta tenetur natus
-                  perspiciatis, sunt maxime perferendis voluptatibus, dolorum
-                  quae quo laborum repellendus quisquam pariatur! Placeat nulla
-                  saepe quidem sapiente quo dignissimos corrupti nihil aliquam
-                  ducimus repudiandae dolorum corporis ea velit ratione facere,
-                  veritatis amet sequi totam, id soluta culpa accusantium dicta.
-                  Nesciunt at eaque sunt.
-                </Typography>
-              </Box>
+              ) : (
+                <Box>
+                  {boardMembers.length > 0 &&
+                    boardMembers.map((member) => (
+                      <>
+                        <Box display={"flex"} gap={2}>
+                          <Avatar
+                            src={member.profile.asset.url}
+                            sx={{
+                              borderRadius: 0.5,
+                              width: 100,
+                              height: 100,
+                            }}
+                          />
+                          <Box>
+                            <Typography variant="h6">
+                              {member.fullname}
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              color={"text.secondary"}
+                            >
+                              {member.position}
+                            </Typography>
+                          </Box>
+                        </Box>
+                        <br />
+                        <Typography variant="body1">
+                          {member.desc[0].children[0]
+                            .text.split(`\n`)
+                            .map((item, key) => {
+                              return (
+                                <span key={key}>
+                                  {item}
+                                  <br />
+                                </span>
+                              );
+                            })}
+                        </Typography>
+                        <br />
+                        <br />
+                      </>
+                    ))}
+                </Box>
+              )}
             </Box>
           </Box>
           <br />

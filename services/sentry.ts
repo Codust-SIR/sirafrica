@@ -95,13 +95,33 @@ export async function getTeam(teamName: string): Promise<Team> {
   return team;
 }
 
-export async function getBoardMember(boardName: string): Promise<Team> {
-  let board: Team = await client.fetch(
+export interface BoardMember{
+  position:string;
+  fullname:string;
+  profile: {
+    asset: {
+      url: string;
+      _ref:string
+    };
+    _ref: string;
+  };
+  _key: string;
+  _type: 'profile';
+  desc:{
+    children:{text:string}[]
+  }[]
+}
+
+export async function getBoardMember(boardName: string): Promise<BoardMember[]> {
+  let board: {
+    members:BoardMember[]
+  } = await client.fetch(
     `
-    *[_type == "board_members" && name == $board_name][0]
+    *[_type == "board_members" && board_name == $board_name][0]
   `,
     { board_name:boardName }
   );
+ console.log("boardMembers A :>>",  board.members );
 
   const imageUrl = async (_ref: string): Promise<string> => {
     // Fetch the asset using the reference
@@ -112,23 +132,30 @@ export async function getBoardMember(boardName: string): Promise<Team> {
     return asset.url;
   };
 
-  // const updatedMembers: Member[] = await Promise.all(
-  //   team.members.map(async (member) => {
-  //     const imageUrlValue = await imageUrl(member.memberImage.asset._ref);
-  //     const updatedMember: Member = {
-  //       _type: "memberImage",
-  //       caption: member.caption,
-  //       _key: member._key,
-  //       memberImage: {
-  //         asset: { url: imageUrlValue, _ref:member.memberImage.asset._ref },
-  //       },
-  //     };
-  //     return updatedMember;
-  //   })
-  // );
+  const updatedMembers: BoardMember[] = await Promise.all(
+    
+    board.members.map(async (member) => {
+      const imageUrlValue = await imageUrl(member.profile.asset._ref);
+      const updatedMember: BoardMember = {
+        _type: "profile",
+        _key: member._key,
+        profile: {
+          asset: { url: imageUrlValue,_ref:member.profile._ref},
+          _ref:member.profile._ref
+        },
+        position:member.position,
+        desc:member.desc,
+        fullname:member.fullname,
 
-  // team.members = updatedMembers;
 
-  return board;
+      };
+      return updatedMember;
+    })
+  );
+
+  board.members = updatedMembers;
+
+
+  return board.members;
 }
 
