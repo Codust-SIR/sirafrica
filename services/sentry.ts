@@ -158,4 +158,50 @@ export async function getBoardMember(boardName: string): Promise<BoardMember[]> 
 
   return board.members;
 }
+export async function getPartners(boardName: string): Promise<BoardMember[]> {
+  let board: {
+    members:BoardMember[]
+  } = await client.fetch(
+    `
+    *[_type == "board_members" && board_name == $board_name][0]
+  `,
+    { board_name:boardName }
+  );
+ console.log("boardMembers A :>>",  board.members );
+
+  const imageUrl = async (_ref: string): Promise<string> => {
+    // Fetch the asset using the reference
+    const asset = await client.fetch(`*[_id == $ref][0]`, {
+      ref: _ref,
+    });
+
+    return asset.url;
+  };
+
+  const updatedMembers: BoardMember[] = await Promise.all(
+    
+    board.members.map(async (member) => {
+      const imageUrlValue = await imageUrl(member.profile.asset._ref);
+      const updatedMember: BoardMember = {
+        _type: "profile",
+        _key: member._key,
+        profile: {
+          asset: { url: imageUrlValue,_ref:member.profile._ref},
+          _ref:member.profile._ref
+        },
+        position:member.position,
+        desc:member.desc,
+        fullname:member.fullname,
+
+
+      };
+      return updatedMember;
+    })
+  );
+
+  board.members = updatedMembers;
+
+
+  return board.members;
+}
 

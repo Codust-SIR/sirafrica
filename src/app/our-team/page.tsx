@@ -106,15 +106,18 @@ function BoardMember() {
               return (
                 <Grid
                   key={index}
-                  {...{ xs: 12, sm: 6, md: 4, lg: 3, mt: 5 }}
+                  {...{ xs: 12, sm: 6, md: 4, lg: 3, mt: 5, p: 3 }}
+                  sx={{
+                    p: 1,
+                  }}
                   minHeight={200}
                 >
                   <Avatar
                     src={item.memberImage.asset.url}
                     sx={{
-                      borderRadius: 0.5,
-                      width: isMobileView ? "90%" : 300,
-                      height: isMobileView ? "90%" : 300,
+                      borderRadius: 1,
+                      width: isMobileView ? "90%" : 220,
+                      height: isMobileView ? "90%" : 220,
                     }}
                   />
                   <Typography variant="subtitle1" pt={1}>
