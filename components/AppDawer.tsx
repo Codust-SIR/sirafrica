@@ -147,29 +147,52 @@ export default function HideAppBar(props: Props) {
       hasMore: true,
       more: [
         {
-          name: "Programming/Codedust",
-          url: "/codedust",
+          name: "Education",
+          url: "/education",
         },
         {
-          name: "Leap",
-          url: "/leap",
+          name: "Livelihoods",
+          url: "/livelihoods",
         },
         {
-          name: "",
-          url: "",
+          name: "Advocacy & Capacity Strengthening",
+          url: "/advocacy",
+        },
+        {
+          name: "Climate Resilience",
+          url: "/climate",
+        },
+        {
+          name: "Digital solutions & Innovation",
+          url: "/digital",
         },
       ],
     },
     {
-      name: "Blogs & News",
-      url: "/blogs",
-      hasMore: false,
+      name: "Impact",
+      url: "/impact",
+      hasMore: true,
+      isExpanded: false,
+      more: [
+        {
+          name: "Stories",
+          url: "/impact/stories",
+        },
+        {
+          name: "In The News",
+          url: "/impact/news",
+        },
+        {
+          name: "Reports",
+          url: "/impact/reports",
+        },
+        {
+          name: "Blogs",
+          url: "/impact/blogs",
+        },
+      ],
     },
-    {
-      name: "Impact Stories",
-      url: "/stories",
-      hasMore: false,
-    },
+
     {
       name: "Get involved",
       url: "/join",
@@ -407,6 +430,7 @@ export default function HideAppBar(props: Props) {
                       ...item,
                       isExpanded: false, // Set isExpanded to false on mouse out
                     };
+
                     setNavItems(updatedNavItems); // Update the state with the new array
                   }}
                   key={item.name}

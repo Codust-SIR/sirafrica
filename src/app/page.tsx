@@ -18,6 +18,7 @@ import {
   CardContent,
   useTheme,
   Avatar,
+  CardActions,
 } from "@mui/material";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { useMemo } from "react";
@@ -37,25 +38,7 @@ export default function Home() {
     []
   );
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
+
   const responsive2 = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -75,6 +58,47 @@ export default function Home() {
       items: 1,
     },
   };
+  const programs: {
+    programe: string;
+    url: string;
+    description: string;
+    programeImage: string;
+  }[] = [
+    {
+      programe: "Education",
+      description: "d",
+      programeImage:
+        "https://images.pexels.com/photos/5896914/pexels-photo-5896914.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      url: "education",
+    },
+    {
+      programe: "Livelihoods ",
+      description: "d",
+      programeImage:
+        "https://images.pexels.com/photos/6457579/pexels-photo-6457579.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      url: "livelihoods",
+    },
+    {
+      programe: "Advocacy & Capacity Strengthening",
+      description: "d",
+      programeImage:
+        "https://images.pexels.com/photos/8385167/pexels-photo-8385167.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      url: "advocacy",
+    },
+    {
+      programe: "Climate Resilience",
+      description: "d",
+      programeImage:
+        "https://www.donovanhatem.com/wp-content/uploads/2017/06/Sustainability.png",
+      url: "climate",
+    },
+    {
+      programe: "Digital solutions & Innovation",
+      description: "d",
+      programeImage: "https://axyya.com/wp-content/uploads/2021/03/web2.png",
+      url: "digital",
+    },
+  ];
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -168,7 +192,8 @@ export default function Home() {
                 brighter future. At SIR, we empower the youth providing access
                 to education and livelihood training, all delivered through
                 innovative digital learning methods.
-              </Typography>
+              </Typography>{" "}
+              <br />
             </Box>
             <Box flex={0.3}>
               <Image
@@ -189,139 +214,36 @@ export default function Home() {
 
           <Box
             sx={{
-              display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              flexDirection: "column",
-              p: 5,
+
+              p: isMobileView ? 1 : 10,
             }}
             bgcolor={theme.palette.action.hover}
           >
-            <Typography variant={isMobileView ? "h5" : "h4"} fontWeight={700}>
+            <Typography
+              sx={{ alignItems: "center" }}
+              variant={isMobileView ? "h5" : "h4"}
+              fontWeight={700}
+            >
               Our Core Programs
-            </Typography>
-            <Typography variant={"body1"}>
+            </Typography>{" "}
+            <br />
+            <Typography sx={{ alignItems: "center" }} variant={"body1"}>
               Empowering young individuals with the necessary skills to pave the
               way for a brighter future of self-sufficiency.
             </Typography>
             <br />
+            <br />
             <Box
-              sx={{
-                p: isMobileView ? 1 : 10,
-                pt: 2,
-                display: isMobileView ? "block" : "flex",
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 10,
-              }}
+              display={"grid"}
+              gridTemplateColumns={"repeat(auto-fit, minmax(300px, 1fr))"}
+              gap={5}
+              pt={isMobileView ? 4 : 0}
             >
-              <Box flex={0.3}>
-                <Image
-                  src="/program-overview.png"
-                  height={600}
-                  width={600}
-                  style={{
-                    borderRadius: 1,
-                    width: isMobileView ? "90%" : 300,
-                    height: isMobileView ? "90%" : 300,
-                  }}
-                  alt="Programs"
-                />
-              </Box>
-              <Box
-                flex={0.7}
-                display={"grid"}
-                gridTemplateColumns={"repeat(auto-fit, minmax(300px, 1fr))"}
-                gap={5}
-                pt={isMobileView ? 4 : 0}
-              >
-                <Box display={"flex"} gap={2}>
-                  <Image
-                    src={"/training_img.png"}
-                    height={50}
-                    width={50}
-                    alt="Education"
-                  />
-                  <Box>
-                    <Typography
-                      variant="h6"
-                      color={theme.palette.success.main}
-                      fontWeight={700}
-                    >
-                      Education
-                    </Typography>
-                    <Typography variant="body1">
-                      We offer informal and digitally connected education to
-                      marginalized youth in the camp.
-                    </Typography>
-                  </Box>
-                </Box>
-                <Box display={"flex"} gap={2}>
-                  <Image
-                    src={"/mentor_img.png"}
-                    height={50}
-                    width={50}
-                    alt="Mentorship"
-                  />
-                  <Box>
-                    <Typography
-                      variant="h6"
-                      color={theme.palette.success.main}
-                      fontWeight={700}
-                    >
-                      Mentorship
-                    </Typography>
-                    <Typography variant="body1">
-                      Pairing Refugees with Experienced Tech Industry Mentors to
-                      Foster Job Readiness and Insights.
-                    </Typography>
-                  </Box>
-                </Box>
-                <Box display={"flex"} gap={2}>
-                  <Image
-                    src={"/freelancing_img.png"}
-                    height={50}
-                    width={50}
-                    alt="Mentorship"
-                  />
-                  <Box>
-                    <Typography
-                      variant="h6"
-                      color={theme.palette.success.main}
-                      fontWeight={700}
-                    >
-                      Freelancing
-                    </Typography>
-                    <Typography variant="body1">
-                      This pillar aims to unlock the independence of youth
-                      livelihoods.
-                    </Typography>
-                  </Box>
-                </Box>
-                <Box display={"flex"} gap={2}>
-                  <Image
-                    src={"/bussiness_img.png"}
-                    height={50}
-                    width={50}
-                    alt="Mentorship"
-                  />
-                  <Box>
-                    <Typography
-                      variant="h6"
-                      color={theme.palette.success.main}
-                      fontWeight={700}
-                    >
-                      Social Business
-                    </Typography>
-                    <Typography variant="body1">
-                      Embracing Social Entrepreneurship to Reduce Reliance on
-                      Donations and Generate Funds for Operational
-                      Sustainability
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
+              {programs.map((item, i) => (
+                <Programe {...item} key={i} />
+              ))}
             </Box>
             <Button
               color="success"
@@ -334,31 +256,10 @@ export default function Home() {
               variant="contained"
               endIcon={<EastRoundedIcon />}
             >
-              Learn more
+              Learn more of our programs
             </Button>
           </Box>
 
-          {/* Feedbacks */}
-          <Box
-            sx={{
-              p: isMobileView ? 1 : 10,
-              pt: 5,
-
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Typography variant="h4">What our beneficieries say</Typography>
-            <br />
-            <Carousel responsive={responsive}>
-              <MediaCard />
-              <MediaCard />
-              <MediaCard />
-              <MediaCard />
-              <MediaCard />
-              <MediaCard />
-            </Carousel>
-          </Box>
           {/* Stories News & Blogs */}
           <Box
             sx={{
@@ -367,7 +268,6 @@ export default function Home() {
 
               p: isMobileView ? 1 : 10,
             }}
-            bgcolor={theme.palette.action.hover}
           >
             <Typography variant="h4">Latest Stories & Blogs</Typography>
             <br />
@@ -381,13 +281,16 @@ export default function Home() {
             </Carousel>
           </Box>
           {/* Our Parters */}
-          <CenteredBox sx={{ p: isMobileView ? 1 : 10 }}>
+          <CenteredBox
+            bgcolor={theme.palette.action.hover}
+            sx={{ p: isMobileView ? 1 : 10 }}
+          >
             <Typography variant="h4">Our Parterns</Typography>
             <br />
             <Parterns />
           </CenteredBox>
           {/* Get involved */}
-          <Box p={2} bgcolor={theme.palette.action.hover}>
+          <Box p={2}>
             <Box
               sx={{
                 height: isMobileView ? 300 : 400,
@@ -475,30 +378,77 @@ const CenteredBox = styled(Box)`
   height: auto;
   text-align: center;
 `;
-function MediaCard() {
+function Programe({
+  description,
+  programe,
+  programeImage,
+  url,
+}: {
+  programe: string;
+  description: string;
+  programeImage: string;
+  url: string;
+}) {
+  const theme = useTheme();
+  const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
+
   return (
-    <Box sx={{ maxWidth: 345 }}>
-      <Avatar
-        sx={{ height: 200, width: 200, borderRadius: 1 }}
-        src="https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&cs=tinysrgb&w=600"
-      />
-      <Box>
-        <Typography gutterBottom variant="h5" component="div">
-          Name
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </Box>
-    </Box>
+    <Card sx={{ maxWidth: 345 }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          padding: 0,
+          margin: 0,
+        }}
+      >
+        <CardMedia
+          sx={{ height: isMobileView ? 180 : 240 }}
+          component={"img"}
+          image={programeImage}
+          title={programe}
+        />
+        <CardContent style={{ flex: 1 }}>
+          <Typography gutterBottom variant="h6" component="div">
+            {programe}
+          </Typography>
+          {/* <Typography variant="body2" color="text.secondary">
+            {description}
+          </Typography> */}
+        </CardContent>
+        <CardActions sx={{ p: 0, m: 0 }}>
+          <Button
+            color="success"
+            sx={{
+              textTransform: "none",
+              borderRadius: 0,
+              width: "100%",
+            }}
+            href={`/programs/${url}`}
+            variant="contained"
+            endIcon={<EastRoundedIcon />}
+          >
+            Learn more
+          </Button>
+        </CardActions>
+      </div>
+    </Card>
   );
 }
+
 function StoryBlogCard() {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
+  const isSmallPC = useMediaQuery(() => theme.breakpoints.down("md"));
   return (
-    <Card sx={{ maxWidth: 670, display: isMobileView ? "block" : "flex" }}>
+    <Card
+      sx={{
+        maxWidth: isSmallPC ? 500 : 670,
+        display: isMobileView ? "block" : "flex",
+        mr: 2,
+      }}
+    >
       <CardMedia
         component="img"
         alt="green iguana"
