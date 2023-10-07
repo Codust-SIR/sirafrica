@@ -19,8 +19,11 @@ import {
   useTheme,
   Avatar,
   CardActions,
+  Icon,
+  ListItemButton,
 } from "@mui/material";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import EventRoundedIcon from "@mui/icons-material/EventRounded";
+import NewspaperRoundedIcon from "@mui/icons-material/NewspaperRounded";
 import { useMemo } from "react";
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { styled } from "@mui/system";
@@ -192,7 +195,7 @@ export default function Home() {
                 brighter future. At SIR, we empower the youth providing access
                 to education and livelihood training, all delivered through
                 innovative digital learning methods.
-              </Typography>{" "}
+              </Typography>
               <br />
             </Box>
             <Box flex={0.3}>
@@ -237,7 +240,9 @@ export default function Home() {
             <br />
             <Box
               display={"grid"}
-              gridTemplateColumns={"repeat(auto-fit, minmax(300px, 1fr))"}
+              gridTemplateColumns={`repeat(auto-fit, minmax(${
+                isMobileView ? "100%" : "300px"
+              }, 1fr))`}
               gap={5}
               pt={isMobileView ? 4 : 0}
             >
@@ -269,7 +274,7 @@ export default function Home() {
               p: isMobileView ? 1 : 10,
             }}
           >
-            <Typography variant="h4">Latest Stories & Blogs</Typography>
+            <Typography variant="h4">Our impacts</Typography>
             <br />
             <Carousel responsive={responsive2}>
               <StoryBlogCard />
@@ -279,6 +284,33 @@ export default function Home() {
               <StoryBlogCard />
               <StoryBlogCard />
             </Carousel>
+            <br />
+            <br />
+            <Box
+              display={"grid"}
+              gridTemplateColumns={`repeat(auto-fit, minmax(${
+                isMobileView ? "100%" : "350px"
+              }, 1fr))`}
+              gap={5}
+              pt={isMobileView ? 4 : 0}
+            >
+              <MoreBlogcard />
+              <MoreBlogcard />
+              <MoreBlogcard />
+            </Box>
+            <Button
+              color="success"
+              sx={{
+                textTransform: "none",
+                borderRadius: 2,
+                mt: 3,
+              }}
+              href="/programs"
+              variant="contained"
+              endIcon={<EastRoundedIcon />}
+            >
+              Learn more of our impacts
+            </Button>
           </Box>
           {/* Our Parters */}
           <CenteredBox
@@ -294,7 +326,7 @@ export default function Home() {
             <Box
               sx={{
                 height: isMobileView ? 300 : 400,
-                width: isMobileView ? "100%" : 900,
+                width: isMobileView ? "100%" : "900px",
                 backgroundImage:
                   "url(https://images.pexels.com/photos/7386009/pexels-photo-7386009.jpeg?auto=compress&cs=tinysrgb&w=1200)",
                 backgroundSize: "cover", // Initially set for larger screens
@@ -446,7 +478,14 @@ function StoryBlogCard() {
       sx={{
         maxWidth: isSmallPC ? 500 : 670,
         display: isMobileView ? "block" : "flex",
+        m: 1,
         mr: 2,
+
+        "&:hover": {
+          boxShadow: 2,
+        },
+        boxShadow: 0,
+        border: `1px solid ${theme.palette.action.hover}`,
       }}
     >
       <CardMedia
@@ -481,6 +520,59 @@ function StoryBlogCard() {
     </Card>
   );
 }
+
+const MoreBlogcard = ({}: {}) => {
+  const theme = useTheme();
+  const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
+
+  return (
+    <Card
+      sx={{
+        maxWidth: isMobileView ? "100%" : 450,
+        "&:hover": {
+          boxShadow: 2,
+        },
+        boxShadow: 0,
+        border: `1px solid ${theme.palette.action.hover}`,
+      }}
+    >
+      <CardMedia
+        sx={{ height: 200 }}
+        image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+        title="green iguana"
+      />
+      <CardContent>
+        <Box display={"flex"} gap={2}>
+          <Typography
+            display={"flex"}
+            alignItems={"center"}
+            variant="caption"
+            gap={1}
+            color={"text.secondary"}
+          >
+            {" "}
+            <EventRoundedIcon fontSize="small" />
+            Ago
+          </Typography>
+
+          <Typography
+            display={"flex"}
+            alignItems={"center"}
+            variant="caption"
+            gap={1}
+            color={"text.secondary"}
+          >
+            <NewspaperRoundedIcon fontSize="small" />
+            Type
+          </Typography>
+        </Box>
+        <Typography mt={2} variant="h6">
+          Our Codedust program
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+};
 
 function Parterns() {
   const theme = useTheme();

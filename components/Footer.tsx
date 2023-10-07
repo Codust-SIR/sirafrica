@@ -6,7 +6,13 @@ const Footer = () => {
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
 
   return (
-    <Box>
+    <Box
+      bgcolor={"#303846"}
+      sx={{
+        p: isMobileView ? 1 : 10,
+        color: "white",
+      }}
+    >
       <Box
         sx={{
           display: isMobileView ? "flex" : "grid",
@@ -14,9 +20,6 @@ const Footer = () => {
           gap: 5,
           gridTemplateColumns: "repeat(auto-fit, minmax(100px,1fr))",
           alignContent: "center",
-          p: isMobileView ? 1 : 10,
-          bgcolor: "#303846",
-          color: "white",
         }}
       >
         <Box>
@@ -48,11 +51,33 @@ const Footer = () => {
         </Box>
         <Box>
           <Typography variant="h6">Join Our Journey</Typography>
+          <br />
+          <br />
+          <Link href="/donation" color="inherit" underline="hover">
+            Donate
+          </Link>
+          <br />
+          <br />
+          <Link href="/volunteer" color="inherit" underline="hover">
+            Volunteer
+          </Link>
+          <br />
+          <br />
+          <Link href="/partners" color="inherit" underline="hover">
+            Become a Partner
+          </Link>
         </Box>
         <Box>
           <Typography variant="h6">Follow Us</Typography>
         </Box>
       </Box>
+      <br />
+      <br />
+      <br />
+      <Typography>
+        Copyright © {new Date().getFullYear()} Solidarity Initiative for
+        Refugees
+      </Typography>
     </Box>
   );
 };
