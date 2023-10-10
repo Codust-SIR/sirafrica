@@ -156,60 +156,113 @@ export default function Home() {
               display: isMobileView ? "block" : "flex",
               flex: 1,
               alignItems: "center",
+              justifyContent: "center",
+              gap: 10,
             }}
           >
-            <Box flex={0.7}>
+            <Box
+              flex={0.7}
+              display={"grid"}
+              gridTemplateColumns={"repeat(auto-fit, minmax(300px, 1fr))"}
+              gap={5}
+              pt={isMobileView ? 4 : 0}
+            >
               <Typography
                 sx={{
-                  width: isMobileView ? "100%" : "80%",
+                  maxWidth: isMobileView ? "100%" : 450,
+                  "&:hover": {
+                    boxShadow: 2,
+                  },
+                  boxShadow: 0,
+                  border: `1px solid ${theme.palette.action.hover}`,
                 }}
-                variant={isMobileView ? "h5" : "h4"}
+                variant="body1"
               >
-                <span
-                  style={{
-                    color: theme.palette.success.main,
-                  }}
-                >
-                  SIR:{" "}
-                </span>
-                Pioneering Change Through Technology and Education
+                The lack of access to quality education for refugee and local
+                youth in Kakuma, where only 48% of primary school-age refugee
+                children are enrolled in school, hinders their ability to break
+                the cycle of poverty and build a better future.
               </Typography>
-              <br />
               <Typography
                 sx={{
-                  width: isMobileView ? "100%" : "80%",
+                  maxWidth: isMobileView ? "100%" : 450,
+                  "&:hover": {
+                    boxShadow: 2,
+                  },
+                  boxShadow: 0,
+                  border: `1px solid ${theme.palette.action.hover}`,
                 }}
+                variant="body1"
               >
-                Solidarity Initiative for Refugees (SIR) is a local
-                community-based organization founded in 2016 by a dedicated
-                group of young refugees.
+                High unemployment rates, with 67% of the working-age refugee
+                population in Kakuma being jobless, pose a significant challenge
+                to economic self-sustainability and dignity for both refugees
+                and locals.
               </Typography>
-              <br />
               <Typography
                 sx={{
-                  width: isMobileView ? "100%" : "80%",
+                  maxWidth: isMobileView ? "100%" : 450,
+                  "&:hover": {
+                    boxShadow: 2,
+                  },
+                  boxShadow: 0,
+                  border: `1px solid ${theme.palette.action.hover}`,
                 }}
+                variant="body1"
               >
-                Our mission is to harness the power of technology to equip
-                refugees with the essential skills and tools needed to forge a
-                brighter future. At SIR, we empower the youth providing access
-                to education and livelihood training, all delivered through
-                innovative digital learning methods.
+                Refugee-led Organizations (RLOs) like Solidarity Initiative for
+                Refugees face limited recognition and support, despite their
+                crucial role, as they struggle to advocate for the rights and
+                voices of displaced communities, who make up 40 million
+                worldwide.
               </Typography>
-              <br />
+              <Typography
+                sx={{
+                  maxWidth: isMobileView ? "100%" : 450,
+                  "&:hover": {
+                    boxShadow: 2,
+                  },
+                  boxShadow: 0,
+                  border: `1px solid ${theme.palette.action.hover}`,
+                }}
+                variant="body1"
+              >
+                The increasing frequency of climate-related disasters in Kakuma,
+                which affects over 185,000 residents, highlights the urgent need
+                to equip the community with the knowledge and tools to adapt and
+                build resilience in the face of environmental challenges.
+              </Typography>
+              <Typography
+                sx={{
+                  maxWidth: isMobileView ? "100%" : 450,
+                  "&:hover": {
+                    boxShadow: 2,
+                  },
+                  boxShadow: 0,
+                  border: `1px solid ${theme.palette.action.hover}`,
+                  p: 1,
+                  borderRadius: 3,
+                }}
+                variant="body1"
+              >
+                With limited access to technology, only 14% of the refugee
+                population in Kakuma has internet connectivity, preventing them
+                from harnessing the transformative potential of digital
+                solutions and innovation for education and
+                livelihood advancement.
+              </Typography>
             </Box>
             <Box flex={0.3}>
               <Image
-                src={
-                  "https://images.pexels.com/photos/18396656/pexels-photo-18396656/free-photo-of-a-group-of-young-women-cheering-and-men-being-upset.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                }
-                height={500}
-                width={300}
+                src="/program-overview.png"
+                height={600}
+                width={600}
                 style={{
                   borderRadius: 1,
-                  width: isMobileView ? "100%" : "auto",
+                  width: isMobileView ? "90%" : 300,
+                  height: isMobileView ? "90%" : 300,
                 }}
-                alt="Image"
+                alt="Programs"
               />
             </Box>
           </Box>
