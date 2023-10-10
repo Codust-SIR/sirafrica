@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import Image from "next/image";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -29,6 +29,7 @@ import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
+import { Logo, getPartners } from "../../services/sentry";
 
 export default function Home() {
   const theme = useMemo(
@@ -42,25 +43,6 @@ export default function Home() {
   );
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
 
-  const responsive2 = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 2,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
   const programs: {
     programe: string;
     url: string;
@@ -216,52 +198,7 @@ export default function Home() {
           </Box>
 
           {/* Stories News & Blogs */}
-          <Box
-            sx={{
-              alignItems: "center",
-              justifyContent: "center",
-
-              p: isMobileView ? 1 : 10,
-            }}
-          >
-            <Typography variant="h4">Our impacts</Typography>
-            <br />
-            <Carousel responsive={responsive2}>
-              <StoryBlogCard />
-              <StoryBlogCard />
-              <StoryBlogCard />
-              <StoryBlogCard />
-              <StoryBlogCard />
-              <StoryBlogCard />
-            </Carousel>
-            <br />
-            <br />
-            <Box
-              display={"grid"}
-              gridTemplateColumns={`repeat(auto-fit, minmax(${
-                isMobileView ? "100%" : "350px"
-              }, 1fr))`}
-              gap={5}
-              pt={isMobileView ? 4 : 0}
-            >
-              <MoreBlogcard />
-              <MoreBlogcard />
-              <MoreBlogcard />
-            </Box>
-            <Button
-              color="success"
-              sx={{
-                textTransform: "none",
-                borderRadius: 2,
-                mt: 3,
-              }}
-              href="/programs"
-              variant="contained"
-              endIcon={<EastRoundedIcon />}
-            >
-              Learn more of our impacts
-            </Button>
-          </Box>
+          <OurImpacts />
           {/* Our Parters */}
           <CenteredBox
             bgcolor={theme.palette.action.hover}
@@ -360,6 +297,79 @@ const CenteredBox = styled(Box)`
   height: auto;
   text-align: center;
 `;
+
+const OurImpacts = () => {
+  const theme = useTheme();
+  const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
+
+  const responsive2 = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 2,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+  return (
+    <Box
+      sx={{
+        alignItems: "center",
+        justifyContent: "center",
+
+        p: isMobileView ? 1 : 10,
+      }}
+    >
+      <Typography variant="h4">Our impacts</Typography>
+      <br />
+      <Carousel responsive={responsive2}>
+        <StoryBlogCard />
+        <StoryBlogCard />
+        <StoryBlogCard />
+        <StoryBlogCard />
+        <StoryBlogCard />
+        <StoryBlogCard />
+      </Carousel>
+      <br />
+      <br />
+      <Box
+        display={"grid"}
+        gridTemplateColumns={`repeat(auto-fit, minmax(${
+          isMobileView ? "100%" : "350px"
+        }, 1fr))`}
+        gap={5}
+        pt={isMobileView ? 4 : 0}
+      >
+        <MoreBlogcard />
+        <MoreBlogcard />
+        <MoreBlogcard />
+      </Box>
+      <Button
+        color="success"
+        sx={{
+          textTransform: "none",
+          borderRadius: 2,
+          mt: 3,
+        }}
+        href="/programs"
+        variant="contained"
+        endIcon={<EastRoundedIcon />}
+      >
+        Learn more of our impacts
+      </Button>
+    </Box>
+  );
+};
 function Programe({
   description,
   programe,
@@ -527,43 +537,18 @@ const MoreBlogcard = ({}: {}) => {
 function Parterns() {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
-  const partners: { name: string; url: string; image: string }[] = [
-    {
-      name: "Source Humanitarian Network",
-      url: "https://source-network.org/",
-      image: "/shn_logo.png",
-    },
-    {
-      name: "Humanitarian OpenStreetMap Team",
-      url: "",
-      image: "/hot_logo.png",
-    },
-    {
-      name: "WUSC",
-      url: "",
-      image: "/wusc_logo.png",
-    },
-    {
-      name: "Don Bosco Kakuma",
-      url: "",
-      image: "/donbosco_logo.png",
-    },
-    {
-      name: "Danish Refugees Council",
-      url: "",
-      image: "/drc_logo.jpg",
-    },
-    {
-      name: "Cohere",
-      url: "",
-      image: "/cohere_logo.png",
-    },
-    {
-      name: "GIZ",
-      url: "",
-      image: "/giz_logo.jpeg",
-    },
-  ];
+  const [partners, setPartners] = React.useState<Logo[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  React.useEffect(() => {
+    getPartners("SIR").then((parterns) => {
+      setPartners(parterns);
+      setLoading(false);
+    });
+    return () => {
+      setLoading(true);
+    };
+  }, []);
+
   return (
     <Box sx={{ flexGrow: 1, p: 2 }}>
       <Grid
@@ -588,7 +573,7 @@ function Parterns() {
             minHeight={160}
           >
             <Image
-              src={item.image}
+              src={item.imageFile.asset.url}
               height={500}
               width={500}
               style={{

@@ -52,7 +52,7 @@ export interface Member {
 export interface MemberImage {
   asset: {
     url: string;
-    _ref:string
+    _ref: string;
   };
 }
 
@@ -81,7 +81,7 @@ export async function getTeam(teamName: string): Promise<Team> {
         caption: member.caption,
         _key: member._key,
         memberImage: {
-          asset: { url: imageUrlValue, _ref:member.memberImage.asset._ref },
+          asset: { url: imageUrlValue, _ref: member.memberImage.asset._ref },
         },
       };
       return updatedMember;
@@ -95,33 +95,35 @@ export async function getTeam(teamName: string): Promise<Team> {
   return team;
 }
 
-export interface BoardMember{
-  position:string;
-  fullname:string;
+export interface BoardMember {
+  position: string;
+  fullname: string;
   profile: {
     asset: {
       url: string;
-      _ref:string
+      _ref: string;
     };
     _ref: string;
   };
   _key: string;
-  _type: 'profile';
-  desc:{
-    children:{text:string}[]
-  }[]
+  _type: "profile";
+  desc: {
+    children: { text: string }[];
+  }[];
 }
 
-export async function getBoardMember(boardName: string): Promise<BoardMember[]> {
+export async function getBoardMember(
+  boardName: string
+): Promise<BoardMember[]> {
   let board: {
-    members:BoardMember[]
+    members: BoardMember[];
   } = await client.fetch(
     `
     *[_type == "board_members" && board_name == $board_name][0]
   `,
-    { board_name:boardName }
+    { board_name: boardName }
   );
- console.log("boardMembers A :>>",  board.members );
+  console.log("boardMembers A :>>", board.members);
 
   const imageUrl = async (_ref: string): Promise<string> => {
     // Fetch the asset using the reference
@@ -133,21 +135,18 @@ export async function getBoardMember(boardName: string): Promise<BoardMember[]> 
   };
 
   const updatedMembers: BoardMember[] = await Promise.all(
-    
     board.members.map(async (member) => {
       const imageUrlValue = await imageUrl(member.profile.asset._ref);
       const updatedMember: BoardMember = {
         _type: "profile",
         _key: member._key,
         profile: {
-          asset: { url: imageUrlValue,_ref:member.profile._ref},
-          _ref:member.profile._ref
+          asset: { url: imageUrlValue, _ref: member.profile._ref },
+          _ref: member.profile._ref,
         },
-        position:member.position,
-        desc:member.desc,
-        fullname:member.fullname,
-
-
+        position: member.position,
+        desc: member.desc,
+        fullname: member.fullname,
       };
       return updatedMember;
     })
@@ -155,19 +154,29 @@ export async function getBoardMember(boardName: string): Promise<BoardMember[]> 
 
   board.members = updatedMembers;
 
-
   return board.members;
 }
-export async function getPartners(boardName: string): Promise<BoardMember[]> {
-  let board: {
-    members:BoardMember[]
+
+export interface Logo {
+  name: string;
+  description: { children: { text: string }[] }[];
+  url: string;
+  imageFile: {
+    asset: {
+      url: string;
+      _ref: string;
+    };
+  };
+}
+export async function getPartners(boardName: string): Promise<Logo[]> {
+  let partners: {
+    logo: Logo[];
   } = await client.fetch(
     `
-    *[_type == "board_members" && board_name == $board_name][0]
+    *[_type == "partners" && name == $name][0]
   `,
-    { board_name:boardName }
+    { name: boardName }
   );
- console.log("boardMembers A :>>",  board.members );
 
   const imageUrl = async (_ref: string): Promise<string> => {
     // Fetch the asset using the reference
@@ -178,30 +187,25 @@ export async function getPartners(boardName: string): Promise<BoardMember[]> {
     return asset.url;
   };
 
-  const updatedMembers: BoardMember[] = await Promise.all(
-    
-    board.members.map(async (member) => {
-      const imageUrlValue = await imageUrl(member.profile.asset._ref);
-      const updatedMember: BoardMember = {
-        _type: "profile",
-        _key: member._key,
-        profile: {
-          asset: { url: imageUrlValue,_ref:member.profile._ref},
-          _ref:member.profile._ref
+  const updatedPartners: Logo[] = await Promise.all(
+    partners.logo.map(async (lo) => {
+      const imageUrlValue = await imageUrl(lo.imageFile.asset._ref);
+      const updatedPartner: Logo = {
+        name: lo.name,
+        description: lo.description,
+        url: lo.url,
+        imageFile: {
+          asset: {
+            _ref: lo.imageFile.asset._ref,
+            url: imageUrlValue,
+          },
         },
-        position:member.position,
-        desc:member.desc,
-        fullname:member.fullname,
-
-
       };
-      return updatedMember;
+      return updatedPartner;
     })
   );
 
-  board.members = updatedMembers;
+  partners.logo = updatedPartners;
 
-
-  return board.members;
+  return partners.logo;
 }
-
