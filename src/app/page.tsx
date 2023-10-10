@@ -149,69 +149,17 @@ export default function Home() {
               </Button>
             </Box>
           </Box>
+
+          <br />
           <Box
             sx={{
               p: isMobileView ? 1 : 10,
               pt: 2,
-              display: isMobileView ? "block" : "flex",
               flex: 1,
               alignItems: "center",
             }}
           >
-            <Box flex={0.7}>
-              <Typography
-                sx={{
-                  width: isMobileView ? "100%" : "80%",
-                }}
-                variant={isMobileView ? "h5" : "h4"}
-              >
-                <span
-                  style={{
-                    color: theme.palette.success.main,
-                  }}
-                >
-                  SIR:{" "}
-                </span>
-                Pioneering Change Through Technology and Education
-              </Typography>
-              <br />
-              <Typography
-                sx={{
-                  width: isMobileView ? "100%" : "80%",
-                }}
-              >
-                Solidarity Initiative for Refugees (SIR) is a local
-                community-based organization founded in 2016 by a dedicated
-                group of young refugees.
-              </Typography>
-              <br />
-              <Typography
-                sx={{
-                  width: isMobileView ? "100%" : "80%",
-                }}
-              >
-                Our mission is to harness the power of technology to equip
-                refugees with the essential skills and tools needed to forge a
-                brighter future. At SIR, we empower the youth providing access
-                to education and livelihood training, all delivered through
-                innovative digital learning methods.
-              </Typography>
-              <br />
-            </Box>
-            <Box flex={0.3}>
-              <Image
-                src={
-                  "https://images.pexels.com/photos/18396656/pexels-photo-18396656/free-photo-of-a-group-of-young-women-cheering-and-men-being-upset.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                }
-                height={500}
-                width={300}
-                style={{
-                  borderRadius: 1,
-                  width: isMobileView ? "100%" : "auto",
-                }}
-                alt="Image"
-              />
-            </Box>
+            <Problems />
           </Box>
           {/* Core Programs */}
 
@@ -528,7 +476,7 @@ const MoreBlogcard = ({}: {}) => {
   return (
     <Card
       sx={{
-        maxWidth: isMobileView ? "100%" : 450,
+        maxWidth: isMobileView ? "100%" : 350,
         "&:hover": {
           boxShadow: 2,
         },
@@ -655,6 +603,93 @@ function Parterns() {
           </Grid>
         ))}
       </Grid>
+    </Box>
+  );
+}
+function Problems() {
+  const theme = useTheme();
+  const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
+  const partners: { title: string; description: string }[] = [
+    {
+      title: "Education:",
+      description:
+        "Globally, only 23% of refugee youth have access to secondary education and technical and vocational education and training (TVET).",
+    },
+    {
+      title: "Livelihoods",
+      description:
+        "80% of refugees live in poverty, and only 20% have access to formal employment.",
+    },
+    {
+      title: "Advocacy & Capacity Strengthening",
+      description:
+        " Refugee-led organizations are often marginalized and lack the resources and capacity to advocate for their own rights and needs.",
+    },
+    {
+      title: "Climate Resilience",
+      description:
+        "Climate Resilience: Refugees are disproportionately affected by climate change, and they often lack the skills and resources to adapt to new challenges.",
+    },
+    {
+      title: "Digital solutions & Innovation",
+      description:
+        "Refugees often lack access to information and opportunities, which limits their ability to learn, work, and connect with others.",
+    },
+  ];
+  return (
+    <Box sx={{ flexGrow: 1, p: 2 }}>
+      <Box
+        sx={{
+          display: isMobileView ? "block" : "flex",
+          flex: 1,
+        }}
+      >
+        <Box
+          display={"grid"}
+          gridTemplateColumns={`repeat(auto-fit, minmax(${
+            isMobileView ? "100%" : "300px"
+          }, 1fr))`}
+          gap={1}
+          flex={0.7}
+          // placeCon
+          pt={isMobileView ? 4 : 0}
+        >
+          {partners.map((item, index) => (
+            <Grid
+              key={index}
+              {...{ xs: 12, sm: 6, md: 4, lg: 3 }}
+              // minHeight={200}
+              sx={{
+                "&:hover": {
+                  boxShadow: 2,
+                },
+                boxShadow: 0,
+                border: `1px solid ${theme.palette.action.hover}`,
+                p: 2,
+                borderRadius: 2,
+              }}
+            >
+              {/* <Typography variant="h6">{item.title}</Typography> */}
+              <Typography variant="body1" color={"text.secondary"}>
+                {item.description}
+              </Typography>
+            </Grid>
+          ))}
+        </Box>
+        <Box flex={0.3}>
+          <Image
+            src="/program-overview.png"
+            height={600}
+            width={600}
+            style={{
+              borderRadius: 1,
+              width: isMobileView ? "90%" : 300,
+              height: isMobileView ? "90%" : 300,
+            }}
+            alt="Programs"
+          />
+        </Box>
+      </Box>
     </Box>
   );
 }
