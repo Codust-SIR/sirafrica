@@ -655,6 +655,7 @@ function Problems() {
           flex={0.7}
           // placeCon
           pt={isMobileView ? 4 : 0}
+          // placeItems={"center"}
         >
           {partners.map((item, index) => (
             <Grid
@@ -678,15 +679,15 @@ function Problems() {
             </Grid>
           ))}
         </Box>
-        <Box flex={0.3}>
+        <Box flex={0.3} p={1}>
           <Image
-            src="/program-overview.png"
+            src="https://images.pexels.com/photos/7275394/pexels-photo-7275394.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             height={600}
             width={600}
             style={{
               borderRadius: 1,
               width: isMobileView ? "90%" : 300,
-              height: isMobileView ? "90%" : 300,
+              height: isMobileView ? "90%" : "auto",
             }}
             alt="Programs"
           />
