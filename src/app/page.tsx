@@ -596,31 +596,36 @@ function Parterns() {
 function Problems() {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
-  const partners: { title: string; description: string }[] = [
+  const partners: { title: string; description: string; imgUrl: string }[] = [
     {
       title: "Education:",
       description:
         "Globally, only 23% of refugee youth have access to secondary education and technical and vocational education and training (TVET).",
+      imgUrl: "/training_img.png",
     },
     {
       title: "Livelihoods",
       description:
         "80% of refugees live in poverty, and only 20% have access to formal employment.",
+      imgUrl: "/freelancing_img.png",
     },
     {
       title: "Advocacy & Capacity Strengthening",
       description:
         " Refugee-led organizations are often marginalized and lack the resources and capacity to advocate for their own rights and needs.",
+      imgUrl: "/mic.png",
     },
     {
       title: "Climate Resilience",
       description:
-        "Climate Resilience: Refugees are disproportionately affected by climate change, and they often lack the skills and resources to adapt to new challenges.",
+        "Refugees are disproportionately affected by climate change, and they often lack the skills and resources to adapt to new challenges.",
+      imgUrl: "/climate.png",
     },
     {
       title: "Digital solutions & Innovation",
       description:
         "Refugees often lack access to information and opportunities, which limits their ability to learn, work, and connect with others.",
+      imgUrl: "/idea.png",
     },
   ];
   return (
@@ -655,9 +660,16 @@ function Problems() {
                 border: `1px solid ${theme.palette.action.hover}`,
                 p: 2,
                 borderRadius: 2,
+                display: "flex",
+                gap: 1,
               }}
             >
-              {/* <Typography variant="h6">{item.title}</Typography> */}
+              <Image
+                src={item.imgUrl}
+                height={50}
+                width={50}
+                alt={item.title}
+              />
               <Typography variant="body1" color={"text.secondary"}>
                 {item.description}
               </Typography>
