@@ -209,3 +209,44 @@ export async function getPartners(boardName: string): Promise<Logo[]> {
 
   return partners.logo;
 }
+export async function getBlogsNewsAndReport(boardName: string): Promise<Logo[]> {
+  let partners: {
+    logo: Logo[];
+  } = await client.fetch(
+    `
+    *[_type == "blog_news_story" && name == $name][0]
+  `,
+    { name: boardName }
+  );
+
+  const imageUrl = async (_ref: string): Promise<string> => {
+    // Fetch the asset using the reference
+    const asset = await client.fetch(`*[_id == $ref][0]`, {
+      ref: _ref,
+    });
+
+    return asset.url;
+  };
+
+  // const updatedPartners: Logo[] = await Promise.all(
+  //   partners.logo.map(async (lo) => {
+  //     const imageUrlValue = await imageUrl(lo.imageFile.asset._ref);
+  //     const updatedPartner: Logo = {
+  //       name: lo.name,
+  //       description: lo.description,
+  //       url: lo.url,
+  //       imageFile: {
+  //         asset: {
+  //           _ref: lo.imageFile.asset._ref,
+  //           url: imageUrlValue,
+  //         },
+  //       },
+  //     };
+  //     return updatedPartner;
+  //   })
+  // );
+
+  // partners.logo = updatedPartners;
+
+  return partners.logo;
+}
