@@ -30,6 +30,7 @@ import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
 import { Logo, getPartners } from "../../services/sentry";
+import DonateCard from "../../components/DonateCard";
 
 export default function Home() {
   const theme = useMemo(
@@ -209,7 +210,12 @@ export default function Home() {
             <Parterns />
           </CenteredBox>
           {/* Get involved */}
-          <Box p={2}>
+          <Box
+            display={"flex"}
+            justifyContent={"space-between"}
+         
+            p={2}
+          >
             <Box
               sx={{
                 height: isMobileView ? 300 : 400,
@@ -285,6 +291,7 @@ export default function Home() {
                 Donate
               </Button>
             </Box>
+            <DonateCard />
           </Box>
         </Box>
       </HideAppBar>
