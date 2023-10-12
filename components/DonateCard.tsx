@@ -6,36 +6,42 @@ import {
   InputLabel,
   OutlinedInput,
   InputAdornment,
+  IconButton,
+  TextField,
 } from "@mui/material";
-import React from "react";
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import React, { useState } from "react";
 
 const DonateCard = () => {
   const [amount, setAmount] = React.useState(0);
+  const [sectionNumber, setSectionNumber] = useState(0);
   return (
-    <Box boxShadow={1} height={"auto"} borderRadius={2}>
-      <Box
-        sx={{
-          width: "100%",
-          bgcolor: (theme) => theme.palette.success.main,
-          p: 2,
-          borderRadius: 2,
-          borderBottomLeftRadius: 0,
-          borderBottomRighttRadius: 0,
-        }}
-      >
-        <Typography variant="h5">Chose amount</Typography>
-      </Box>
-      <Tabs />
-      <AmountToSelect
+    <Box
+      boxShadow={1}
+      display={"flex"}
+      flexDirection={"column"}
+      justifyContent={"space-between"}
+      borderRadius={2}
+      m={3}
+    >
+      <Section
+        value={sectionNumber}
         amount={amount}
-        onChangeHandler={(newAmount: number) => {
+        back={() =>
+          setSectionNumber((p) => {
+            if (p < 1) return 0;
+            return p - 1;
+          })
+        }
+        onAmountChangeHandler={(newAmount: number) => {
           setAmount(newAmount);
         }}
       />
       <Button
-        sx={{ width: "100%", textTransform: "none" }}
+        sx={{ width: "100%", textTransform: "none", m: 1 }}
         variant="contained"
         color="success"
+        onClick={() => setSectionNumber((p) => p + 1)}
       >
         Next
       </Button>
@@ -90,6 +96,94 @@ const Tabs: React.FC = ({}) => {
   );
 };
 
+const Section: React.FC<{
+  value: number;
+  amount: number;
+  onAmountChangeHandler: (value: number) => void;
+  back: () => void;
+}> = ({ value, amount, onAmountChangeHandler, back }) => {
+  switch (value) {
+    case 0:
+      return (
+        <Box>
+          {" "}
+          <Box
+            sx={{
+              width: "100%",
+              bgcolor: (theme) => theme.palette.success.main,
+              p: 2,
+              borderRadius: 2,
+              borderBottomLeftRadius: 0,
+              borderBottomRighttRadius: 0,
+            }}
+          >
+            <Typography variant="h5" sx={{ color: "white" }}>
+              Chose amount
+            </Typography>
+          </Box>
+          <Tabs />
+          <AmountToSelect
+            amount={amount}
+            onChangeHandler={onAmountChangeHandler}
+          />
+        </Box>
+      );
+    case 1:
+      return (
+        <Box sx={{ width: "100%" }}>
+          <Box
+            sx={{
+              width: "100%",
+              bgcolor: (theme) => theme.palette.success.main,
+              p: 2,
+              borderRadius: 2,
+              borderBottomLeftRadius: 0,
+              borderBottomRighttRadius: 0,
+              display: "flex",
+              gap: 2,
+            }}
+          >
+            <IconButton sx={{ color: "white" }} onClick={back}>
+              <ArrowBackRoundedIcon sx={{ color: "white" }} />
+            </IconButton>
+            <Typography variant="h5" sx={{ color: "white" }}>
+              Your Informations
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+
+            // autoComplete="off"
+          >
+            <TextField
+              id="outlined-required"
+              color="success"
+              label="Names"
+              fullWidth
+              size="small"
+            />
+            <br />
+            <TextField
+              id="outlined-required"
+              label="Email"
+              color="success"
+              type="email"
+              fullWidth
+              size="small"
+            />
+          </Box>
+        </Box>
+      );
+
+    default:
+      return <Box></Box>;
+
+      break;
+  }
+};
+
 const AmountToSelect: React.FC<{
   amount: number;
   onChangeHandler: (newAmount: number) => void;
@@ -111,13 +205,31 @@ const AmountToSelect: React.FC<{
         width={"100%"}
         justifyContent={"space-around"}
       >
-        <Button color="success" variant="outlined">
+        <Button
+          color={amount == 10 ? "success" : "inherit"}
+          onClick={() => {
+            onChangeHandler(10);
+          }}
+          variant="outlined"
+        >
           $ 10
         </Button>
-        <Button color="success" variant="outlined">
+        <Button
+          onClick={() => {
+            onChangeHandler(50);
+          }}
+          color={amount == 50 ? "success" : "inherit"}
+          variant="outlined"
+        >
           $ 50
         </Button>
-        <Button color="success" variant="outlined">
+        <Button
+          onClick={() => {
+            onChangeHandler(100);
+          }}
+          color={amount == 100 ? "success" : "inherit"}
+          variant="outlined"
+        >
           $ 100
         </Button>
       </Box>
@@ -134,6 +246,11 @@ const AmountToSelect: React.FC<{
           id="outlined-adornment-amount"
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
           label="Amount"
+          type="number"
+          value={amount}
+          onChange={(e) => {
+            onChangeHandler(Number(e.target.value));
+          }}
           size="small"
         />
       </FormControl>

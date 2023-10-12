@@ -211,9 +211,8 @@ export default function Home() {
           </CenteredBox>
           {/* Get involved */}
           <Box
-            display={"flex"}
+            display={isMobileView ? "block" : "flex"}
             justifyContent={"space-between"}
-         
             p={2}
           >
             <Box
