@@ -359,7 +359,7 @@ export default function HideAppBar(props: Props) {
                   sx={{
                     flexGrow: 1,
                     color: (theme) => theme.palette.success.main,
-                    fontWeight: 700,
+                    fontWeight: 800,
                     letterSpacing: 3,
                   }}
                 >
@@ -371,7 +371,7 @@ export default function HideAppBar(props: Props) {
                   sx={{
                     flexGrow: 1,
                     color: "text.primary",
-                    letterSpacing: 2,
+                    letterSpacing: 1,
                   }}
                 >
                   Learn, Earn, Innovate

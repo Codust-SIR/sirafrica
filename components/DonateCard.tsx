@@ -10,15 +10,28 @@ import {
   TextField,
   Checkbox,
   FormControlLabel,
+  Divider,
+  Alert,
+  useTheme,
+  useMediaQuery,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@mui/material";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
+import CreditCardRoundedIcon from "@mui/icons-material/CreditCardRounded";
 import React, { useState } from "react";
 
 const DonateCard = () => {
+  const [donationType, setDonationType] = useState("One-time");
   const [amount, setAmount] = React.useState(0);
   const [sectionNumber, setSectionNumber] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const handleOnFullNameChange = (value: string) => {
     setFullName(value);
@@ -50,28 +63,62 @@ const DonateCard = () => {
         onAmountChangeHandler={(newAmount: number) => {
           setAmount(newAmount);
         }}
+        editInfo={() => {
+          setSectionNumber(0);
+        }}
         email={email}
         fullName={fullName}
         handleOnEmailChange={handleOnEmailChange}
         handleOnFullNameChange={handleOnFullNameChange}
         handleIsAnonymous={handleIsAnonymous}
         isAnonymous={isAnonymous}
+        onDonationType={(type) => {
+          setDonationType(type);
+        }}
+        donationType={donationType}
       />
-      <Button
-        sx={{ width: "100%", textTransform: "none" }}
-        variant="contained"
-        color="success"
-        onClick={() => setSectionNumber((p) => p + 1)}
-      >
-        Next
-      </Button>
+      {errorMessage && (
+        <Alert sx={{ m: 2 }} severity="error">
+          {errorMessage}
+        </Alert>
+      )}
+      {sectionNumber < 2 && (
+        <Button
+          sx={{ width: "100%", textTransform: "none" }}
+          variant="contained"
+          color="success"
+          onClick={() => {
+            if (sectionNumber === 0 && amount < 1) {
+              setErrorMessage("Amount can't be $0");
+              setTimeout(() => {
+                setErrorMessage("");
+              }, 3000);
+              return;
+            } else if (sectionNumber === 1 && (!fullName || isAnonymous)) {
+              if (!isAnonymous) {
+                setErrorMessage("Full name can't be empty");
+                setTimeout(() => {
+                  setErrorMessage("");
+                }, 3000);
+                return;
+              }
+            }
+
+            setSectionNumber((p) => p + 1);
+          }}
+        >
+          Next
+        </Button>
+      )}
     </Box>
   );
 };
 
 export default DonateCard;
 
-const Tabs: React.FC = ({}) => {
+const Tabs: React.FC<{ onDonationType: (value: string) => void }> = ({
+  onDonationType,
+}) => {
   const [value, setValue] = React.useState(0);
   return (
     <Box
@@ -85,7 +132,10 @@ const Tabs: React.FC = ({}) => {
       <Button
         variant={value === 0 ? "contained" : "outlined"}
         color={value === 0 ? "success" : "inherit"}
-        onClick={() => setValue(0)}
+        onClick={() => {
+          setValue(0);
+          onDonationType("One-time");
+        }}
         sx={{
           textTransform: "none",
         }}
@@ -95,7 +145,10 @@ const Tabs: React.FC = ({}) => {
       <Button
         variant={value === 1 ? "contained" : "outlined"}
         color={value === 1 ? "success" : "inherit"}
-        onClick={() => setValue(1)}
+        onClick={() => {
+          setValue(1);
+          onDonationType("Monthly");
+        }}
         sx={{
           textTransform: "none",
         }}
@@ -105,7 +158,10 @@ const Tabs: React.FC = ({}) => {
       <Button
         variant={value === 2 ? "contained" : "outlined"}
         color={value === 2 ? "success" : "inherit"}
-        onClick={() => setValue(2)}
+        onClick={() => {
+          setValue(2);
+          onDonationType("Anually");
+        }}
         sx={{
           textTransform: "none",
         }}
@@ -117,15 +173,18 @@ const Tabs: React.FC = ({}) => {
 };
 
 const Section: React.FC<{
+  donationType: string;
   value: number;
   amount: number;
   fullName: string;
   email: string;
+  isAnonymous: boolean;
+  onDonationType: (value: string) => void;
   onAmountChangeHandler: (value: number) => void;
   handleOnFullNameChange: (value: string) => void;
   handleOnEmailChange: (value: string) => void;
-  isAnonymous: boolean;
   handleIsAnonymous: () => void;
+  editInfo: () => void;
   back: () => void;
 }> = ({
   value,
@@ -138,6 +197,9 @@ const Section: React.FC<{
   fullName,
   handleOnEmailChange,
   handleOnFullNameChange,
+  donationType,
+  onDonationType,
+  editInfo,
 }) => {
   switch (value) {
     case 0:
@@ -158,7 +220,7 @@ const Section: React.FC<{
               Chose amount
             </Typography>
           </Box>
-          <Tabs />
+          <Tabs onDonationType={onDonationType} />
           <AmountToSelect
             amount={amount}
             onChangeHandler={onAmountChangeHandler}
@@ -194,6 +256,38 @@ const Section: React.FC<{
             fullName={fullName}
             handleOnEmailChange={handleOnEmailChange}
             handleOnFullNameChange={handleOnFullNameChange}
+          />
+        </Box>
+      );
+    case 2:
+      return (
+        <Box>
+          <Box
+            sx={{
+              width: "100%",
+              bgcolor: (theme) => theme.palette.success.main,
+              p: 2,
+              borderRadius: 2,
+              borderBottomLeftRadius: 0,
+              borderBottomRighttRadius: 0,
+              display: "flex",
+              gap: 2,
+            }}
+          >
+            <IconButton sx={{ color: "white" }} onClick={back}>
+              <ArrowBackRoundedIcon sx={{ color: "white" }} />
+            </IconButton>
+            <Typography variant="h5" sx={{ color: "white" }}>
+              Summary of donation
+            </Typography>
+          </Box>
+          <PaymentMethod
+            isAnonymous={isAnonymous}
+            email={email}
+            fullName={fullName}
+            amount={amount}
+            donationType={donationType}
+            editInfo={editInfo}
           />
         </Box>
       );
@@ -298,7 +392,7 @@ const DonarInfo: React.FC<{
     <Box sx={{ gap: 2, p: 3 }}>
       <Box
         sx={{
-          "& .MuiTextField-root": { m: 1, width: "25ch" },
+          "& .MuiTextField-root": { m: 1, width: "100%" },
         }}
 
         // autoComplete="off"
@@ -349,5 +443,231 @@ const DonarInfo: React.FC<{
         </Typography>
       </Box>
     </Box>
+  );
+};
+
+const PaymentMethod: React.FC<{
+  donationType: string;
+  amount: number;
+  fullName: string;
+  email: string;
+  isAnonymous: boolean;
+  editInfo: () => void;
+}> = ({ amount, donationType, email, fullName, isAnonymous, editInfo }) => {
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <Box sx={{ gap: 2, p: 3 }}>
+        <Box
+          sx={{
+            "& .MuiTextField-root": { m: 1, width: "100%" },
+          }}
+
+          // autoComplete="off"
+        >
+          <Typography>{donationType}</Typography>
+          {isAnonymous ? (
+            <Typography>Donating as Anonymous</Typography>
+          ) : (
+            <Typography>{fullName}</Typography>
+          )}
+          <Typography>{email}</Typography>
+          <Typography>${amount}</Typography>
+        </Box>
+        <br />
+        <Button
+          variant="contained"
+          color="warning"
+          size="small"
+          sx={{
+            textTransform: "none",
+            width: "100%",
+            // borderRadius: 0,
+          }}
+          startIcon={<ArrowBackRoundedIcon sx={{ color: "white" }} />}
+          onClick={editInfo}
+        >
+          Edit donation information
+        </Button>
+      </Box>
+
+      <Divider />
+      <br />
+      <Button
+        variant="contained"
+        color="info"
+        size="small"
+        sx={{
+          textTransform: "none",
+          width: "100%",
+          borderRadius: 0,
+        }}
+        endIcon={<CreditCardRoundedIcon sx={{ color: "white" }} />}
+        onClick={handleClickOpen}
+      >
+        Donate by card
+      </Button>
+      <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1
+          }}
+          id="responsive-dialog-title"
+        >
+          Card info <CreditCardRoundedIcon />
+        </DialogTitle>
+        <DialogContent>
+          <Box component={"form"} autoComplete="on">
+            <FormControl color="success" fullWidth sx={{ mt: 1 }}>
+              <InputLabel
+                size="small"
+                color="success"
+                htmlFor="outlined-adornment-card-number"
+              >
+                Card number
+              </InputLabel>
+              <OutlinedInput
+                size="small"
+                color="success"
+                id="outlined-adornment-card-number"
+                label="Card number"
+                name="Card number"
+                autoComplete="cc-number" // Specify autocomplete type for card number
+                type="number"
+              />
+            </FormControl>
+            <FormControl color="success" fullWidth sx={{ mt: 1 }}>
+              <InputLabel
+                size="small"
+                color="success"
+                htmlFor="outlined-adornment-amount"
+              >
+                Cardholder&rsquo;s name
+              </InputLabel>
+              <OutlinedInput
+                size="small"
+                color="success"
+                id="outlined-adornment-card-holder-name"
+                label="Cardholder's name"
+                name="Cardholder's name"
+                autoComplete="cc-name"
+              />
+            </FormControl>
+            <Typography m={1} color="text.secondary">
+              Expiry date
+            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <FormControl
+                color="success"
+                size={"small"}
+                sx={{ mt: 1, width: 60 }}
+              >
+                <InputLabel
+                  size="small"
+                  color="success"
+                  htmlFor="outlined-adornment-amount"
+                >
+                  MM
+                </InputLabel>
+                <OutlinedInput
+                  size="small"
+                  color="success"
+                  id="outlined-adornment-MM"
+                  name="MM"
+                  type="number"
+                  label="MM"
+                />
+              </FormControl>
+              <FormControl
+                size={"small"}
+                color="success"
+                sx={{ mt: 1, width: 80 }}
+              >
+                <InputLabel
+                  size="small"
+                  color="success"
+                  htmlFor="outlined-adornment-YYYY"
+                >
+                  YYYY
+                </InputLabel>
+                <OutlinedInput
+                  size="small"
+                  color="success"
+                  id="outlined-adornment-YYYY"
+                  label="YYYY"
+                  name="YYYY"
+                  type="number"
+                />
+              </FormControl>
+            </Box>
+            <Typography m={1} color="text.secondary">
+              Security code
+            </Typography>
+            <FormControl
+              size={"small"}
+              color="success"
+              sx={{ mt: 1, width: 80 }}
+            >
+              <OutlinedInput
+                size="small"
+                color="success"
+                id="outlined-adornment-security-code"
+                name="YYYY"
+                type="number"
+              />
+            </FormControl>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            size="small"
+            sx={{
+              textTransform: "none",
+              // width: "100%",
+              // borderRadius: 0,
+            }}
+            variant="contained"
+            color="error"
+            onClick={handleClose}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            color="success"
+            // onClick={handleClose}
+            type="submit"
+            autoFocus
+            size="small"
+            sx={{
+              textTransform: "none",
+              width: "60%",
+              // borderRadius: 0,
+            }}
+            endIcon={<VolunteerActivismRoundedIcon />}
+          >
+            Submit Donation
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
