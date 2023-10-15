@@ -8,6 +8,8 @@ import {
   InputAdornment,
   IconButton,
   TextField,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import React, { useState } from "react";
@@ -15,6 +17,18 @@ import React, { useState } from "react";
 const DonateCard = () => {
   const [amount, setAmount] = React.useState(0);
   const [sectionNumber, setSectionNumber] = useState(0);
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [isAnonymous, setIsAnonymous] = useState(false);
+  const handleOnFullNameChange = (value: string) => {
+    setFullName(value);
+  };
+  const handleOnEmailChange = (value: string) => {
+    setEmail(value);
+  };
+  const handleIsAnonymous = () => {
+    setIsAnonymous((p) => !p);
+  };
   return (
     <Box
       boxShadow={1}
@@ -36,9 +50,15 @@ const DonateCard = () => {
         onAmountChangeHandler={(newAmount: number) => {
           setAmount(newAmount);
         }}
+        email={email}
+        fullName={fullName}
+        handleOnEmailChange={handleOnEmailChange}
+        handleOnFullNameChange={handleOnFullNameChange}
+        handleIsAnonymous={handleIsAnonymous}
+        isAnonymous={isAnonymous}
       />
       <Button
-        sx={{ width: "100%", textTransform: "none", m: 1 }}
+        sx={{ width: "100%", textTransform: "none" }}
         variant="contained"
         color="success"
         onClick={() => setSectionNumber((p) => p + 1)}
@@ -99,9 +119,26 @@ const Tabs: React.FC = ({}) => {
 const Section: React.FC<{
   value: number;
   amount: number;
+  fullName: string;
+  email: string;
   onAmountChangeHandler: (value: number) => void;
+  handleOnFullNameChange: (value: string) => void;
+  handleOnEmailChange: (value: string) => void;
+  isAnonymous: boolean;
+  handleIsAnonymous: () => void;
   back: () => void;
-}> = ({ value, amount, onAmountChangeHandler, back }) => {
+}> = ({
+  value,
+  amount,
+  onAmountChangeHandler,
+  back,
+  handleIsAnonymous,
+  isAnonymous,
+  email,
+  fullName,
+  handleOnEmailChange,
+  handleOnFullNameChange,
+}) => {
   switch (value) {
     case 0:
       return (
@@ -130,7 +167,7 @@ const Section: React.FC<{
       );
     case 1:
       return (
-        <Box sx={{ width: "100%" }}>
+        <Box>
           <Box
             sx={{
               width: "100%",
@@ -150,30 +187,14 @@ const Section: React.FC<{
               Your Informations
             </Typography>
           </Box>
-          <Box
-            sx={{
-              "& .MuiTextField-root": { m: 1, width: "25ch" },
-            }}
-
-            // autoComplete="off"
-          >
-            <TextField
-              id="outlined-required"
-              color="success"
-              label="Names"
-              fullWidth
-              size="small"
-            />
-            <br />
-            <TextField
-              id="outlined-required"
-              label="Email"
-              color="success"
-              type="email"
-              fullWidth
-              size="small"
-            />
-          </Box>
+          <DonarInfo
+            handleIsAnonymous={handleIsAnonymous}
+            isAnonymous={isAnonymous}
+            email={email}
+            fullName={fullName}
+            handleOnEmailChange={handleOnEmailChange}
+            handleOnFullNameChange={handleOnFullNameChange}
+          />
         </Box>
       );
 
@@ -254,6 +275,79 @@ const AmountToSelect: React.FC<{
           size="small"
         />
       </FormControl>
+    </Box>
+  );
+};
+
+const DonarInfo: React.FC<{
+  isAnonymous: boolean;
+  fullName: string;
+  email: string;
+  handleIsAnonymous: () => void;
+  handleOnFullNameChange: (value: string) => void;
+  handleOnEmailChange: (value: string) => void;
+}> = ({
+  handleIsAnonymous,
+  isAnonymous,
+  email,
+  fullName,
+  handleOnEmailChange,
+  handleOnFullNameChange,
+}) => {
+  return (
+    <Box sx={{ gap: 2, p: 3 }}>
+      <Box
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+        }}
+
+        // autoComplete="off"
+      >
+        <TextField
+          id="outlined-required"
+          color="success"
+          label="Full Names"
+          fullWidth
+          size="small"
+          disabled={isAnonymous}
+          type="text"
+          value={fullName}
+          onChange={(e) => handleOnFullNameChange(e.target.value)}
+        />
+        <br />
+        <TextField
+          onChange={(e) => {
+            handleOnEmailChange(e.target.value);
+          }}
+          value={email}
+          id="outlined-required"
+          label="Email"
+          color="success"
+          type="email"
+          fullWidth
+          size="small"
+          disabled={isAnonymous}
+        />
+        <br />
+        <FormControlLabel
+          value="start"
+          control={
+            <Checkbox
+              checked={isAnonymous}
+              onChange={handleIsAnonymous}
+              inputProps={{ "aria-label": "controlled" }}
+              color="success"
+            />
+          }
+          label="Donate as Anonymous"
+          labelPlacement="start"
+        />
+        <br />
+        <Typography variant="caption">
+          By donating as Anonymous, you don&apos;t need to provide <br />
+          your informations
+        </Typography>
+      </Box>
     </Box>
   );
 };
