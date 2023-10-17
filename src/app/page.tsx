@@ -63,12 +63,13 @@ export default function Home() {
       programeImage:
         "https://images.pexels.com/photos/6457579/pexels-photo-6457579.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       url: "livelihoods",
-    },{
-          programe: "Digital solutions & Innovation",
-          description: "d",
-          programeImage: "https://axyya.com/wp-content/uploads/2021/03/web2.png",
-          url: "digital",
-      },
+    },
+    {
+      programe: "Digital solutions & Innovation",
+      description: "d",
+      programeImage: "https://axyya.com/wp-content/uploads/2021/03/web2.png",
+      url: "digital",
+    },
     {
       programe: "Advocacy & Capacity Strengthening",
       description: "d",
@@ -83,7 +84,35 @@ export default function Home() {
         "https://www.donovanhatem.com/wp-content/uploads/2017/06/Sustainability.png",
       url: "climate",
     },
+  ];
 
+  const initiatives: {
+    title: string;
+    description: string;
+    image: string;
+    url: string;
+  }[] = [
+    {
+      title: "Open Gates",
+      description:
+        "Open Gates is a digital platform that connects refugees and local youth with opportunities, resources, and each other.",
+      image: "/open-gates-icon-a.png",
+      url: "https://opengates.app/",
+    },
+    {
+      title: "Codedust",
+      description:
+        "Codedust is a coding bootcamp that provides refugees and local youth with the skills and resources to become software developers.",
+      image: "/code_dust.jpeg",
+      url: "https://codust-tutorial.vercel.app/",
+    },
+    {
+      title: "Shop",
+      description:
+        "We build 3D models of refugee-made products and sell them on our online shop.",
+      image: "/sir_shop.png",
+      url: "/shop",
+    },
   ];
   return (
     <ThemeProvider theme={theme}>
@@ -218,65 +247,49 @@ export default function Home() {
             <iframe
               width={isMobileView ? "100%" : "60%"}
               height={!isMobileView ? 400 : 250}
-
-              frameBorder="0"              src="https://www.youtube.com/embed/EBOwnrCu42I"
+              frameBorder="0"
+              src="https://www.youtube.com/embed/EBOwnrCu42I"
               title="Supporting refugees preparing for their"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>
             <DonateCard />
           </Box>
-        {/* SIR Initietives */}
+          {/* SIR Initietives */}
 
-            <Box
-                sx={{
-                    alignItems: "center",
-                    justifyContent: "center",
+          <Box
+            sx={{
+              alignItems: "center",
+              justifyContent: "center",
 
-                    p: isMobileView ? 1 : 10,
-                }}
-                bgcolor={theme.palette.action.hover}
+              p: isMobileView ? 1 : 10,
+            }}
+            bgcolor={theme.palette.action.hover}
+          >
+            <Typography
+              sx={{ alignItems: "center" }}
+              variant={isMobileView ? "h5" : "h4"}
+              fontWeight={700}
             >
-                <Typography
-                    sx={{ alignItems: "center" }}
-                    variant={isMobileView ? "h5" : "h4"}
-                    fontWeight={700}
-                >
-                    Initiatives of SIR
-                </Typography>{" "}
-                <br />
-                <Typography sx={{ alignItems: "center" }} variant={"body1"}>
-                    Empowering young individuals with the necessary skills to pave the
-                    way for a brighter future of self-sufficiency.
-                </Typography>
-                <br />
-                <br />
-                <Box
-                    display={"grid"}
-                    gridTemplateColumns={`repeat(auto-fit, minmax(${
-                        isMobileView ? "100%" : "300px"
-                    }, 1fr))`}
-                    gap={5}
-                    pt={isMobileView ? 4 : 0}
-                >
-                    {programs.map((item, i) => (
-                        <Programe {...item} key={i} />
-                    ))}
-                </Box>
-                <Button
-                    color="success"
-                    sx={{
-                        textTransform: "none",
-                        borderRadius: 2,
-                        mt: 3,
-                    }}
-                    href="/programs"
-                    variant="contained"
-                    endIcon={<EastRoundedIcon />}
-                >
-                    Learn more of our programs
-                </Button>
+              Initiatives of SIR
+            </Typography>{" "}
+            <br />
+            <Typography sx={{ alignItems: "center" }} variant={"body1"}>
+              We are working on some initiatives that will help us achieve our
+              goals. Here are some of our initiatives.
+            </Typography>
+            <br />
+            <br />
+            <Box
+              display={"grid"}
+              gridTemplateColumns={`repeat(auto-fit, minmax(350px, 1fr))`}
+              gap={1}
+            >
+              {initiatives.map((item, i) => (
+                <Initiative {...item} key={i} />
+              ))}
             </Box>
+          </Box>
         </Box>
       </HideAppBar>
     </ThemeProvider>
@@ -686,3 +699,56 @@ function Problems() {
     </Box>
   );
 }
+
+// Initiative component
+const Initiative: React.FC<{
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+}> = ({ title, description, image, url }) => {
+  const theme = useTheme();
+  const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        gap: 2,
+        alignItems: "center",
+        maxWidth: isMobileView ? "100%" : 350,
+        "&:hover": {
+          boxShadow: 2,
+        },
+        boxShadow: 0,
+        border: `1px solid ${theme.palette.action.hover}`,
+        bgcolor: theme.palette.background.paper,
+        borderRadius: 2,
+      }}
+      href={url}
+      underline="none"
+      target="_blank"
+      component={Link}
+    >
+      <Box>
+        <Image
+          src={image}
+          height={800}
+          width={1500}
+          style={{
+            height: 80,
+            width: 100,
+          }}
+          alt={title}
+        />
+      </Box>
+      <Box>
+        <Typography variant={isMobileView ? "h6" : "h5"} color="text.primary">
+          {title}
+        </Typography>
+        <Typography variant="caption" color="text.secondary">
+          {description}
+        </Typography>
+      </Box>
+    </Box>
+  );
+};
