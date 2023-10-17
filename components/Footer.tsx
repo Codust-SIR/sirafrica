@@ -1,4 +1,4 @@
-import { Box, Link, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Link, Typography, useMediaQuery, useTheme,Toolbar } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 
@@ -21,6 +21,7 @@ const Footer = () => {
           justifyContent: "space-between",
         }}
       >
+          <br/>
         <Box
           sx={{
             display: "flex",
@@ -69,6 +70,13 @@ const Footer = () => {
               Learn, Earn, Innovate
             </Typography>
           </Box>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
         </Box>
         <Box
           sx={{

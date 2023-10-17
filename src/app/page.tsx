@@ -63,7 +63,12 @@ export default function Home() {
       programeImage:
         "https://images.pexels.com/photos/6457579/pexels-photo-6457579.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       url: "livelihoods",
-    },
+    },{
+          programe: "Digital solutions & Innovation",
+          description: "d",
+          programeImage: "https://axyya.com/wp-content/uploads/2021/03/web2.png",
+          url: "digital",
+      },
     {
       programe: "Advocacy & Capacity Strengthening",
       description: "d",
@@ -78,12 +83,7 @@ export default function Home() {
         "https://www.donovanhatem.com/wp-content/uploads/2017/06/Sustainability.png",
       url: "climate",
     },
-    {
-      programe: "Digital solutions & Innovation",
-      description: "d",
-      programeImage: "https://axyya.com/wp-content/uploads/2021/03/web2.png",
-      url: "digital",
-    },
+
   ];
   return (
     <ThemeProvider theme={theme}>
@@ -205,93 +205,78 @@ export default function Home() {
             bgcolor={theme.palette.action.hover}
             sx={{ p: isMobileView ? 1 : 10 }}
           >
-            <Typography variant="h4">Our Parterns</Typography>
+            <Typography variant="h4">Our Partners</Typography>
             <br />
             <Parterns />
           </CenteredBox>
           {/* Get involved */}
           <Box
             display={isMobileView ? "block" : "flex"}
-            justifyContent={"space-between"}
+            justifyContent={"space-around"}
             p={2}
           >
-            <Box
-              sx={{
-                height: isMobileView ? 300 : 400,
-                width: isMobileView ? "100%" : "900px",
-                backgroundImage:
-                  "url(https://images.pexels.com/photos/7386009/pexels-photo-7386009.jpeg?auto=compress&cs=tinysrgb&w=1200)",
-                backgroundSize: "cover", // Initially set for larger screens
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",
-                justifyContent: "center",
-                color: "white",
-                pl: 6,
-                borderRadius: 1,
-                objectFit: "fill",
-              }}
-            >
-              <Typography
-                fontWeight={700}
-                variant={isMobileView ? "subtitle2" : "subtitle1"}
-                sx={{
-                  // textAlign: "center",
-                  width: isMobileView ? "100%" : "40%",
+            <iframe
+              width={isMobileView ? "100%" : "60%"}
+              height={!isMobileView ? 400 : 250}
 
-                  color: (theme) => theme.palette.success.main,
-                  fontWeight: 700,
-                  letterSpacing: 3,
-                }}
-              >
-                SIR - Learn, Earn, Innovate
-              </Typography>
-              <br />
-              <Typography
-                fontWeight={700}
-                sx={{
-                  width: isMobileView ? "100%" : "40%",
-                }}
-                variant={isMobileView ? "h5" : "h4"}
-              >
-                Get Involved
-              </Typography>
-              <br />
-              <Typography
-                variant={isMobileView ? "body1" : "subtitle1"}
-                sx={{
-                  width: isMobileView ? "100%" : "30%",
-                }}
-              >
-                At SIR, we&rsquo;re committed to empowering Kakuma&rsquo;s youth
-                through digital education and training, founded by young
-                refugees in 2016.
-              </Typography>
-              <Typography
-                variant={isMobileView ? "body1" : "subtitle1"}
-                sx={{
-                  width: isMobileView ? "100%" : "30%",
-                }}
-              >
-                But we need your help
-              </Typography>
-              <br />
-              <Button
-                variant="contained"
-                color="success"
-                sx={{
-                  textTransform: "none",
-                  borderRadius: 5,
-                }}
-                size="large"
-                href="/donate"
-                startIcon={<VolunteerActivismRoundedIcon />}
-              >
-                Donate
-              </Button>
-            </Box>
+              frameBorder="0"              src="https://www.youtube.com/embed/EBOwnrCu42I"
+              title="Supporting refugees preparing for their"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
             <DonateCard />
           </Box>
+        {/* SIR Initietives */}
+
+            <Box
+                sx={{
+                    alignItems: "center",
+                    justifyContent: "center",
+
+                    p: isMobileView ? 1 : 10,
+                }}
+                bgcolor={theme.palette.action.hover}
+            >
+                <Typography
+                    sx={{ alignItems: "center" }}
+                    variant={isMobileView ? "h5" : "h4"}
+                    fontWeight={700}
+                >
+                    Initiatives of SIR
+                </Typography>{" "}
+                <br />
+                <Typography sx={{ alignItems: "center" }} variant={"body1"}>
+                    Empowering young individuals with the necessary skills to pave the
+                    way for a brighter future of self-sufficiency.
+                </Typography>
+                <br />
+                <br />
+                <Box
+                    display={"grid"}
+                    gridTemplateColumns={`repeat(auto-fit, minmax(${
+                        isMobileView ? "100%" : "300px"
+                    }, 1fr))`}
+                    gap={5}
+                    pt={isMobileView ? 4 : 0}
+                >
+                    {programs.map((item, i) => (
+                        <Programe {...item} key={i} />
+                    ))}
+                </Box>
+                <Button
+                    color="success"
+                    sx={{
+                        textTransform: "none",
+                        borderRadius: 2,
+                        mt: 3,
+                    }}
+                    href="/programs"
+                    variant="contained"
+                    endIcon={<EastRoundedIcon />}
+                >
+                    Learn more of our programs
+                </Button>
+            </Box>
         </Box>
       </HideAppBar>
     </ThemeProvider>
@@ -376,6 +361,7 @@ const OurImpacts = () => {
     </Box>
   );
 };
+
 function Programe({
   description,
   programe,
@@ -599,6 +585,7 @@ function Parterns() {
     </Box>
   );
 }
+
 function Problems() {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
