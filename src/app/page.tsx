@@ -29,7 +29,11 @@ import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
-import { Logo, getPartners } from "../../services/sentry";
+import {
+  Logo,
+  getBlogsNewsAndReport,
+  getPartners,
+} from "../../services/sentry";
 import DonateCard from "../../components/DonateCard";
 
 export default function Home() {
@@ -228,7 +232,7 @@ export default function Home() {
           </Box>
 
           {/* Stories News & Blogs */}
-          <OurImpacts />
+          <BlogNewsStory />
           {/* Our Parters */}
           <CenteredBox
             bgcolor={theme.palette.action.hover}
@@ -302,10 +306,20 @@ const CenteredBox = styled(Box)`
   text-align: center;
 `;
 
-const OurImpacts = () => {
+const BlogNewsStory = () => {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
-
+  const [partners, setPartners] = React.useState<Logo[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  React.useEffect(() => {
+    getBlogsNewsAndReport("author").then((parterns) => {
+      setPartners(parterns);
+      setLoading(false);
+    });
+    return () => {
+      setLoading(true);
+    };
+  }, []);
   const responsive2 = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -336,6 +350,7 @@ const OurImpacts = () => {
     >
       <Typography variant="h4">Our impacts</Typography>
       <br />
+
       <Carousel responsive={responsive2}>
         <StoryBlogCard />
         <StoryBlogCard />

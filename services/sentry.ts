@@ -107,9 +107,7 @@ export interface BoardMember {
   };
   _key: string;
   _type: "profile";
-  desc: {
-    children: { text: string }[];
-  }[];
+  desc:any[];
 }
 
 export async function getBoardMember(
@@ -210,9 +208,7 @@ export async function getPartners(boardName: string): Promise<Logo[]> {
   return partners.logo;
 }
 export async function getBlogsNewsAndReport(boardName: string): Promise<Logo[]> {
-  let partners: {
-    logo: Logo[];
-  } = await client.fetch(
+  let blogNewsStory = await client.fetch(
     `
     *[_type == "blog_news_story" && name == $name][0]
   `,
@@ -247,6 +243,7 @@ export async function getBlogsNewsAndReport(boardName: string): Promise<Logo[]> 
   // );
 
   // partners.logo = updatedPartners;
+console.log({blogNewsStory});
 
-  return partners.logo;
+  return blogNewsStory;
 }
