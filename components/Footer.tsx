@@ -1,6 +1,14 @@
-import { Box, Link, Typography, useMediaQuery, useTheme,Toolbar } from "@mui/material";
+import {
+  Box,
+  Link,
+  Typography,
+  useMediaQuery,
+  useTheme,
+  IconButton,
+} from "@mui/material";
 import Image from "next/image";
 import React from "react";
+import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 
 const Footer = () => {
   const theme = useTheme();
@@ -21,7 +29,7 @@ const Footer = () => {
           justifyContent: "space-between",
         }}
       >
-          <br/>
+        <br />
         <Box
           sx={{
             display: "flex",
@@ -70,13 +78,12 @@ const Footer = () => {
               Learn, Earn, Innovate
             </Typography>
           </Box>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </Box>
         <Box
           sx={{
@@ -89,7 +96,9 @@ const Footer = () => {
           }}
         >
           <Box>
-            <Typography variant="h6">Contact Us</Typography>
+            <Typography variant="h6">
+              <b>Contact Us</b>
+            </Typography>
             <br />
             <Link href="tel:+254796761503" color="inherit" underline="hover">
               Tel: +254796761503
@@ -116,7 +125,9 @@ const Footer = () => {
             </Link>
           </Box>
           <Box>
-            <Typography variant="h6">Join Our Journey</Typography>
+            <Typography variant="h6">
+              <b>Join Our Journey</b>
+            </Typography>
             <br />
             <br />
             <Link href="/donation" color="inherit" underline="hover">
@@ -134,7 +145,42 @@ const Footer = () => {
             </Link>
           </Box>
           <Box>
-            <Typography variant="h6">Follow Us</Typography>
+            <Typography variant="h6">
+              <b>Follow Us</b>
+            </Typography>
+            <Box>
+              <IconButton
+                href="https://twitter.com/SolidarityInit1"
+                target="_blank"
+                size="large"
+              >
+                <Image src="/x_icon.svg" height={30} width={30} alt="twitter" />
+              </IconButton>
+              <IconButton
+                href="https://www.facebook.com/soliref"
+                target="_blank"
+                size="large"
+              >
+                <Image
+                  src="/facebook.svg"
+                  height={30}
+                  width={30}
+                  alt="facebook"
+                />
+              </IconButton>
+              <IconButton
+                href="https://www.linkedin.com/company/solidarity-initiative-for-refugees-sir/?viewAsMember=true"
+                target="_blank"
+                size="large"
+              >
+                <Image
+                  src="/linkedin.svg"
+                  height={30}
+                  width={30}
+                  alt="facebook"
+                />
+              </IconButton>
+            </Box>
           </Box>
         </Box>
       </Box>
