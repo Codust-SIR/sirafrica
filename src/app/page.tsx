@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import HideAppBar from "../../components/AppDawer";
 import {
@@ -31,6 +30,7 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
 import { Logo, getPartners } from "../../services/sentry";
 import DonateCard from "../../components/DonateCard";
+import { OurImpacts } from "./OurImpacts";
 
 export default function Home() {
   const theme = useMemo(
@@ -302,79 +302,6 @@ const CenteredBox = styled(Box)`
   text-align: center;
 `;
 
-const OurImpacts = () => {
-  const theme = useTheme();
-  const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
-
-  const responsive2 = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 2,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-  return (
-    <Box
-      sx={{
-        alignItems: "center",
-        justifyContent: "center",
-
-        p: isMobileView ? 1 : 10,
-      }}
-    >
-      <Typography variant="h4">Our impacts</Typography>
-      <br />
-      <Carousel responsive={responsive2}>
-        <StoryBlogCard />
-        <StoryBlogCard />
-        <StoryBlogCard />
-        <StoryBlogCard />
-        <StoryBlogCard />
-        <StoryBlogCard />
-      </Carousel>
-      <br />
-      <br />
-      <Box
-        display={"grid"}
-        gridTemplateColumns={`repeat(auto-fit, minmax(${
-          isMobileView ? "100%" : "350px"
-        }, 1fr))`}
-        gap={5}
-        pt={isMobileView ? 4 : 0}
-      >
-        <MoreBlogcard />
-        <MoreBlogcard />
-        <MoreBlogcard />
-      </Box>
-      <Button
-        color="success"
-        sx={{
-          textTransform: "none",
-          borderRadius: 2,
-          mt: 3,
-        }}
-        href="/programs"
-        variant="contained"
-        endIcon={<EastRoundedIcon />}
-      >
-        Learn more of our impacts
-      </Button>
-    </Box>
-  );
-};
-
 function Programe({
   description,
   programe,
@@ -434,14 +361,14 @@ function Programe({
   );
 }
 
-function StoryBlogCard() {
+export function StoryBlogCard() {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
   const isSmallPC = useMediaQuery(() => theme.breakpoints.down("md"));
   return (
     <Card
       sx={{
-        maxWidth: isSmallPC ? 500 : 670,
+        // maxWidth: isSmallPC ? 500 : 670,
         display: isMobileView ? "block" : "flex",
         m: 1,
         mr: 2,
@@ -457,8 +384,8 @@ function StoryBlogCard() {
         component="img"
         alt="green iguana"
         height="280"
-        style={{ maxHeight: 280, width: "100%", objectFit: "cover" }}
-        image="https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&cs=tinysrgb&w=600"
+        style={{ maxHeight: 300, width: "100%", objectFit: "cover" }}
+        image="https://images.pexels.com/photos/18685964/pexels-photo-18685964/free-photo-of-rock-formations-on-the-hill.jpeg?auto=compress&cs=tinysrgb&w=600"
         title="green iguana"
       />
       <CardContent>
@@ -486,7 +413,7 @@ function StoryBlogCard() {
   );
 }
 
-const MoreBlogcard = ({}: {}) => {
+export const MoreBlogcard = ({}: {}) => {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
 
