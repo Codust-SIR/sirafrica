@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import moment from "moment";
 import HideAppBar from "../../components/AppDawer";
 import {
   Box,
@@ -21,6 +22,7 @@ import {
   CardActions,
   Icon,
   ListItemButton,
+  CircularProgress,
 } from "@mui/material";
 import EventRoundedIcon from "@mui/icons-material/EventRounded";
 import NewspaperRoundedIcon from "@mui/icons-material/NewspaperRounded";
@@ -29,7 +31,11 @@ import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
+import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
+import FeedRoundedIcon from "@mui/icons-material/FeedRounded";
+import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
 import {
+  BlogNewsStory,
   Logo,
   getBlogsNewsAndReport,
   getPartners,
@@ -309,11 +315,11 @@ const CenteredBox = styled(Box)`
 const BlogNewsStory = () => {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
-  const [partners, setPartners] = React.useState<Logo[]>([]);
+  const [blogNewsStory, setBlogNewsStory] = React.useState<BlogNewsStory[]>([]);
   const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
     getBlogsNewsAndReport("author").then((parterns) => {
-      setPartners(parterns);
+      setBlogNewsStory(parterns);
       setLoading(false);
     });
     return () => {
@@ -328,7 +334,7 @@ const BlogNewsStory = () => {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 2,
+      items: 1,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -350,29 +356,41 @@ const BlogNewsStory = () => {
     >
       <Typography variant="h4">Our impacts</Typography>
       <br />
-
-      <Carousel responsive={responsive2}>
-        <StoryBlogCard />
-        <StoryBlogCard />
-        <StoryBlogCard />
-        <StoryBlogCard />
-        <StoryBlogCard />
-        <StoryBlogCard />
-      </Carousel>
-      <br />
-      <br />
-      <Box
-        display={"grid"}
-        gridTemplateColumns={`repeat(auto-fit, minmax(${
-          isMobileView ? "100%" : "350px"
-        }, 1fr))`}
-        gap={5}
-        pt={isMobileView ? 4 : 0}
-      >
-        <MoreBlogcard />
-        <MoreBlogcard />
-        <MoreBlogcard />
-      </Box>
+      <>
+        {loading ? (
+          <Box
+            display={"grid"}
+            sx={{
+              placeItems: "center",
+              heigh: "100%",
+            }}
+          >
+            <CircularProgress color="success" size={isMobileView ? 20 : 30} />
+          </Box>
+        ) : (
+          <>
+            <Carousel responsive={responsive2}>
+              {blogNewsStory.slice(0, 2).map((item, index) => (
+                <StoryBlogCard {...item} key={index} />
+              ))}
+            </Carousel>
+            <br />
+            <br />
+            <Box
+              display={"grid"}
+              gridTemplateColumns={`repeat(auto-fit, minmax(${
+                isMobileView ? "100%" : "350px"
+              }, 1fr))`}
+              gap={5}
+              pt={isMobileView ? 4 : 0}
+            >
+              {blogNewsStory.slice(2, 5).map((item, index) => (
+                <MoreBlogcard {...item} key={index} />
+              ))}
+            </Box>
+          </>
+        )}
+      </>
       <Button
         color="success"
         sx={{
@@ -448,15 +466,28 @@ function Programe({
     </Card>
   );
 }
-
-function StoryBlogCard() {
+const getIcon = (type: "Blog" | "News" | "Report" | "Story") => {
+  switch (type) {
+    case "Blog":
+      return <FeedRoundedIcon fontSize="small" />;
+    case "News":
+      return <NewspaperRoundedIcon fontSize="small" />;
+    case "Report":
+      return <AssessmentRoundedIcon fontSize="small" />;
+    case "Story":
+      return <ArticleRoundedIcon fontSize="small" />;
+    default:
+      return <FeedRoundedIcon fontSize="small" />;
+  }
+};
+const StoryBlogCard: React.FC<BlogNewsStory> = (prop) => {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
   const isSmallPC = useMediaQuery(() => theme.breakpoints.down("md"));
   return (
     <Card
       sx={{
-        maxWidth: isSmallPC ? 500 : 670,
+        maxWidth: isSmallPC ? 500 : 1000,
         display: isMobileView ? "block" : "flex",
         m: 1,
         mr: 2,
@@ -470,20 +501,44 @@ function StoryBlogCard() {
     >
       <CardMedia
         component="img"
-        alt="green iguana"
+        alt={prop.title}
         height="280"
-        style={{ maxHeight: 280, width: "100%", objectFit: "cover" }}
-        image="https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&cs=tinysrgb&w=600"
-        title="green iguana"
+        style={{ maxHeight: 280, width: "40%", objectFit: "fill" }}
+        image={prop.cover.asset.url}
+        title={prop.title}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {prop.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {prop.description}
         </Typography>
+        <br />
+        <Box display={"flex"} gap={2}>
+          <Typography
+            display={"flex"}
+            alignItems={"center"}
+            variant="caption"
+            gap={1}
+            color={"text.secondary"}
+          >
+            {" "}
+            <EventRoundedIcon fontSize="small" />
+            {moment(prop._createdAt).fromNow()}
+          </Typography>
+
+          <Typography
+            display={"flex"}
+            alignItems={"center"}
+            variant="caption"
+            gap={1}
+            color={"text.secondary"}
+          >
+            {getIcon(prop.type)}
+            {prop.type}
+          </Typography>
+        </Box>
         <Button
           color="success"
           sx={{
@@ -493,15 +548,16 @@ function StoryBlogCard() {
           }}
           variant="contained"
           endIcon={<EastRoundedIcon />}
+          href={`/${prop.type.toLowerCase()}/${prop._id}`}
         >
           Read more
         </Button>
       </CardContent>
     </Card>
   );
-}
+};
 
-const MoreBlogcard = ({}: {}) => {
+const MoreBlogcard: React.FC<BlogNewsStory> = (prop) => {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
 
@@ -518,8 +574,8 @@ const MoreBlogcard = ({}: {}) => {
     >
       <CardMedia
         sx={{ height: 200 }}
-        image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
+        image={prop.cover.asset.url}
+        title={prop.title}
       />
       <CardContent>
         <Box display={"flex"} gap={2}>
@@ -532,7 +588,7 @@ const MoreBlogcard = ({}: {}) => {
           >
             {" "}
             <EventRoundedIcon fontSize="small" />
-            Ago
+            {moment(prop._createdAt).fromNow()}
           </Typography>
 
           <Typography
@@ -542,12 +598,12 @@ const MoreBlogcard = ({}: {}) => {
             gap={1}
             color={"text.secondary"}
           >
-            <NewspaperRoundedIcon fontSize="small" />
-            Type
+            {getIcon(prop.type)}
+            {prop.type}
           </Typography>
         </Box>
         <Typography mt={2} variant="h6">
-          Our Codedust program
+          {prop.title}
         </Typography>
       </CardContent>
     </Card>
@@ -571,45 +627,57 @@ function Parterns() {
 
   return (
     <Box sx={{ flexGrow: 1, p: 2 }}>
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          "--Grid-borderWidth": "1px",
-          borderTop: "var(--Grid-borderWidth) solid",
-          borderLeft: "var(--Grid-borderWidth) solid",
-          borderColor: "divider",
-          "& > div": {
-            borderRight: "var(--Grid-borderWidth) solid",
-            borderBottom: "var(--Grid-borderWidth) solid",
+      {loading ? (
+        <Box
+          display={"grid"}
+          sx={{
+            placeItems: "center",
+            heigh: "100%",
+          }}
+        >
+          <CircularProgress color="success" size={isMobileView ? 20 : 30} />
+        </Box>
+      ) : (
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            "--Grid-borderWidth": "1px",
+            borderTop: "var(--Grid-borderWidth) solid",
+            borderLeft: "var(--Grid-borderWidth) solid",
             borderColor: "divider",
-          },
-        }}
-      >
-        {partners.map((item, index) => (
-          <Grid
-            key={index}
-            {...{ xs: 12, sm: 6, md: 4, lg: 3 }}
-            minHeight={160}
-          >
-            <Image
-              src={item.imageFile.asset.url}
-              height={500}
-              width={500}
-              style={{
-                borderRadius: 1,
-                width: isMobileView ? "100%" : "auto",
-                maxHeight: isMobileView ? 90 : 90,
-                maxWidth: isMobileView ? 90 : 250,
-              }}
-              alt="Image"
-            />
-            <Typography variant="subtitle2" color={"text.secondary"}>
-              {item.name}
-            </Typography>
-          </Grid>
-        ))}
-      </Grid>
+            "& > div": {
+              borderRight: "var(--Grid-borderWidth) solid",
+              borderBottom: "var(--Grid-borderWidth) solid",
+              borderColor: "divider",
+            },
+          }}
+        >
+          {partners.map((item, index) => (
+            <Grid
+              key={index}
+              {...{ xs: 12, sm: 6, md: 4, lg: 3 }}
+              minHeight={160}
+            >
+              <Image
+                src={item.imageFile.asset.url}
+                height={500}
+                width={500}
+                style={{
+                  borderRadius: 1,
+                  width: isMobileView ? "100%" : "auto",
+                  maxHeight: isMobileView ? 90 : 90,
+                  maxWidth: isMobileView ? 90 : 250,
+                }}
+                alt="Image"
+              />
+              <Typography variant="subtitle2" color={"text.secondary"}>
+                {item.name}
+              </Typography>
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </Box>
   );
 }
