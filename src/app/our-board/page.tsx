@@ -1,5 +1,8 @@
 "use client";
-
+import {
+  PortableText,
+  type PortableTextReactComponents,
+} from "@portabletext/react";
 import Image from "next/image";
 import "react-multi-carousel/lib/styles.css";
 import HideAppBar from "../../../components/AppDawer";
@@ -26,6 +29,7 @@ import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
 import { BoardMember, getBoardMember } from "../../../services/sentry";
+import { SanityImage } from "../../../components/SanityImage";
 
 export default function OurBoard() {
   const theme = useMemo(
@@ -116,18 +120,20 @@ export default function OurBoard() {
                           </Box>
                         </Box>
                         <br />
-                        <Typography variant="body1">
-                          {member.desc[0].children[0]
-                            .text.split(`\n`)
-                            .map((item, key) => {
-                              return (
-                                <span key={key}>
-                                  {item}
-                                  <br />
-                                </span>
-                              );
-                            })}
-                        </Typography>
+                        <PortableText
+                          value={member.desc}
+                          components={myPortableTextComponents}
+                        />
+                        {/* <Typography variant="body1">
+                          {[0].text.split(`\n`).map((item, key) => {
+                            return (
+                              <span key={key}>
+                                {item}
+                                <br />
+                              </span>
+                            );
+                          })}
+                        </Typography> */}
                         <br />
                         <br />
                       </>
@@ -142,3 +148,11 @@ export default function OurBoard() {
     </ThemeProvider>
   );
 }
+
+const myPortableTextComponents: Partial<PortableTextReactComponents> = {
+  types: {
+    image: ({ value }) => {
+      return <SanityImage {...value} />;
+    },
+  },
+};
