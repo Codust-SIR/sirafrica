@@ -398,11 +398,11 @@ const BlogNewsStory = () => {
           borderRadius: 2,
           mt: 3,
         }}
-        href="/programs"
+        href="/impacts"
         variant="contained"
         endIcon={<EastRoundedIcon />}
       >
-        Learn more of our impacts
+        Discover more of our impacts
       </Button>
     </Box>
   );
@@ -557,14 +557,18 @@ const StoryBlogCard: React.FC<BlogNewsStory> = (prop) => {
   );
 };
 
-const MoreBlogcard: React.FC<BlogNewsStory> = (prop) => {
+export const MoreBlogcard: React.FC<BlogNewsStory> = (prop) => {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
 
   return (
     <Card
+      component={Link}
+      underline="none"
+      color="inherit"
+      href={`/impacts/${prop.type.toLowerCase()}/${prop._id}`}
       sx={{
-        maxWidth: isMobileView ? "100%" : 350,
+        maxWidth: isMobileView ? "100%" : 300,
         "&:hover": {
           boxShadow: 2,
         },
