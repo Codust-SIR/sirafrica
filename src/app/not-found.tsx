@@ -9,6 +9,7 @@ import {
   Typography,
   createTheme,
   Toolbar,
+  useMediaQuery,
 } from "@mui/material";
 import HideAppBar from "../../components/AppDawer";
 import { usePathname, useRouter } from "next/navigation";
@@ -25,7 +26,7 @@ const Index = () => {
       }),
     []
   );
-  console.log({ pathname });
+  const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
 
   return (
     <ThemeProvider theme={theme}>
@@ -38,9 +39,21 @@ const Index = () => {
             justifyContent: "center",
           }}
         >
-          <Image src={"/404_img.png"} height={300} width={500} alt="404" />
-          <Typography variant="h3"> Page not Found.</Typography>
-          <Typography variant="body1">
+          <Image
+            src={"/404_img.png"}
+            height={300}
+            width={500}
+            style={{
+              height: "100%",
+              width: "100%",
+            }}
+            alt="404"
+          />
+          <Typography p={2} variant={isMobileView ? "h5" : "h3"}>
+            {" "}
+            Page not Found.
+          </Typography>
+          <Typography p={2} variant="body1">
             <i>
               <b>{pathname}</b>
             </i>
@@ -48,7 +61,7 @@ const Index = () => {
             is not found at the moment.
           </Typography>
           <Toolbar />
-          <Box display={"flex"} justifyContent={"space-between"}>
+          <Box display={"flex"} justifyContent={"space-between"} p={2}>
             <Button
               onClick={() => router.back()}
               variant="outlined"
