@@ -375,15 +375,14 @@ const BlogNewsStory = () => {
                 <StoryBlogCard {...item} key={index} />
               ))}
             </Carousel>
-            <br />
-            <br />
             <Box
               display={"grid"}
               gridTemplateColumns={`repeat(auto-fit, minmax(${
-                isMobileView ? "100%" : "350px"
+                isMobileView ? "100%" : "250px"
               }, 1fr))`}
-              gap={5}
-              pt={isMobileView ? 4 : 0}
+              gap={1}
+              p={isMobileView ? 2 : 0}
+              pt={isMobileView ? 0 : 4}
             >
               {blogNewsStory.slice(2, 5).map((item, index) => (
                 <MoreBlogcard {...item} key={index} />
@@ -467,7 +466,6 @@ function Programe({
     </Card>
   );
 }
-
 
 function Parterns() {
   const theme = useTheme();

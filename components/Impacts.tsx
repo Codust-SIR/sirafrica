@@ -33,6 +33,7 @@ import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 import FeedRoundedIcon from "@mui/icons-material/FeedRounded";
 import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
 import { BlogNewsStory } from "../services/sentry";
+import Color from "color-thief-react";
 
 export const getIcon = (type: "Blog" | "News" | "Report" | "Story") => {
   switch (type) {
@@ -67,20 +68,56 @@ export const StoryBlogCard: React.FC<BlogNewsStory> = (prop) => {
         border: `1px solid ${theme.palette.action.hover}`,
       }}
     >
-      <CardMedia
-        component="img"
-        alt={prop.title}
-        height="280"
-        style={{ maxHeight: 280, width: "40%", objectFit: "fill" }}
-        image={prop.cover.asset.url}
-        title={prop.title}
-      />
+      <Color crossOrigin="anonymous" format="hex" src={prop.cover.asset.url}>
+        {({ data, loading, error }) => {
+          if (loading)
+            return (
+              <Box
+                sx={{
+                  display: "grid",
+                  placeItems: "center",
+                  height: "100%",
+                }}
+              >
+                <CircularProgress size={20} color="success" />
+              </Box>
+            );
+          return (
+            <Box
+              sx={{
+                backgroundColor: data,
+                width: "100%",
+                height: "100%",
+                placeItems: "center",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                src={prop.cover.asset.url}
+                width={isMobileView ? 400 : 800}
+                height={isMobileView ? 300 : 300}
+                alt={prop?.title}
+                style={{
+                  height: isMobileView ? "100%" : 300,
+                  width: "100%",
+                  objectFit: "contain",
+                  // Background color should be picked from the image dominant color
+                }}
+              />
+            </Box>
+          );
+        }}
+      </Color>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {prop.title}
+          {prop.title.length > 50
+            ? prop.title.slice(0, 50) + "..."
+            : prop.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {prop.description}
+          {prop.description.length > 100
+            ? prop.description.slice(0, 100) + "..."
+            : prop.description}
         </Typography>
         <br />
         <Box display={"flex"} gap={2}>
@@ -116,7 +153,7 @@ export const StoryBlogCard: React.FC<BlogNewsStory> = (prop) => {
           }}
           variant="contained"
           endIcon={<EastRoundedIcon />}
-          href={`/${prop.type.toLowerCase()}/${prop._id}`}
+          href={`impacts/${prop.type.toLowerCase()}/${prop._id}`}
         >
           Read more
         </Button>
