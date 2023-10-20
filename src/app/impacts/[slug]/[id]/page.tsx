@@ -61,7 +61,7 @@ export default function Impact() {
     return () => {
       setLoading(true);
     };
-  }, []);
+  }, [id]);
 
   return (
     <ThemeProvider theme={theme}>
