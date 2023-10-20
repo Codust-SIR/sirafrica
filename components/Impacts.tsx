@@ -35,7 +35,7 @@ import FeedRoundedIcon from "@mui/icons-material/FeedRounded";
 import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
 import { BlogNewsStory } from "../services/sentry";
 
-const getIcon = (type: "Blog" | "News" | "Report" | "Story") => {
+export const getIcon = (type: "Blog" | "News" | "Report" | "Story") => {
   switch (type) {
     case "Blog":
       return <FeedRoundedIcon fontSize="small" />;

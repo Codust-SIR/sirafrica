@@ -124,16 +124,7 @@ export default function OurBoard() {
                           value={member.desc}
                           components={myPortableTextComponents}
                         />
-                        {/* <Typography variant="body1">
-                          {[0].text.split(`\n`).map((item, key) => {
-                            return (
-                              <span key={key}>
-                                {item}
-                                <br />
-                              </span>
-                            );
-                          })}
-                        </Typography> */}
+                       
                         <br />
                         <br />
                       </>
@@ -149,7 +140,7 @@ export default function OurBoard() {
   );
 }
 
-const myPortableTextComponents: Partial<PortableTextReactComponents> = {
+export const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
     image: ({ value }) => {
       return <SanityImage {...value} />;
