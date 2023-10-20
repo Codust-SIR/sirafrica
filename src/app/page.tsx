@@ -42,6 +42,7 @@ import {
 } from "../../services/sentry";
 import DonateCard from "../../components/DonateCard";
 import { MoreBlogcard, StoryBlogCard } from "../../components/Impacts";
+import Color from "color-thief-react";
 
 export default function Home() {
   const theme = useMemo(
@@ -58,39 +59,34 @@ export default function Home() {
   const programs: {
     programe: string;
     url: string;
-    description: string;
     programeImage: string;
   }[] = [
     {
       programe: "Education",
-      description: "d",
       programeImage:
         "https://images.pexels.com/photos/5896914/pexels-photo-5896914.jpeg?auto=compress&cs=tinysrgb&w=1200",
       url: "education",
     },
     {
       programe: "Livelihoods ",
-      description: "d",
+
       programeImage:
         "https://images.pexels.com/photos/6457579/pexels-photo-6457579.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       url: "livelihoods",
     },
     {
       programe: "Digital solutions & Innovation",
-      description: "d",
       programeImage: "https://axyya.com/wp-content/uploads/2021/03/web2.png",
       url: "digital",
     },
     {
       programe: "Advocacy & Capacity Strengthening",
-      description: "d",
       programeImage:
         "https://images.pexels.com/photos/8385167/pexels-photo-8385167.jpeg?auto=compress&cs=tinysrgb&w=1200",
       url: "advocacy",
     },
     {
       programe: "Climate Resilience",
-      description: "d",
       programeImage:
         "https://www.donovanhatem.com/wp-content/uploads/2017/06/Sustainability.png",
       url: "climate",
@@ -216,8 +212,8 @@ export default function Home() {
               gridTemplateColumns={`repeat(auto-fit, minmax(${
                 isMobileView ? "100%" : "300px"
               }, 1fr))`}
-              gap={5}
-              pt={isMobileView ? 4 : 0}
+              gap={1}
+              pt={isMobileView ? 1 : 0}
             >
               {programs.map((item, i) => (
                 <Programe {...item} key={i} />
@@ -293,8 +289,11 @@ export default function Home() {
             <br />
             <Box
               display={"grid"}
-              gridTemplateColumns={`repeat(auto-fit, minmax(350px, 1fr))`}
+              gridTemplateColumns={`repeat(auto-fit, minmax(${
+                isMobileView ? "100%" : "300px"
+              }, 1fr))`}
               gap={1}
+              p={isMobileView ? 2 : 0}
             >
               {initiatives.map((item, i) => (
                 <Initiative {...item} key={i} />
@@ -409,13 +408,11 @@ const BlogNewsStory = () => {
 };
 
 function Programe({
-  description,
   programe,
   programeImage,
   url,
 }: {
   programe: string;
-  description: string;
   programeImage: string;
   url: string;
 }) {
@@ -429,23 +426,56 @@ function Programe({
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          padding: 0,
+          padding: 3,
           margin: 0,
+          paddingTop: 1,
         }}
       >
-        <CardMedia
-          sx={{ height: isMobileView ? 180 : 240 }}
-          component={"img"}
-          image={programeImage}
-          title={programe}
-        />
-        <CardContent style={{ flex: 1 }}>
-          <Typography gutterBottom variant="h6" component="div">
+        <Color crossOrigin="anonymous" format="hex" src={programeImage}>
+          {({ data, loading, error }) => {
+            if (loading)
+              return (
+                <Box
+                  sx={{
+                    display: "grid",
+                    placeItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <CircularProgress size={20} color="success" />
+                </Box>
+              );
+            return (
+              <Box
+                sx={{
+                  backgroundColor: data,
+                  width: "100%",
+                  height: "100%",
+                  placeItems: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  src={programeImage}
+                  width={isMobileView ? 400 : 800}
+                  height={isMobileView ? 150 : 300}
+                  alt={programe}
+                  style={{
+                    height: isMobileView ? 150 : 300,
+                    width: "100%",
+                    objectFit: "contain",
+                    // Background color should be picked from the image dominant color
+                  }}
+                />
+              </Box>
+            );
+          }}
+        </Color>
+
+        <CardContent style={{ flex: 1, padding: 2, margin: 0 }}>
+          <Typography gutterBottom variant={isMobileView ? "subtitle1" : "h6"}>
             {programe}
           </Typography>
-          {/* <Typography variant="body2" color="text.secondary">
-            {description}
-          </Typography> */}
         </CardContent>
         <CardActions sx={{ p: 0, m: 0 }}>
           <Button
@@ -589,9 +619,6 @@ function Problems() {
           }, 1fr))`}
           gap={1}
           flex={0.7}
-          // placeCon
-          pt={isMobileView ? 4 : 0}
-          // placeItems={"center"}
         >
           {partners.map((item, index) => (
             <Grid
@@ -615,25 +642,69 @@ function Problems() {
                 height={50}
                 width={50}
                 alt={item.title}
+                style={{
+                  height: isMobileView ? 30 : 50,
+                  width: isMobileView ? 30 : 50,
+                }}
               />
-              <Typography variant="body1" color={"text.secondary"}>
+              <Typography
+                variant={isMobileView ? "caption" : "body1"}
+                color={"text.secondary"}
+              >
                 {item.description}
               </Typography>
             </Grid>
           ))}
         </Box>
         <Box flex={0.3} p={1}>
-          <Image
-            src="https://images.pexels.com/photos/7275394/pexels-photo-7275394.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            height={600}
-            width={600}
-            style={{
-              borderRadius: 1,
-              width: isMobileView ? "90%" : 300,
-              height: isMobileView ? "90%" : "auto",
+          <Color
+            crossOrigin="anonymous"
+            format="hex"
+            src={
+              "https://images.pexels.com/photos/7275394/pexels-photo-7275394.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            }
+          >
+            {({ data, loading, error }) => {
+              if (loading)
+                return (
+                  <Box
+                    sx={{
+                      display: "grid",
+                      placeItems: "center",
+                      height: "100%",
+                    }}
+                  >
+                    <CircularProgress size={20} color="success" />
+                  </Box>
+                );
+              return (
+                <Box
+                  sx={{
+                    backgroundColor: data,
+                    width: "100%",
+                    height: "100%",
+                    placeItems: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Image
+                    src={
+                      "https://images.pexels.com/photos/7275394/pexels-photo-7275394.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    }
+                    width={isMobileView ? 400 : 800}
+                    height={isMobileView ? 300 : 300}
+                    alt={"Image"}
+                    style={{
+                      height: isMobileView ? "100%" : 300,
+                      width: "100%",
+                      objectFit: "contain",
+                      // Background color should be picked from the image dominant color
+                    }}
+                  />
+                </Box>
+              );
             }}
-            alt="Programs"
-          />
+          </Color>
         </Box>
       </Box>
     </Box>
@@ -675,14 +746,17 @@ const Initiative: React.FC<{
           height={800}
           width={1500}
           style={{
-            height: 80,
-            width: 100,
+            height: isMobileView ? 50 : 80,
+            width: isMobileView ? 50 : 80,
           }}
           alt={title}
         />
       </Box>
       <Box>
-        <Typography variant={isMobileView ? "h6" : "h5"} color="text.primary">
+        <Typography
+          variant={isMobileView ? "subtitle1" : "h5"}
+          color="text.primary"
+        >
           {title}
         </Typography>
         <Typography variant="caption" color="text.secondary">

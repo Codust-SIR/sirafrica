@@ -348,14 +348,13 @@ export default function HideAppBar(props: Props) {
                 alt="Open Gates"
                 src="/sirafrica_logo.png"
                 style={{
-                  height: 45,
-                  width: 45,
+                  height: isMobileView ? 35 : 45,
+                  width: isMobileView ? 35 : 45,
                 }}
               />
               <Box>
                 <Typography
-                  variant="h5"
-                  component="h5"
+                  variant={isMobileView ? "h6" : "h5"}
                   sx={{
                     flexGrow: 1,
                     color: (theme) => theme.palette.success.main,
@@ -366,12 +365,11 @@ export default function HideAppBar(props: Props) {
                   SIR
                 </Typography>
                 <Typography
-                  variant="body2"
-                  component="p"
+                  variant={isMobileView ? "caption" : "body2"}
                   sx={{
                     flexGrow: 1,
                     color: "text.primary",
-                    letterSpacing: 1,
+                    letterSpacing: isMobileView ? 0.4 : 1,
                   }}
                 >
                   Learn, Earn, Innovate

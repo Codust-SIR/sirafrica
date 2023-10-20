@@ -153,6 +153,7 @@ const DonateCard = () => {
 
             setSectionNumber((p) => p + 1);
           }}
+          size="small"
         >
           Next
         </Button>
@@ -186,6 +187,7 @@ const Tabs: React.FC<{
         sx={{
           textTransform: "none",
         }}
+        size="small"
       >
         One-time
       </Button>
@@ -199,6 +201,7 @@ const Tabs: React.FC<{
         sx={{
           textTransform: "none",
         }}
+        size="small"
       >
         Monthly
       </Button>
@@ -212,6 +215,7 @@ const Tabs: React.FC<{
         sx={{
           textTransform: "none",
         }}
+        size="small"
       >
         Annually
       </Button>
@@ -272,6 +276,8 @@ const Section: React.FC<{
   onAddingCreditCardError,
   handleSubmitDonation,
 }) => {
+  const theme = useTheme();
+  const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
   switch (value) {
     case 0:
       return (
@@ -287,7 +293,10 @@ const Section: React.FC<{
               borderBottomRightRadius: 0,
             }}
           >
-            <Typography variant="h5" sx={{ color: "white" }}>
+            <Typography
+              variant={isMobileView ? "subtitle1" : "h5"}
+              sx={{ color: "white" }}
+            >
               Chose amount
             </Typography>
           </Box>
@@ -313,10 +322,13 @@ const Section: React.FC<{
               gap: 2,
             }}
           >
-            <IconButton sx={{ color: "white" }} onClick={back}>
+            <IconButton sx={{ color: "white" }} size="small" onClick={back}>
               <ArrowBackRoundedIcon sx={{ color: "white" }} />
             </IconButton>
-            <Typography variant="h5" sx={{ color: "white" }}>
+            <Typography
+              variant={isMobileView ? "subtitle1" : "h5"}
+              sx={{ color: "white" }}
+            >
               Your Information
             </Typography>
           </Box>
@@ -345,10 +357,13 @@ const Section: React.FC<{
               gap: 2,
             }}
           >
-            <IconButton sx={{ color: "white" }} onClick={back}>
+            <IconButton sx={{ color: "white" }} size="small" onClick={back}>
               <ArrowBackRoundedIcon sx={{ color: "white" }} />
             </IconButton>
-            <Typography variant="h5" sx={{ color: "white" }}>
+            <Typography
+              variant={isMobileView ? "subtitle1" : "h5"}
+              sx={{ color: "white" }}
+            >
               Summary of donation
             </Typography>
           </Box>
@@ -409,6 +424,7 @@ const AmountToSelect: React.FC<{
             onChangeHandler(10);
           }}
           variant="outlined"
+          size="small"
         >
           $ 10
         </Button>
@@ -418,6 +434,7 @@ const AmountToSelect: React.FC<{
           }}
           color={amount == 50 ? "success" : "inherit"}
           variant="outlined"
+          size="small"
         >
           $ 50
         </Button>
@@ -427,6 +444,7 @@ const AmountToSelect: React.FC<{
           }}
           color={amount == 100 ? "success" : "inherit"}
           variant="outlined"
+          size="small"
         >
           $ 100
         </Button>
