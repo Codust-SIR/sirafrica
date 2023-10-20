@@ -1,4 +1,3 @@
-
 import React from "react";
 import Image from "next/image";
 import Carousel from "react-multi-carousel";
@@ -146,7 +145,11 @@ export const MoreBlogcard: React.FC<BlogNewsStory> = (prop) => {
       }}
     >
       <CardMedia
-        sx={{ height: 200 }}
+        sx={{
+          height: isMobileView ? 150 : 200,
+          width: "100%",
+          objectFit: "fill",
+        }}
         image={prop.cover.asset.url}
         title={prop.title}
       />
@@ -175,7 +178,7 @@ export const MoreBlogcard: React.FC<BlogNewsStory> = (prop) => {
             {prop.type}
           </Typography>
         </Box>
-        <Typography mt={2} variant="h6">
+        <Typography mt={2} variant={isMobileView ? "subtitle2" : "h6"}>
           {prop.title}
         </Typography>
       </CardContent>

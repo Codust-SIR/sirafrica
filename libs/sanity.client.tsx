@@ -1,5 +1,10 @@
 import { createClient, type SanityClient } from 'next-sanity'
 import { client } from '../services/sentry'
+import {
+  
+  type PortableTextReactComponents,
+} from "@portabletext/react";
+import { SanityImage } from '../components/SanityImage';
 
 export function getClient(preview?: { token: string }): SanityClient {
 
@@ -18,3 +23,11 @@ export function getClient(preview?: { token: string }): SanityClient {
 }
 
 export const getSanityImageConfig = () => getClient()
+
+export const myPortableTextComponents: Partial<PortableTextReactComponents> = {
+  types: {
+    image: ({ value }) => {
+      return <SanityImage {...value} />;
+    },
+  },
+};

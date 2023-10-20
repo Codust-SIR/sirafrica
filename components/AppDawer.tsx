@@ -176,19 +176,19 @@ export default function HideAppBar(props: Props) {
       more: [
         {
           name: "Stories",
-          url: "/impacts/stories",
+          url: "/impacts#story",
         },
         {
           name: "In The News",
-          url: "/impacts/news",
+          url: "/impacts#news",
         },
         {
           name: "Reports",
-          url: "/impacts/reports",
+          url: "/impacts#report",
         },
         {
           name: "Blogs",
-          url: "/impacts/blogs",
+          url: "/impacts#blog",
         },
       ],
     },
@@ -508,7 +508,7 @@ export default function HideAppBar(props: Props) {
                 transformOrigin: "0 0 0",
                 backgroundColor: theme.palette.background.default,
               }}
-              {...{ timeout: 1000 }}
+              {...{ timeout: 500 }}
               onMouseLeave={() => {
                 const updatedNavItems = navItems.map((item) => ({
                   ...item,

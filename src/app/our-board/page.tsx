@@ -29,7 +29,7 @@ import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
 import { BoardMember, getBoardMember } from "../../../services/sentry";
-import { SanityImage } from "../../../components/SanityImage";
+import { myPortableTextComponents } from "../../../libs/sanity.client";
 
 export default function OurBoard() {
   const theme = useMemo(
@@ -140,10 +140,3 @@ export default function OurBoard() {
   );
 }
 
-export const myPortableTextComponents: Partial<PortableTextReactComponents> = {
-  types: {
-    image: ({ value }) => {
-      return <SanityImage {...value} />;
-    },
-  },
-};

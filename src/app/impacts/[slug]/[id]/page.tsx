@@ -34,7 +34,7 @@ import {
 import { getIcon } from "../../../../../components/Impacts";
 import moment from "moment";
 import { PortableText } from "@portabletext/react";
-import { myPortableTextComponents } from "@/app/our-board/page";
+import { myPortableTextComponents } from "../../../../../libs/sanity.client";
 
 export default function Impact() {
   const theme = useMemo(

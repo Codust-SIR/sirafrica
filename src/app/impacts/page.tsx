@@ -28,15 +28,12 @@ import { BlogNewsStory, getBlogsNewsAndReport } from "../../../services/sentry";
 import { MoreBlogcard } from "../../../components/Impacts";
 
 export default function Donate() {
-  const theme = useMemo(
-    () =>
-      createTheme({
-        typography: {
-          fontFamily: "inherit",
-        },
-      }),
-    []
-  );
+  const theme = createTheme({
+    typography: {
+      fontFamily: "inherit",
+    },
+  });
+
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
   const [selectedOption, setSelectedOption] = useState<
     "all" | "blog" | "news" | "report" | "story"
@@ -52,6 +49,24 @@ export default function Donate() {
       setLoading(true);
     };
   }, []);
+
+  useEffect(() => {
+    const option = window.location.hash.replace("#", "") as
+      | "all"
+      | "blog"
+      | "news"
+      | "report"
+      | "story";
+
+    if (option) {
+      setSelectedOption(option);
+    }
+
+    return () => {
+      setSelectedOption("all");
+    };
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -149,14 +164,13 @@ export default function Donate() {
                   }[selectedOption]
                 }
               </Typography>
-              <Toolbar />
 
               <Box
                 display={"grid"}
                 gridTemplateColumns={`repeat(auto-fit, minmax(${
                   isMobileView ? "100%" : "250px"
                 }, 1fr))`}
-                // gap={1}
+                gap={1}
                 pt={isMobileView ? 4 : 0}
               >
                 {loading ? (
