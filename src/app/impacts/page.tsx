@@ -25,7 +25,8 @@ import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
 import NewspaperRoundedIcon from "@mui/icons-material/NewspaperRounded";
 import DensitySmallRoundedIcon from "@mui/icons-material/DensitySmallRounded";
 import { BlogNewsStory, getBlogsNewsAndReport } from "../../../services/sentry";
-import { MoreBlogcard } from "../page";
+import { MoreBlogcard } from "../../../components/Impacts";
+
 export default function Donate() {
   const theme = useMemo(
     () =>
