@@ -114,7 +114,7 @@ export default function Home() {
       url: "https://codust-tutorial.vercel.app/",
     },
     {
-      title: "Shop",
+      title: "Shop for Change",
       description:
         "We build 3D models of refugee-made products and sell them on our online shop.",
       image: "/sir_shop.png",
