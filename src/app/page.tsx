@@ -546,7 +546,55 @@ function Parterns() {
               {...{ xs: 12, sm: 6, md: 4, lg: 3 }}
               minHeight={160}
             >
-              <Image
+              <Color
+                crossOrigin="anonymous"
+                format="hex"
+                src={item.imageFile.asset.url}
+              >
+                {({ data, loading, error }) => {
+                  if (loading)
+                    return (
+                      <Box
+                        sx={{
+                          display: "grid",
+                          placeItems: "center",
+                          height: "100%",
+                        }}
+                      >
+                        <CircularProgress size={20} color="success" />
+                      </Box>
+                    );
+                  return (
+                    <Box
+                      sx={{
+                        backgroundColor: data,
+                        width: isMobileView ? "100%" : "auto",
+                        maxHeight: isMobileView ? 90 : 150,
+                        display: "grid",
+                        placeItems: "center",
+                        alignItems: "center",
+                        borderRadius: 1,
+                      }}
+                    >
+                      <Image
+                        src={item.imageFile.asset.url}
+                        height={500}
+                        width={500}
+                        alt={item.name}
+                        style={{
+                          borderRadius: 1,
+                          width: isMobileView ? "100%" : "auto",
+                          maxHeight: isMobileView ? 90 : 150,
+                          maxWidth: isMobileView ? 90 : 250,
+                          objectFit: "contain",
+                          // Background color should be picked from the image dominant color
+                        }}
+                      />
+                    </Box>
+                  );
+                }}
+              </Color>
+              {/* <Image
                 src={item.imageFile.asset.url}
                 height={500}
                 width={500}
@@ -557,7 +605,7 @@ function Parterns() {
                   maxWidth: isMobileView ? 90 : 250,
                 }}
                 alt="Image"
-              />
+              /> */}
               <Typography variant="subtitle2" color={"text.secondary"}>
                 {item.name}
               </Typography>
