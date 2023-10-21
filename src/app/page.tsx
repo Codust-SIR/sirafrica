@@ -442,7 +442,20 @@ function Programe({
                     height: "100%",
                   }}
                 >
-                  <CircularProgress size={20} color="success" />
+                  <Image
+                    src={"/image-placeholder.svg"}
+                    width={isMobileView ? 400 : 800}
+                    height={isMobileView ? 300 : 300}
+                    alt={"Image"}
+                    style={{
+                      height: isMobileView ? "100%" : 300,
+                      width: "100%",
+                      objectFit: "contain",
+                      // Image to be blury to show loading
+                      filter: "blur(10px)",
+                    }}
+                    key={"Loading Image"}
+                  />{" "}
                 </Box>
               );
             return (
@@ -735,7 +748,18 @@ function Problems() {
                       height: "100%",
                     }}
                   >
-                    <CircularProgress size={20} color="success" />
+                    <Image
+                      src={"/image-placeholder.svg"}
+                      width={isMobileView ? 400 : 800}
+                      height={isMobileView ? 300 : 300}
+                      alt={"Image"}
+                      style={{
+                        height: isMobileView ? "100%" : 300,
+                        width: "100%",
+                        objectFit: "contain",
+                        // Background color should be picked from the image dominant color
+                      }}
+                    />{" "}
                   </Box>
                 );
               return (
