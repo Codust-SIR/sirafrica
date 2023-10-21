@@ -426,7 +426,7 @@ function Programe({
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          padding: 3,
+          // padding: 3,
           margin: 0,
           paddingTop: 1,
         }}
@@ -472,7 +472,16 @@ function Programe({
           }}
         </Color>
 
-        <CardContent style={{ flex: 1, padding: 2, margin: 0 }}>
+        <CardContent
+          style={{
+            flex: 1,
+            padding: 2,
+            margin: 0,
+            backgroundImage:
+              "linear-gradient(to right, whitesmoke , green,dodgerblue,green,whitesmoke)",
+            backdropFilter: "blur(5px)",
+          }}
+        >
           <Typography gutterBottom variant={isMobileView ? "subtitle1" : "h6"}>
             {programe}
           </Typography>
