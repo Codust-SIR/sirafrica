@@ -467,6 +467,18 @@ export default function HideAppBar(props: Props) {
                   textTransform: "none",
                   borderRadius: 5,
                 }}
+                href="/join"
+                startIcon={<VolunteerActivismRoundedIcon />}
+              >
+                Shop for Changes
+              </Button>
+              <Button
+                variant="contained"
+                color="success"
+                sx={{
+                  textTransform: "none",
+                  borderRadius: 5,
+                }}
                 href="/donate"
                 startIcon={<VolunteerActivismRoundedIcon />}
               >

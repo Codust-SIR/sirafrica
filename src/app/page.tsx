@@ -478,11 +478,11 @@ function Programe({
             padding: 2,
             margin: 0,
             backgroundImage:
-              "linear-gradient(to right, whitesmoke , green,dodgerblue,green,whitesmoke)",
+              "linear-gradient(to right, whitesmoke , green,whitesmoke)",
             backdropFilter: "blur(5px)",
           }}
         >
-          <Typography gutterBottom variant={isMobileView ? "subtitle1" : "h6"}>
+          <Typography gutterBottom variant={isMobileView ? "h6" : "h5"}>
             {programe}
           </Typography>
         </CardContent>
@@ -576,9 +576,13 @@ function Parterns() {
                   return (
                     <Box
                       sx={{
-                        backgroundColor: data,
+                        backgroundColor: item.name
+                          .toLowerCase()
+                          .includes("source")
+                          ? theme.palette.background.paper
+                          : data,
                         width: isMobileView ? "100%" : "auto",
-                        maxHeight: isMobileView ? 90 : 150,
+                        maxHeight: isMobileView ? 120 : 180,
                         display: "grid",
                         placeItems: "center",
                         alignItems: "center",
@@ -593,8 +597,8 @@ function Parterns() {
                         style={{
                           borderRadius: 1,
                           width: isMobileView ? "100%" : "auto",
-                          maxHeight: isMobileView ? 90 : 150,
-                          maxWidth: isMobileView ? 90 : 250,
+                          maxHeight: isMobileView ? 120 : 150,
+                          maxWidth: isMobileView ? 120 : 250,
                           objectFit: "contain",
                           // Background color should be picked from the image dominant color
                         }}
