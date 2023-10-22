@@ -64,7 +64,7 @@ export default function Home() {
     {
       programe: "Education",
       programeImage:
-        "https://images.pexels.com/photos/5896914/pexels-photo-5896914.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "https://th.bing.com/th/id/R.101696699d7e931bddf71141273d3937?rik=3%2fKMJDDcW%2bghhQ&pid=ImgRaw&r=0",
       url: "education",
     },
     {
@@ -81,8 +81,7 @@ export default function Home() {
     },
     {
       programe: "Advocacy & Capacity Strengthening",
-      programeImage:
-        "https://images.pexels.com/photos/8385167/pexels-photo-8385167.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      programeImage: "/bahydro5.jpg",
       url: "advocacy",
     },
     {
@@ -110,7 +109,7 @@ export default function Home() {
       title: "Codedust",
       description:
         "Codedust is a coding bootcamp that provides refugees and local youth with the skills and resources to become software developers.",
-      image: "/codedust.jpeg",
+      image: "/codedust.png",
       url: "https://codust-tutorial.vercel.app/",
     },
     {
@@ -476,7 +475,7 @@ function Programe({
                   style={{
                     height: isMobileView ? 150 : 300,
                     width: "100%",
-                    objectFit: "contain",
+                    objectFit: "cover",
                     // Background color should be picked from the image dominant color
                   }}
                 />
@@ -490,12 +489,9 @@ function Programe({
             flex: 1,
             padding: 2,
             margin: 0,
-            backgroundImage:
-              "linear-gradient(to right, whitesmoke , green,whitesmoke)",
-            backdropFilter: "blur(5px)",
           }}
         >
-          <Typography gutterBottom variant={isMobileView ? "h6" : "h5"}>
+          <Typography gutterBottom variant={isMobileView ? "h5" : "h4"}>
             {programe}
           </Typography>
         </CardContent>
@@ -509,6 +505,7 @@ function Programe({
             }}
             href={`/programs/${url}`}
             variant="contained"
+            size="large"
             endIcon={<EastRoundedIcon />}
           >
             Learn more
@@ -550,17 +547,17 @@ function Parterns() {
         <Grid
           container
           spacing={2}
-          sx={{
-            "--Grid-borderWidth": "1px",
-            borderTop: "var(--Grid-borderWidth) solid",
-            borderLeft: "var(--Grid-borderWidth) solid",
-            borderColor: "divider",
-            "& > div": {
-              borderRight: "var(--Grid-borderWidth) solid",
-              borderBottom: "var(--Grid-borderWidth) solid",
-              borderColor: "divider",
-            },
-          }}
+          // sx={{
+          //   "--Grid-borderWidth": "1px",
+          //   borderTop: "var(--Grid-borderWidth) solid",
+          //   borderLeft: "var(--Grid-borderWidth) solid",
+          //   borderColor: "divider",
+          //   "& > div": {
+          //     borderRight: "var(--Grid-borderWidth) solid",
+          //     borderBottom: "var(--Grid-borderWidth) solid",
+          //     borderColor: "divider",
+          //   },
+          // }}
         >
           {partners.map((item, index) => (
             <Grid
@@ -589,9 +586,16 @@ function Parterns() {
                   return (
                     <Box
                       sx={{
-                        backgroundColor: item.name
-                          .toLowerCase()
-                          .includes("source")
+                        backgroundColor: [
+                          "source",
+                          "openstreet",
+                          "united",
+                          "cyber ",
+                          "world",
+                          "danish",
+                        ].some((substring) =>
+                          item.name.toLowerCase().includes(substring)
+                        )
                           ? theme.palette.background.paper
                           : data,
                         width: isMobileView ? "100%" : "auto",
@@ -632,7 +636,7 @@ function Parterns() {
                 }}
                 alt="Image"
               /> */}
-              <Typography variant="subtitle2" color={"text.secondary"}>
+              <Typography variant="subtitle1" color={"text.secondary"}>
                 {item.name}
               </Typography>
             </Grid>
@@ -825,14 +829,14 @@ const Initiative: React.FC<{
       target="_blank"
       component={Link}
     >
-      <Box>
+      <Box p={1}>
         <Image
           src={image}
           height={800}
           width={1500}
           style={{
-            height: isMobileView ? 50 : 80,
-            width: isMobileView ? 50 : 80,
+            height: isMobileView ? 50 : 70,
+            width: isMobileView ? 50 : 70,
           }}
           alt={title}
         />

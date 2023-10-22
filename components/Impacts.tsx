@@ -56,7 +56,7 @@ export const StoryBlogCard: React.FC<BlogNewsStory> = (prop) => {
   return (
     <Card
       sx={{
-        maxWidth: isSmallPC ? 500 : 1000,
+        maxWidth: isSmallPC ? 500 : 1600,
         display: isMobileView ? "block" : "flex",
         m: 1,
         mr: 2,
@@ -68,55 +68,65 @@ export const StoryBlogCard: React.FC<BlogNewsStory> = (prop) => {
         border: `1px solid ${theme.palette.action.hover}`,
       }}
     >
-      <Color crossOrigin="anonymous" format="hex" src={prop.cover.asset.url}>
-        {({ data, loading, error }) => {
-          if (loading)
+      <Box flex={0.36}>
+        <Color crossOrigin="anonymous" format="hex" src={prop.cover.asset.url}>
+          {({ data, loading, error }) => {
+            if (loading)
+              return (
+                <Box
+                  sx={{
+                    display: "grid",
+                    placeItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <CircularProgress size={20} color="success" />
+                </Box>
+              );
             return (
               <Box
                 sx={{
-                  display: "grid",
-                  placeItems: "center",
+                  backgroundColor: data,
+                  width: "100%",
                   height: "100%",
+                  placeItems: "center",
+                  alignItems: "center",
                 }}
               >
-                <CircularProgress size={20} color="success" />
+                <Image
+                  src={prop.cover.asset.url}
+                  width={isMobileView ? 400 : 800}
+                  height={isMobileView ? 300 : 300}
+                  alt={prop?.title}
+                  style={{
+                    height: isMobileView ? "100%" : 300,
+                    width: "100%",
+                    objectFit: "contain",
+                    // Background color should be picked from the image dominant color
+                  }}
+                />
               </Box>
             );
-          return (
-            <Box
-              sx={{
-                backgroundColor: data,
-                width: "100%",
-                height: "100%",
-                placeItems: "center",
-                alignItems: "center",
-              }}
-            >
-              <Image
-                src={prop.cover.asset.url}
-                width={isMobileView ? 400 : 800}
-                height={isMobileView ? 300 : 300}
-                alt={prop?.title}
-                style={{
-                  height: isMobileView ? "100%" : 300,
-                  width: "100%",
-                  objectFit: "contain",
-                  // Background color should be picked from the image dominant color
-                }}
-              />
-            </Box>
-          );
+          }}
+        </Color>
+      </Box>
+      <CardContent
+        sx={{
+          flex: 0.64,
         }}
-      </Color>
-      <CardContent>
+      >
         <Typography gutterBottom variant="h5" component="div">
-          {prop.title.length > 50
-            ? prop.title.slice(0, 50) + "..."
+          {prop.title.length > 90
+            ? prop.title.slice(0, 90) + "..."
             : prop.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {prop.description.length > 100
-            ? prop.description.slice(0, 100) + "..."
+        {!isMobileView && <br />}
+        <Typography
+          variant={isMobileView ? "subtitle1" : "body1"}
+          color="text.secondary"
+        >
+          {prop.description.length > 350
+            ? prop.description.slice(0, 350) + "..."
             : prop.description}
         </Typography>
         <br />

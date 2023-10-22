@@ -6,6 +6,7 @@ const nextConfig = {
       "cdn.sanity.io",
       "axyya.com",
       "www.donovanhatem.com",
+      "th.bing.com",
     ],
   },
 };
