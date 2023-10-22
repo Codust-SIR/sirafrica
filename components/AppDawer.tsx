@@ -315,11 +315,6 @@ export default function HideAppBar(props: Props) {
             borderBottom: `1px solid ${theme.palette.divider}`,
             border: "none",
             height: hoveredNavItem.length > 0 ? "100vh" : "auto",
-            // display: "flex",
-            // flexDirection: "column",
-            // justifyContent: "space-between",
-            // alignItems: "center",
-            // p: 1,
           }}
         >
           <Toolbar
@@ -460,6 +455,36 @@ export default function HideAppBar(props: Props) {
                   </Link>
                 </div>
               ))}
+              <Box
+                sx={{
+                  "&:hover": {
+                    boxShadow: 2,
+                  },
+                  boxShadow: 0,
+                  border: `1px solid ${theme.palette.action.hover}`,
+                  p: 1,
+                  borderRadius: 2,
+                  display: "flex",
+                  gap: 1,
+                }}
+                component={Link}
+                underline="none"
+                color="inherit"
+                href="/shop"
+                alignItems={"center"}
+              >
+                <Image
+                  src={"/sir_shop.png"}
+                  height={800}
+                  width={1500}
+                  style={{
+                    height: isMobileView ? 50 : 30,
+                    width: isMobileView ? 50 : 30,
+                  }}
+                  alt={"Shop for Changes"}
+                />
+                <Typography>Shop for Changes</Typography>
+              </Box>
               <Button
                 variant="contained"
                 color="success"

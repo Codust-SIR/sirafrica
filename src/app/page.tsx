@@ -114,7 +114,7 @@ export default function Home() {
       url: "https://codust-tutorial.vercel.app/",
     },
     {
-      title: "Shop",
+      title: "Shop for Change",
       description:
         "We build 3D models of refugee-made products and sell them on our online shop.",
       image: "/sir_shop.png",
@@ -426,7 +426,7 @@ function Programe({
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          padding: 3,
+          // padding: 3,
           margin: 0,
           paddingTop: 1,
         }}
@@ -442,7 +442,20 @@ function Programe({
                     height: "100%",
                   }}
                 >
-                  <CircularProgress size={20} color="success" />
+                  <Image
+                    src={"/image-placeholder.svg"}
+                    width={isMobileView ? 400 : 800}
+                    height={isMobileView ? 300 : 300}
+                    alt={"Image"}
+                    style={{
+                      height: isMobileView ? "100%" : 300,
+                      width: "100%",
+                      objectFit: "contain",
+                      // Image to be blury to show loading
+                      filter: "blur(10px)",
+                    }}
+                    key={"Loading Image"}
+                  />{" "}
                 </Box>
               );
             return (
@@ -472,8 +485,17 @@ function Programe({
           }}
         </Color>
 
-        <CardContent style={{ flex: 1, padding: 2, margin: 0 }}>
-          <Typography gutterBottom variant={isMobileView ? "subtitle1" : "h6"}>
+        <CardContent
+          style={{
+            flex: 1,
+            padding: 2,
+            margin: 0,
+            backgroundImage:
+              "linear-gradient(to right, whitesmoke , green,whitesmoke)",
+            backdropFilter: "blur(5px)",
+          }}
+        >
+          <Typography gutterBottom variant={isMobileView ? "h6" : "h5"}>
             {programe}
           </Typography>
         </CardContent>
@@ -546,7 +568,59 @@ function Parterns() {
               {...{ xs: 12, sm: 6, md: 4, lg: 3 }}
               minHeight={160}
             >
-              <Image
+              <Color
+                crossOrigin="anonymous"
+                format="hex"
+                src={item.imageFile.asset.url}
+              >
+                {({ data, loading, error }) => {
+                  if (loading)
+                    return (
+                      <Box
+                        sx={{
+                          display: "grid",
+                          placeItems: "center",
+                          height: "100%",
+                        }}
+                      >
+                        <CircularProgress size={20} color="success" />
+                      </Box>
+                    );
+                  return (
+                    <Box
+                      sx={{
+                        backgroundColor: item.name
+                          .toLowerCase()
+                          .includes("source")
+                          ? theme.palette.background.paper
+                          : data,
+                        width: isMobileView ? "100%" : "auto",
+                        maxHeight: isMobileView ? 120 : 180,
+                        display: "grid",
+                        placeItems: "center",
+                        alignItems: "center",
+                        borderRadius: 1,
+                      }}
+                    >
+                      <Image
+                        src={item.imageFile.asset.url}
+                        height={500}
+                        width={500}
+                        alt={item.name}
+                        style={{
+                          borderRadius: 1,
+                          width: isMobileView ? "100%" : "auto",
+                          maxHeight: isMobileView ? 120 : 150,
+                          maxWidth: isMobileView ? 120 : 250,
+                          objectFit: "contain",
+                          // Background color should be picked from the image dominant color
+                        }}
+                      />
+                    </Box>
+                  );
+                }}
+              </Color>
+              {/* <Image
                 src={item.imageFile.asset.url}
                 height={500}
                 width={500}
@@ -557,7 +631,7 @@ function Parterns() {
                   maxWidth: isMobileView ? 90 : 250,
                 }}
                 alt="Image"
-              />
+              /> */}
               <Typography variant="subtitle2" color={"text.secondary"}>
                 {item.name}
               </Typography>
@@ -674,7 +748,18 @@ function Problems() {
                       height: "100%",
                     }}
                   >
-                    <CircularProgress size={20} color="success" />
+                    <Image
+                      src={"/image-placeholder.svg"}
+                      width={isMobileView ? 400 : 800}
+                      height={isMobileView ? 300 : 300}
+                      alt={"Image"}
+                      style={{
+                        height: isMobileView ? "100%" : 300,
+                        width: "100%",
+                        objectFit: "contain",
+                        // Background color should be picked from the image dominant color
+                      }}
+                    />{" "}
                   </Box>
                 );
               return (
