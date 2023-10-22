@@ -23,6 +23,7 @@ import {
   Icon,
   ListItemButton,
   CircularProgress,
+  Divider,
 } from "@mui/material";
 import EventRoundedIcon from "@mui/icons-material/EventRounded";
 import NewspaperRoundedIcon from "@mui/icons-material/NewspaperRounded";
@@ -125,7 +126,7 @@ export default function Home() {
       <CssBaseline />
       <HideAppBar>
         <Box>
-          <Box p={2} bgcolor={theme.palette.action.hover}>
+          <Box p={2}>
             <Box
               sx={{
                 height: isMobileView ? 300 : 600,
@@ -168,6 +169,52 @@ export default function Home() {
             </Box>
           </Box>
 
+          <br />
+          <Box
+            p={isMobileView ? 1 : 10}
+            bgcolor={theme.palette.action.hover}
+            sx={{
+              display: "grid",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Box
+              sx={{
+                display: "grid",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: theme.palette.success.main,
+                }}
+                variant={isMobileView ? "h5" : "h4"}
+              >
+                Our Mission
+              </Typography>{" "}
+              <Divider />
+            </Box>
+            <br />
+            <Box
+              sx={{
+                display: "grid",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography
+                sx={{
+                  alignItems: "center",
+                }}
+              >
+                Our mission is to support youth (both men and women equally)
+                back to the path of regaining what insecurity, discrimination,
+                war, and disaster took away from them.
+              </Typography>
+            </Box>
+          </Box>
           <br />
           <Box
             sx={{
@@ -235,20 +282,13 @@ export default function Home() {
 
           {/* Stories News & Blogs */}
           <BlogNewsStory />
-          {/* Our Parters */}
-          <CenteredBox
-            bgcolor={theme.palette.action.hover}
-            sx={{ p: isMobileView ? 1 : 10 }}
-          >
-            <Typography variant="h4">Our Partners</Typography>
-            <br />
-            <Parterns />
-          </CenteredBox>
+
           {/* Get involved */}
           <Box
             display={isMobileView ? "block" : "flex"}
             justifyContent={"space-around"}
             p={2}
+            bgcolor={theme.palette.action.hover}
           >
             <iframe
               width={isMobileView ? "100%" : "60%"}
@@ -270,7 +310,6 @@ export default function Home() {
 
               p: isMobileView ? 1 : 10,
             }}
-            bgcolor={theme.palette.action.hover}
           >
             <Typography
               sx={{ alignItems: "center" }}
@@ -299,6 +338,15 @@ export default function Home() {
               ))}
             </Box>
           </Box>
+          {/* Our Parters */}
+          <CenteredBox
+            bgcolor={theme.palette.action.hover}
+            sx={{ p: isMobileView ? 1 : 10 }}
+          >
+            <Typography variant="h4">Our Partners</Typography>
+            <br />
+            <Parterns />
+          </CenteredBox>
         </Box>
       </HideAppBar>
     </ThemeProvider>
