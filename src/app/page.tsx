@@ -194,7 +194,12 @@ export default function Home() {
               >
                 Our Mission
               </Typography>{" "}
-              <Divider />
+              <Divider
+                sx={{
+                  backgroundColor: theme.palette.success.main,
+                  height: 2,
+                }}
+              />
             </Box>
             <br />
             <Box
