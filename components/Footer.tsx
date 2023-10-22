@@ -46,7 +46,7 @@ const Footer = () => {
           <Image
             height={100}
             width={100}
-            alt="Open Gates"
+            alt="SIR"
             src="/sirafrica_logo_bw.png"
             style={{
               height: 45,

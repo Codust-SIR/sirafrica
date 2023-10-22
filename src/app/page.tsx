@@ -110,7 +110,7 @@ export default function Home() {
       title: "Codedust",
       description:
         "Codedust is a coding bootcamp that provides refugees and local youth with the skills and resources to become software developers.",
-      image: "/code_dust.jpeg",
+      image: "/codedust.jpeg",
       url: "https://codust-tutorial.vercel.app/",
     },
     {
