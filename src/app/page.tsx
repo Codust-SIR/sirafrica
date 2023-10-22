@@ -841,7 +841,7 @@ const Initiative: React.FC<{
           alt={title}
         />
       </Box>
-      <Box>
+      <Box pt={1}>
         <Typography
           variant={isMobileView ? "subtitle1" : "h5"}
           color="text.primary"
