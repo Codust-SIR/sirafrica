@@ -198,6 +198,10 @@ export default function Home() {
                 sx={{
                   backgroundColor: theme.palette.success.main,
                   height: 2,
+                  transition: "height 0.5s ease-in-out",
+                  "&:hover": {
+                    height: 4,
+                  },
                 }}
               />
             </Box>
@@ -260,7 +264,7 @@ export default function Home() {
             <br />
             <Box
               display={"grid"}
-              gridTemplateColumns={`repeat(auto-fit, minmax(${
+              gridTemplateColumns={`repeat(${isMobileView ? "auto-fit" : 3}, minmax(${
                 isMobileView ? "100%" : "300px"
               }, 1fr))`}
               gap={1}
@@ -472,7 +476,7 @@ function Programe({
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 410 }}>
       <div
         style={{
           display: "flex",
