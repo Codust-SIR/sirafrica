@@ -186,11 +186,12 @@ export default function Home() {
                 justifyContent: "center",
               }}
             >
+              <br />
               <Typography
                 sx={{
                   textAlign: "center",
                 }}
-                variant="h5"
+                variant={isMobileView ? "subtitle1" : "h5"}
                 fontWeight={700}
               >
                 Our mission is to support youth (both men and women equally)
@@ -220,6 +221,8 @@ export default function Home() {
                 }}
               />
             </Box>
+            <br />
+            <br />
           </Box>
           <br />
           <Box
@@ -245,6 +248,7 @@ export default function Home() {
             }}
             bgcolor={theme.palette.action.hover}
           >
+            <br />
             <Typography
               sx={{ alignItems: "center" }}
               variant={isMobileView ? "h5" : "h4"}
@@ -319,6 +323,7 @@ export default function Home() {
               p: isMobileView ? 1 : 10,
             }}
           >
+            <br />
             <Typography
               sx={{ alignItems: "center" }}
               variant={isMobileView ? "h5" : "h4"}
@@ -351,6 +356,7 @@ export default function Home() {
             bgcolor={theme.palette.action.hover}
             sx={{ p: isMobileView ? 1 : 10 }}
           >
+            <br />
             <Typography variant="h4">Our Partners</Typography>
             <br />
             <Parterns />
@@ -409,6 +415,7 @@ const BlogNewsStory = () => {
         p: isMobileView ? 1 : 10,
       }}
     >
+      <br />
       <Typography variant="h4">Our impacts</Typography>
       <br />
       <>
@@ -547,7 +554,7 @@ function Programe({
             margin: 0,
           }}
         >
-          <Typography gutterBottom variant={isMobileView ? "h5" : "h4"}>
+          <Typography p={1} gutterBottom variant={isMobileView ? "h5" : "h4"}>
             {programe}
           </Typography>
         </CardContent>

@@ -85,6 +85,7 @@ const DonateCard = () => {
       m={isMobileView ? 0 : 3}
       mt={isMobileView ? 1 : 3}
       border={`1px solid ${theme.palette.action.hover}`}
+      bgcolor={theme.palette.background.paper}
     >
       <Section
         value={sectionNumber}
