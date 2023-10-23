@@ -55,8 +55,12 @@ export const StoryBlogCard: React.FC<BlogNewsStory> = (prop) => {
   const isSmallPC = useMediaQuery(() => theme.breakpoints.down("md"));
   return (
     <Card
+      component={Link}
+      underline="none"
+      color="inherit"
+      href={`/impacts/${prop.type.toLowerCase()}/${prop._id}`}
       sx={{
-        maxWidth: isSmallPC ? 500 : 1600,
+        maxWidth: isSmallPC ? 500 : 1300,
         display: isMobileView ? "block" : "flex",
         m: 1,
         mr: 2,
@@ -68,7 +72,13 @@ export const StoryBlogCard: React.FC<BlogNewsStory> = (prop) => {
         border: `1px solid ${theme.palette.action.hover}`,
       }}
     >
-      <Box flex={0.36}>
+      <Box
+        flex={0.36}
+        sx={{
+          height: isMobileView ? 150 : 300,
+          objectFit: "fill",
+        }}
+      >
         <Color crossOrigin="anonymous" format="hex" src={prop.cover.asset.url}>
           {({ data, loading, error }) => {
             if (loading)
@@ -115,58 +125,72 @@ export const StoryBlogCard: React.FC<BlogNewsStory> = (prop) => {
           flex: 0.64,
         }}
       >
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography
+          gutterBottom
+          variant={isMobileView ? "subtitle1" : "h5"}
+          component="div"
+        >
           {prop.title.length > 90
             ? prop.title.slice(0, 90) + "..."
             : prop.title}
         </Typography>
-        {!isMobileView && <br />}
-        <Typography
-          variant={isMobileView ? "subtitle1" : "body1"}
-          color="text.secondary"
-        >
-          {prop.description.length > 350
-            ? prop.description.slice(0, 350) + "..."
-            : prop.description}
+        {isMobileView && (
+          <Box display={"flex"} gap={2}>
+            <Typography
+              display={"flex"}
+              alignItems={"center"}
+              variant="caption"
+              gap={1}
+              color={"text.secondary"}
+            >
+              {" "}
+              <EventRoundedIcon fontSize="small" />
+              {moment(prop._createdAt).fromNow()}
+            </Typography>
+
+            <Typography
+              display={"flex"}
+              alignItems={"center"}
+              variant="caption"
+              gap={1}
+              color={"text.secondary"}
+            >
+              {getIcon(prop.type)}
+              {prop.type}
+            </Typography>
+          </Box>
+        )}
+        <Typography variant={!isMobileView ? "subtitle1" : "caption"}>
+          {prop.description.slice(0, isMobileView ? 200 : 350) +
+            (prop.description.length > (isMobileView ? 200 : 350) ? "..." : "")}
         </Typography>
         <br />
-        <Box display={"flex"} gap={2}>
-          <Typography
-            display={"flex"}
-            alignItems={"center"}
-            variant="caption"
-            gap={1}
-            color={"text.secondary"}
-          >
-            {" "}
-            <EventRoundedIcon fontSize="small" />
-            {moment(prop._createdAt).fromNow()}
-          </Typography>
+        {!isMobileView && (
+          <Box display={"flex"} gap={2}>
+            <Typography
+              display={"flex"}
+              alignItems={"center"}
+              variant="caption"
+              gap={1}
+              color={"text.secondary"}
+            >
+              {" "}
+              <EventRoundedIcon fontSize="small" />
+              {moment(prop._createdAt).fromNow()}
+            </Typography>
 
-          <Typography
-            display={"flex"}
-            alignItems={"center"}
-            variant="caption"
-            gap={1}
-            color={"text.secondary"}
-          >
-            {getIcon(prop.type)}
-            {prop.type}
-          </Typography>
-        </Box>
-        <Button
-          color="success"
-          sx={{
-            textTransform: "none",
-            borderRadius: 2,
-            mt: 3,
-          }}
-          variant="contained"
-          endIcon={<EastRoundedIcon />}
-          href={`impacts/${prop.type.toLowerCase()}/${prop._id}`}
-        >
-          Read more
-        </Button>
+            <Typography
+              display={"flex"}
+              alignItems={"center"}
+              variant="caption"
+              gap={1}
+              color={"text.secondary"}
+            >
+              {getIcon(prop.type)}
+              {prop.type}
+            </Typography>
+          </Box>
+        )}
       </CardContent>
     </Card>
   );
@@ -183,7 +207,7 @@ export const MoreBlogcard: React.FC<BlogNewsStory> = (prop) => {
       color="inherit"
       href={`/impacts/${prop.type.toLowerCase()}/${prop._id}`}
       sx={{
-        maxWidth: isMobileView ? "100%" : 300,
+        maxWidth: isMobileView ? "100%" : 400,
         "&:hover": {
           boxShadow: 2,
         },

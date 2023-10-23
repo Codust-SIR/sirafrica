@@ -188,22 +188,15 @@ export default function Home() {
             >
               <Typography
                 sx={{
-                  color: theme.palette.success.main,
+                  textAlign: "center",
                 }}
-                variant={isMobileView ? "h5" : "h4"}
+                variant="h5"
+                fontWeight={700}
               >
-                Our Mission
-              </Typography>{" "}
-              <Divider
-                sx={{
-                  backgroundColor: theme.palette.success.main,
-                  height: 2,
-                  transition: "height 0.5s ease-in-out",
-                  "&:hover": {
-                    height: 4,
-                  },
-                }}
-              />
+                Our mission is to support youth (both men and women equally)
+                back to the path of regaining what insecurity, discrimination,
+                war, and disaster took away from them.
+              </Typography>
             </Box>
             <br />
             <Box
@@ -213,15 +206,19 @@ export default function Home() {
                 justifyContent: "center",
               }}
             >
-              <Typography
+              <Divider
                 sx={{
+                  backgroundColor: theme.palette.success.main,
+                  height: 3,
+                  width: 100,
+                  transition: "width 1s ease-in-out",
+                  "&:hover": {
+                    width: 400,
+                  },
                   alignItems: "center",
+                  borderRadius: 2,
                 }}
-              >
-                Our mission is to support youth (both men and women equally)
-                back to the path of regaining what insecurity, discrimination,
-                war, and disaster took away from them.
-              </Typography>
+              />
             </Box>
           </Box>
           <br />
@@ -264,9 +261,9 @@ export default function Home() {
             <br />
             <Box
               display={"grid"}
-              gridTemplateColumns={`repeat(${isMobileView ? "auto-fit" : 3}, minmax(${
-                isMobileView ? "100%" : "300px"
-              }, 1fr))`}
+              gridTemplateColumns={`repeat(${
+                isMobileView ? "auto-fit" : 3
+              }, minmax(${isMobileView ? "100%" : "300px"}, 1fr))`}
               gap={1}
               pt={isMobileView ? 1 : 0}
             >
@@ -280,9 +277,11 @@ export default function Home() {
                 textTransform: "none",
                 borderRadius: 2,
                 mt: 3,
+                width: "100%",
               }}
               href="/programs"
               variant="contained"
+              size="large"
               endIcon={<EastRoundedIcon />}
             >
               Learn more of our programs
@@ -561,7 +560,7 @@ function Programe({
               width: "100%",
             }}
             href={`/programs/${url}`}
-            variant="contained"
+            variant="text"
             size="large"
             endIcon={<EastRoundedIcon />}
           >
@@ -621,6 +620,11 @@ function Parterns() {
               key={index}
               {...{ xs: 12, sm: 6, md: 4, lg: 3 }}
               minHeight={160}
+              component={Link}
+              underline="none"
+              color="inherit"
+              href={`${item.url}`}
+              target="_blank"
             >
               <Color
                 crossOrigin="anonymous"
@@ -693,9 +697,6 @@ function Parterns() {
                 }}
                 alt="Image"
               /> */}
-              <Typography variant="subtitle1" color={"text.secondary"}>
-                {item.name}
-              </Typography>
             </Grid>
           ))}
         </Grid>
@@ -778,13 +779,13 @@ function Problems() {
                 width={50}
                 alt={item.title}
                 style={{
-                  height: isMobileView ? 30 : 50,
-                  width: isMobileView ? 30 : 50,
+                  height: isMobileView ? 40 : 60,
+                  width: isMobileView ? 40 : 60,
                 }}
               />
               <Typography
-                variant={isMobileView ? "caption" : "body1"}
-                color={"text.secondary"}
+                variant={isMobileView ? "subtitle2" : "subtitle1"}
+                // color={"text.secondary"}
               >
                 {item.description}
               </Typography>
@@ -792,65 +793,22 @@ function Problems() {
           ))}
         </Box>
         <Box flex={0.3} p={1}>
-          <Color
-            crossOrigin="anonymous"
-            format="hex"
+          <Image
             src={
               "https://images.pexels.com/photos/7275394/pexels-photo-7275394.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             }
-          >
-            {({ data, loading, error }) => {
-              if (loading)
-                return (
-                  <Box
-                    sx={{
-                      display: "grid",
-                      placeItems: "center",
-                      height: "100%",
-                    }}
-                  >
-                    <Image
-                      src={"/image-placeholder.svg"}
-                      width={isMobileView ? 400 : 800}
-                      height={isMobileView ? 300 : 300}
-                      alt={"Image"}
-                      style={{
-                        height: isMobileView ? "100%" : 300,
-                        width: "100%",
-                        objectFit: "contain",
-                        // Background color should be picked from the image dominant color
-                      }}
-                    />{" "}
-                  </Box>
-                );
-              return (
-                <Box
-                  sx={{
-                    backgroundColor: data,
-                    width: "100%",
-                    height: "100%",
-                    placeItems: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Image
-                    src={
-                      "https://images.pexels.com/photos/7275394/pexels-photo-7275394.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                    }
-                    width={isMobileView ? 400 : 800}
-                    height={isMobileView ? 300 : 300}
-                    alt={"Image"}
-                    style={{
-                      height: isMobileView ? "100%" : 300,
-                      width: "100%",
-                      objectFit: "contain",
-                      // Background color should be picked from the image dominant color
-                    }}
-                  />
-                </Box>
-              );
+            width={isMobileView ? 400 : 800}
+            height={isMobileView ? 300 : 300}
+            alt={"Image"}
+            style={{
+              height: isMobileView ? "100%" : 450,
+              width: "100%",
+              objectFit: "contain",
+              borderRadius: "8px",
+
+              // Background color should be picked from the image dominant color
             }}
-          </Color>
+          />
         </Box>
       </Box>
     </Box>
