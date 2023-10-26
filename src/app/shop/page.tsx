@@ -18,6 +18,8 @@ import {
   Toolbar,
   CircularProgress,
   Link,
+  Card,
+  CardContent,
 } from "@mui/material";
 import { useMemo, useState, useEffect } from "react";
 import ViewInArRoundedIcon from "@mui/icons-material/ViewInArRounded";
@@ -27,8 +29,9 @@ import RectangleRoundedIcon from "@mui/icons-material/RectangleRounded";
 import DensitySmallRoundedIcon from "@mui/icons-material/DensitySmallRounded";
 import { Product, getProducts } from "../../../services/sentry";
 import { MoreBlogcard } from "../../../components/Impacts";
+import Color from "color-thief-react";
 
-export default function Donate() {
+export default function Shop() {
   const theme = createTheme({
     typography: {
       fontFamily: "inherit",
@@ -167,11 +170,11 @@ export default function Donate() {
                   }[selectedOption]
                 }
               </Typography>
-
+              <br />
               <Box
                 display={"grid"}
                 gridTemplateColumns={`repeat(auto-fit, minmax(${
-                  isMobileView ? "100%" : "250px"
+                  isMobileView ? "100%" : "230px"
                 }, 1fr))`}
                 gap={1}
                 pt={isMobileView ? 4 : 0}
@@ -192,14 +195,20 @@ export default function Donate() {
                 ) : products.filter((item) => {
                     if (selectedOption === "all") return true;
                     return (
-                      item.type.toLowerCase() === selectedOption.toLowerCase()
+                      item &&
+                      item.category &&
+                      item.category.toLowerCase() ===
+                        selectedOption.toLowerCase()
                     );
                   }).length > 0 ? (
                   products
                     .filter((item) => {
                       if (selectedOption === "all") return true;
                       return (
-                        item.type.toLowerCase() === selectedOption.toLowerCase()
+                        item &&
+                        item.category &&
+                        item.category.toLowerCase() ===
+                          selectedOption.toLowerCase()
                       );
                     })
                     .map((item, index) => {
@@ -226,7 +235,7 @@ export default function Donate() {
   );
 }
 
-function Product({ name, description, image, type, price, _id }: Product) {
+function Product({ name, image, price, _id }: Product) {
   const theme = createTheme({
     typography: {
       fontFamily: "inherit",
@@ -236,66 +245,37 @@ function Product({ name, description, image, type, price, _id }: Product) {
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
 
   return (
-    <Box
+    <Card
+      component={Link}
+      underline="none"
+      color="inherit"
+      href={`/shop/${_id}`}
       sx={{
-        borderRadius: 2,
-        overflow: "hidden",
-        boxShadow: 1,
-        p: 2,
-        display: "flex",
-        flexDirection: "column",
-        gap: 1,
-        height: "100%",
+        maxWidth: isMobileView ? "100%" : 250,
+        "&:hover": {
+          boxShadow: 2,
+        },
+        boxShadow: 0,
+        border: `1px solid ${theme.palette.action.hover}`,
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: isMobileView ? 200 : 300,
-          width: "100%",
-          borderRadius: 2,
-          overflow: "hidden",
+      <Image
+        src={image.asset.url}
+        width={isMobileView ? 400 : 800}
+        height={isMobileView ? 300 : 300}
+        alt={name}
+        style={{
+          height: isMobileView ? "100%" : 250,
+          width: isMobileView ? "100%" : 250,
+          objectFit: "contain",
         }}
-      >
-        <Image
-          src={image.asset.url}
-          alt={name}
-          height={isMobileView ? 200 : 300}
-          width={isMobileView ? 200 : 300}
-        />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 1,
-          height: "100%",
-        }}
-      >
-        <Typography variant="h6">{name}</Typography>
-        <Typography variant="body2">{description}</Typography>
-        <Typography variant="body2">{price}</Typography>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-            alignItems: "center",
-            gap: 1,
-          }}
-        >
-          <Link href={`/shop/${_id}`} underline="none">
-            <Button
-              variant="contained"
-              color="success"
-              startIcon={<ViewInArRoundedIcon />}
-            >
-              View
-            </Button>
-          </Link>
-        </Box>
-      </Box>
-    </Box>
+      />
+      <CardContent sx={{ m: 0.5, p: 0.5 }}>
+        <Typography variant="subtitle1">{name}</Typography>
+        <Typography variant="body1" fontWeight={700}>
+          Ksh {price}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }

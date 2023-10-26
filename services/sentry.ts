@@ -324,7 +324,7 @@ export async function getJobs(): Promise<Job[]> {
 
 export interface Product {
   _id: string;
-  type: string;
+  category: string;
   name: string;
   description: string;
   body: any;
@@ -344,6 +344,8 @@ export async function getProducts(): Promise<Product[]> {
   let products: Product[] = await client.fetch(`
     *[_type == "products"]
   `);
+
+  console.log({ products });
 
   const imageUrl = async (_ref: string): Promise<string> => {
     // Fetch the asset using the reference
@@ -368,7 +370,7 @@ export async function getProducts(): Promise<Product[]> {
     };
     return {
       _id: item._id,
-      type: item.type,
+      category: item.category,
       name: item.name,
       description: item.description,
       body: item.body,

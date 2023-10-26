@@ -17,22 +17,11 @@ import {
   Avatar,
 } from "@mui/material";
 import { useMemo, useState, useEffect } from "react";
-import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
-import FeedRoundedIcon from "@mui/icons-material/FeedRounded";
-import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
-import NewspaperRoundedIcon from "@mui/icons-material/NewspaperRounded";
-import DensitySmallRoundedIcon from "@mui/icons-material/DensitySmallRounded";
 import { emphasize, styled } from "@mui/material/styles";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Chip from "@mui/material/Chip";
 import HomeIcon from "@mui/icons-material/Home";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {
-  BlogNewsStory,
-  Product,
-  getBlogsNewsAndReportById,
-  getProductById,
-} from "../../../../services/sentry";
+import { Product, getProductById } from "../../../../services/sentry";
 import { getIcon } from "../../../../components/Impacts";
 import moment from "moment";
 import { PortableText } from "@portabletext/react";
@@ -97,6 +86,50 @@ export default function Impact() {
               ) : (
                 product && (
                   <Box>
+                    <Color
+                      crossOrigin="anonymous"
+                      format="hex"
+                      src={product?.image.asset.url}
+                    >
+                      {({ data, loading, error }) => {
+                        if (loading)
+                          return (
+                            <Box
+                              sx={{
+                                display: "grid",
+                                placeItems: "center",
+                                height: "100%",
+                              }}
+                            >
+                              <CircularProgress size={20} color="success" />
+                            </Box>
+                          );
+                        return (
+                          <Box
+                            sx={{
+                              backgroundColor: data,
+                              width: "100%",
+                              height: "100%",
+                              placeItems: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Image
+                              src={product?.image.asset.url}
+                              width={isMobileView ? 400 : 800}
+                              height={isMobileView ? 300 : 300}
+                              alt={product?.name}
+                              style={{
+                                height: isMobileView ? "100%" : 300,
+                                width: "100%",
+                                objectFit: "contain",
+                                // Background color should be picked from the image dominant color
+                              }}
+                            />
+                          </Box>
+                        );
+                      }}
+                    </Color>
                     <br />
 
                     <Typography variant={isMobileView ? "h4" : "h3"}>
