@@ -307,3 +307,17 @@ export const getBlogsNewsAndReportById = async (
 
   return blogNewsStory;
 };
+
+export interface Job{
+  job_title: string;
+  category: string;
+  job_type: string;
+}
+
+export async function getJobs(): Promise<Job[]> {
+  let jobs: Job[] = await client.fetch(`
+    *[_type == "jobs"]
+  `);
+
+  return jobs;
+}

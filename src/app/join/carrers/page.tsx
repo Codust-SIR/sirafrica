@@ -16,11 +16,13 @@ import {
   OutlinedInput,
   Chip,
   MenuItem,
+  CircularProgress,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { green, deepOrange, red, yellow, grey } from "@mui/material/colors";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState, useEffect, FC, useRef } from "react";
+import { Job, getJobs } from "../../../../services/sentry";
 
 export default function Carrers() {
   const theme = createTheme({
@@ -63,14 +65,10 @@ export default function Carrers() {
   };
 
   const categories = [
-    "Accounting",
-    "Administrative",
-    "Business Development",
-    "Communications",
-    "Customer Service",
-    "Data",
-    "Design",
-    "Engineering",
+    "Communication and Advocacy",
+    "Management",
+    "Trainers",
+    "Social Media",
   ];
 
   const jobs = [
@@ -122,6 +120,21 @@ export default function Carrers() {
       typeof value === "string" ? value.split(",") : value
     );
   };
+  const [allJobs, setAllJobs] = useState<Job[]>([]);
+  const [loadingJobs, setLoadingJobs] = useState(true);
+
+  useEffect(() => {
+    setLoadingJobs(true);
+    getJobs().then((res) => {
+      setAllJobs(res);
+      setLoadingJobs(false);
+    });
+
+    return () => {
+      setAllJobs([]);
+      setLoadingJobs(true);
+    };
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -276,7 +289,7 @@ export default function Carrers() {
                     <MenuItem
                       key={item}
                       value={item}
-                      style={getStyles(item, categoriesItem, theme)}
+                      style={getStyles(item, jobsItems, theme)}
                     >
                       {item}
                     </MenuItem>
@@ -294,12 +307,49 @@ export default function Carrers() {
                 gap: 4,
               }}
             >
-              <JobComponent />
-              <JobComponent />
-              <JobComponent />
-              <JobComponent />
-              <JobComponent />
-              <JobComponent />
+              {loadingJobs ? (
+                <Box
+                  sx={{
+                    display: "grid",
+                    placeItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <CircularProgress size={20} color="success" />
+                </Box>
+              ) : //  Filter jobs by category and job type and a message if there is no job
+              allJobs
+                  .filter((job) => {
+                    if (categoriesItem.length === 0) {
+                      return true;
+                    }
+                    return categoriesItem.includes(job.category);
+                  })
+                  .filter((job) => {
+                    if (jobsItems.length === 0) {
+                      return true;
+                    }
+                    return jobsItems.includes(job.job_type);
+                  }).length < 1 ? (
+                <Typography variant={"h5"} textAlign={"center"}>
+                  No jobs found
+                </Typography>
+              ) : (
+                allJobs
+                  .filter((job) => {
+                    if (categoriesItem.length === 0) {
+                      return true;
+                    }
+                    return categoriesItem.includes(job.category);
+                  })
+                  .filter((job) => {
+                    if (jobsItems.length === 0) {
+                      return true;
+                    }
+                    return jobsItems.includes(job.job_type);
+                  })
+                  .map((job, i) => <JobComponent key={i} {...job} />)
+              )}
             </Box>
           </Box>
         </Box>
@@ -314,7 +364,7 @@ const CenteredBox = styled(Box)`
   justify-content: center;
 `;
 
-const JobComponent: FC = ({}) => {
+const JobComponent: FC<Job> = ({ job_title, job_type }) => {
   return (
     <Box
       sx={{
@@ -324,7 +374,6 @@ const JobComponent: FC = ({}) => {
         border: (theme) => `1px solid ${theme.palette.action.hover}`,
         "&:hover": {
           border: `1px solid black`,
-          boxShadow: 2,
         },
       }}
     >
@@ -337,14 +386,14 @@ const JobComponent: FC = ({}) => {
           },
         }}
       >
-        Job title
+        {job_title}
       </Typography>
       <br />
       <Chip
         sx={{
           bgcolor: yellow[800],
         }}
-        label="Full time"
+        label={job_type}
       />
     </Box>
   );
