@@ -4,7 +4,7 @@ import { Nunito } from "next/font/google";
 const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SIR | Jobs",
+  title: "SIR | Carrer",
   description: "",
   icons: { icon: "/sirafrica_logo.png" },
 };

@@ -18,12 +18,11 @@ import {
   MenuItem,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { green, purple, red, yellow } from "@mui/material/colors";
+import { green, deepOrange, red, yellow, grey } from "@mui/material/colors";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useState, useEffect, FC, useRef } from "react";
 
-import { useState, useEffect, FC } from "react";
-
-export default function Donate() {
+export default function Carrers() {
   const theme = createTheme({
     typography: {
       fontFamily: "inherit",
@@ -46,7 +45,7 @@ export default function Donate() {
     if (text === "Work") {
       return yellow[500];
     } else if (text === "Advocate") {
-      return purple[500];
+      return deepOrange[500];
     } else {
       return red[500];
     }
@@ -84,6 +83,13 @@ export default function Donate() {
     "Other",
   ];
 
+  const joinMessages = [
+    "Hey, wanna join us?",
+    "We are looking for you",
+    "Take part in our mission",
+    "Join our team",
+  ];
+
   function getStyles(name: string, item: readonly string[], theme: Theme) {
     return {
       fontWeight:
@@ -116,6 +122,7 @@ export default function Donate() {
       typeof value === "string" ? value.split(",") : value
     );
   };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -128,7 +135,7 @@ export default function Donate() {
             sx={{
               display: isMobileView ? "block" : "flex",
             }}
-            bgcolor={green[700]}
+            bgcolor={grey[700]}
           >
             <CenteredBox alignItems={"center"} flex={0.4}>
               <Typography variant={isMobileView ? "h4" : "h3"} color="white">
@@ -168,11 +175,14 @@ export default function Donate() {
             </CenteredBox>
           </Box>
           <br />
-          <Box sx={{ p: 9, pt: 3 }}>
-            <Typography variant={isMobileView ? "h5" : "h4"} fontWeight="bold">
-              Other ways to give
+          <Box sx={{ p: isMobileView ? 1 : 35, pt: 3 }}>
+            <Typography
+              textAlign={"center"}
+              variant={isMobileView ? "h5" : "h3"}
+              fontWeight="bold"
+            >
+              {joinMessages[Math.floor(Math.random() * joinMessages.length)]}
             </Typography>
-
             <Box
               sx={{
                 display: "grid",
@@ -276,22 +286,21 @@ export default function Donate() {
             </Box>
             <br />
             <br />
-          </Box>
-          <Box
-            sx={{
-              p: 9,
-              pt: 3,
-              display: "flex",
-              flexDirection: "column",
-              gap: 2,
-            }}
-          >
-            <JobComponent />
-            <JobComponent />
-            <JobComponent />
-            <JobComponent />
-            <JobComponent />
-            <JobComponent />
+            <Box
+              sx={{
+                pt: 3,
+                display: "flex",
+                flexDirection: "column",
+                gap: 4,
+              }}
+            >
+              <JobComponent />
+              <JobComponent />
+              <JobComponent />
+              <JobComponent />
+              <JobComponent />
+              <JobComponent />
+            </Box>
           </Box>
         </Box>
       </HideAppBar>
@@ -310,17 +319,33 @@ const JobComponent: FC = ({}) => {
     <Box
       sx={{
         width: "100%",
-        borderRadius: 10,
-        padding: 2,
-        border: `1px solid black`,
+        borderRadius: 5,
+        padding: 3,
+        border: (theme) => `1px solid ${theme.palette.action.hover}`,
         "&:hover": {
           border: `1px solid black`,
           boxShadow: 2,
         },
       }}
     >
-      <Typography variant="h3">Job title</Typography>
-      <Chip label="Full time" />
+      <Typography
+        variant="h5"
+        fontWeight={600}
+        sx={{
+          "&:hover": {
+            color: yellow[800],
+          },
+        }}
+      >
+        Job title
+      </Typography>
+      <br />
+      <Chip
+        sx={{
+          bgcolor: yellow[800],
+        }}
+        label="Full time"
+      />
     </Box>
   );
 };
