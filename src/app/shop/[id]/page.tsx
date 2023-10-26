@@ -15,6 +15,7 @@ import {
   Link,
   CircularProgress,
   Avatar,
+  Divider,
 } from "@mui/material";
 import { useMemo, useState, useEffect } from "react";
 import { emphasize, styled } from "@mui/material/styles";
@@ -26,6 +27,7 @@ import { getIcon } from "../../../../components/Impacts";
 import moment from "moment";
 import { PortableText } from "@portabletext/react";
 import { myPortableTextComponents } from "../../../../libs/sanity.client";
+import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
 
 export default function Impact() {
   const theme = useMemo(
@@ -57,7 +59,6 @@ export default function Impact() {
       <CssBaseline />
       <HideAppBar>
         <Box p={isMobileView ? 1 : 15} pt={1}>
-          {/* Impacts */}
           <Box
             sx={{
               p: 2,
@@ -86,59 +87,92 @@ export default function Impact() {
               ) : (
                 product && (
                   <Box>
-                    <Color
-                      crossOrigin="anonymous"
-                      format="hex"
-                      src={product?.image.asset.url}
-                    >
-                      {({ data, loading, error }) => {
-                        if (loading)
-                          return (
-                            <Box
-                              sx={{
-                                display: "grid",
-                                placeItems: "center",
-                                height: "100%",
-                              }}
-                            >
-                              <CircularProgress size={20} color="success" />
-                            </Box>
-                          );
-                        return (
-                          <Box
-                            sx={{
-                              backgroundColor: data,
-                              width: "100%",
-                              height: "100%",
-                              placeItems: "center",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Image
-                              src={product?.image.asset.url}
-                              width={isMobileView ? 400 : 800}
-                              height={isMobileView ? 300 : 300}
-                              alt={product?.name}
-                              style={{
-                                height: isMobileView ? "100%" : 300,
-                                width: "100%",
-                                objectFit: "contain",
-                                // Background color should be picked from the image dominant color
-                              }}
-                            />
-                          </Box>
-                        );
+                    <Box
+                      sx={{
+                        display: isMobileView ? "block" : "flex",
+                        gap: 5,
                       }}
-                    </Color>
+                    >
+                      <Box flex={0.3}>
+                        <Color
+                          crossOrigin="anonymous"
+                          format="hex"
+                          src={product?.image.asset.url}
+                        >
+                          {({ data, loading, error }) => {
+                            if (loading)
+                              return (
+                                <Box
+                                  sx={{
+                                    display: "grid",
+                                    placeItems: "center",
+                                    height: "100%",
+                                  }}
+                                >
+                                  <CircularProgress size={20} color="success" />
+                                </Box>
+                              );
+                            return (
+                              <Box
+                                sx={{
+                                  backgroundColor: data,
+                                  width: isMobileView ? "100%" : 250,
+                                  height: isMobileView ? "100%" : 250,
+                                  placeItems: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <Image
+                                  src={product?.image.asset.url}
+                                  width={isMobileView ? 400 : 800}
+                                  height={isMobileView ? 300 : 300}
+                                  alt={product?.name}
+                                  style={{
+                                    height: isMobileView ? "100%" : 250,
+                                    width: "100%",
+                                    objectFit: "contain",
+                                    // Background color should be picked from the image dominant color
+                                  }}
+                                />
+                              </Box>
+                            );
+                          }}
+                        </Color>
+                      </Box>
+                      <Box flex={0.7}>
+                        <Typography
+                          // fontSize={isMobileView ? 20 : 30}
+                          variant={isMobileView ? "h5" : "h4"}
+                        >
+                          {product?.name}
+                        </Typography>
+                        <Typography
+                          // fontSize={isMobileView ? 20 : 30}
+                          variant={isMobileView ? "body2" : "body1"}
+                        >
+                          Category: {product?.category}
+                        </Typography>
+                        <br />
+                        <Divider />
+                        <br />
+                        <Typography variant={isMobileView ? "h5" : "h4"}>
+                          <b>Ksh {product?.price}</b>
+                        </Typography>
+                        <br />
+                        <Button
+                          variant="contained"
+                          color="warning"
+                          sx={{
+                            textTransform: "none",
+                            width: "100%",
+                          }}
+                          startIcon={<AddShoppingCartRoundedIcon />}
+                        >
+                          Place order
+                        </Button>
+                      </Box>
+                    </Box>
                     <br />
-
-                    <Typography variant={isMobileView ? "h4" : "h3"}>
-                      <b>{product?.name}</b>
-                    </Typography>
-                    <br />
-                    <Typography variant={isMobileView ? "h6" : "h5"}>
-                      {product?.description}
-                    </Typography>
                     <br />
                     <PortableText
                       value={product.body}
