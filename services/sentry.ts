@@ -308,7 +308,7 @@ export const getBlogsNewsAndReportById = async (
   return blogNewsStory;
 };
 
-export interface Job{
+export interface Job {
   job_title: string;
   category: string;
   job_type: string;
@@ -320,4 +320,87 @@ export async function getJobs(): Promise<Job[]> {
   `);
 
   return jobs;
+}
+
+export interface Product {
+  _id: string;
+  type: string;
+  name: string;
+  description: string;
+  body: any;
+  image: {
+    asset: {
+      _ref: string;
+      url: string;
+    };
+  };
+  price: number;
+  slug: {
+    current: string;
+  };
+}
+
+export async function getProducts(): Promise<Product[]> {
+  let products: Product[] = await client.fetch(`
+    *[_type == "products"]
+  `);
+
+  const imageUrl = async (_ref: string): Promise<string> => {
+    // Fetch the asset using the reference
+    const asset = await client.fetch(`*[_id == $ref][0]`, {
+      ref: _ref,
+    });
+
+    return asset.url;
+  };
+
+  const imageUrls = await Promise.all(
+    products.map((item) => imageUrl(item.image.asset._ref))
+  );
+
+  const updatedProducts: Product[] = products.map((item, index) => {
+    const coverImage = {
+      ...item.image,
+      asset: {
+        _ref: item.image.asset._ref,
+        url: imageUrls[index],
+      },
+    };
+    return {
+      _id: item._id,
+      type: item.type,
+      name: item.name,
+      description: item.description,
+      body: item.body,
+      image: coverImage,
+      price: item.price,
+      slug: item.slug,
+    };
+  });
+
+  products = updatedProducts;
+
+  return products;
+}
+
+export async function getProductById(id: string): Promise<Product> {
+  let product: Product = await client.fetch(
+    `
+    *[_type == "products" && _id == $id][0]
+  `,
+    { id }
+  );
+
+  const imageUrl = async (_ref: string): Promise<string> => {
+    // Fetch the asset using the reference
+    const asset = await client.fetch(`*[_id == $ref][0]`, {
+      ref: _ref,
+    });
+
+    return asset.url;
+  };
+
+  product.image.asset.url = await imageUrl(product.image.asset._ref);
+
+  return product;
 }
