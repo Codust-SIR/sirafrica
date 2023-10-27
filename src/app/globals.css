@@ -13,3 +13,7 @@
         transform: translateY(0);
     }
 }
+
+.carousel{
+    margin: 10px;
+}
