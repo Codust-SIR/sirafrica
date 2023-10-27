@@ -14,9 +14,16 @@ import {
   useMediaQuery,
   Link,
   CircularProgress,
-  Avatar,
   Divider,
+  Icon,
+  IconButton,
 } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import { useMemo, useState, useEffect } from "react";
 import { emphasize, styled } from "@mui/material/styles";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
@@ -28,6 +35,8 @@ import moment from "moment";
 import { PortableText } from "@portabletext/react";
 import { myPortableTextComponents } from "../../../../libs/sanity.client";
 import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
+import AddRounded from "@mui/icons-material/AddRounded";
+import RemoveRounded from "@mui/icons-material/RemoveRounded";
 
 export default function Impact() {
   const theme = useMemo(
@@ -159,17 +168,7 @@ export default function Impact() {
                           <b>Ksh {product?.price}</b>
                         </Typography>
                         <br />
-                        <Button
-                          variant="contained"
-                          color="warning"
-                          sx={{
-                            textTransform: "none",
-                            width: "100%",
-                          }}
-                          startIcon={<AddShoppingCartRoundedIcon />}
-                        >
-                          Place order
-                        </Button>
+                        <FormDialog />
                       </Box>
                     </Box>
                     <br />
@@ -254,6 +253,137 @@ function CustomizedBreadcrumbs() {
           onDelete={handleClick}
         />
       </Breadcrumbs>
+    </div>
+  );
+}
+
+function FormDialog() {
+  const [open, setOpen] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <Button
+        onClick={handleClickOpen}
+        variant="contained"
+        color="warning"
+        sx={{
+          textTransform: "none",
+          width: "100%",
+        }}
+        startIcon={<AddShoppingCartRoundedIcon />}
+      >
+        Place order
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Place order</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please provide your email address and the quantity you wish to order
+            in the fields below. Our team will contact you shortly to gather
+            more information from you.{" "}
+          </DialogContentText>
+
+          <Box
+            sx={{
+              display: "grid",
+              placeItems: "center",
+            }}
+          >
+            {/* Quantity */}
+            <Box
+              sx={{
+                display: "flex",
+                gap: 3,
+                alignItems: "center",
+                placeItems: "center",
+                width: "100%",
+              }}
+            >
+              <IconButton
+                size="small"
+                sx={{
+                  bgcolor: "warning.main",
+                  color: "white",
+                  "&:hover": {
+                    color: "warning.light",
+                  },
+                }}
+                onClick={() => {
+                  setQuantity((p) => p + 1);
+                }}
+                color="warning"
+              >
+                <AddRounded fontSize="small" />
+              </IconButton>
+              <Typography variant="h6">{quantity}</Typography>
+              <IconButton
+                size="small"
+                sx={{
+                  bgcolor: "warning.main",
+                  color: "white",
+                }}
+                color="warning"
+                onClick={() => {
+                  setQuantity((p) => {
+                    if (p < 1) {
+                      return p;
+                    }
+                    return p - 1;
+                  });
+                }}
+              >
+                <RemoveRounded fontSize="small" />
+              </IconButton>
+            </Box>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Email Address"
+              type="email"
+              fullWidth
+              color="success"
+              variant="outlined"
+            />
+            <br />
+            <DialogContentText>
+              Thank you for your interest, and we look forward to assisting you
+              with your order.
+            </DialogContentText>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            sx={{
+              textTransform: "none",
+            }}
+            variant="outlined"
+            color="error"
+            onClick={handleClose}
+          >
+            Cancel
+          </Button>
+          <Button
+            sx={{
+              textTransform: "none",
+            }}
+            variant="contained"
+            color="success"
+            onClick={handleClose}
+          >
+            Order
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
