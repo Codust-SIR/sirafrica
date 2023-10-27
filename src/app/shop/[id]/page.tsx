@@ -260,6 +260,7 @@ function CustomizedBreadcrumbs() {
 function FormDialog() {
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [email, setEmail] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -296,6 +297,8 @@ function FormDialog() {
             sx={{
               display: "grid",
               placeItems: "center",
+              justifyContent: "center", // Add justifyContent property to center horizontally
+              alignItems: "center", // Add alignItems property to center vertically
             }}
           >
             {/* Quantity */}
@@ -330,6 +333,9 @@ function FormDialog() {
                 sx={{
                   bgcolor: "warning.main",
                   color: "white",
+                  "&:hover": {
+                    color: "warning.light",
+                  },
                 }}
                 color="warning"
                 onClick={() => {
@@ -351,8 +357,11 @@ function FormDialog() {
               label="Email Address"
               type="email"
               fullWidth
-              color="success"
+              color="warning"
               variant="outlined"
+              size="small"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <br />
             <DialogContentText>
@@ -377,7 +386,7 @@ function FormDialog() {
               textTransform: "none",
             }}
             variant="contained"
-            color="success"
+            color="warning"
             onClick={handleClose}
           >
             Order

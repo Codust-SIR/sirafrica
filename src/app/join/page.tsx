@@ -16,7 +16,6 @@ import {
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { useMemo } from "react";
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
-import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
 
@@ -31,44 +30,7 @@ export default function Donate() {
     []
   );
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-  const responsive2 = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 2,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -182,6 +144,7 @@ export default function Donate() {
                   mt: 3,
                 }}
                 variant="contained"
+                href="/join/volunteer"
                 endIcon={<EastRoundedIcon />}
               >
                 Learn more
@@ -249,6 +212,7 @@ export default function Donate() {
                 }}
                 variant="contained"
                 endIcon={<EastRoundedIcon />}
+                href="/join/fundraise"
               >
                 Learn more
               </Button>
@@ -286,6 +250,7 @@ export default function Donate() {
                 }}
                 variant="contained"
                 endIcon={<EastRoundedIcon />}
+                href="/join/carrer"
               >
                 Learn more
               </Button>
@@ -311,5 +276,3 @@ export default function Donate() {
     </ThemeProvider>
   );
 }
-
-
