@@ -70,13 +70,13 @@ export default function Home() {
               sx={{
                 color: "#1C2B33",
               }}
-              width={isMobileView ? "100%" : 800}
+              width={isMobileView ? "100%" : 900}
               variant={isMobileView ? "h5" : "h4"}
               fontWeight={500}
             >
-              To support youth (both men and women equally) in reclaiming what
-              insecurity, discrimination, war, and disaster have taken away from
-              them.
+              We are dedicated to empowering refugees and locals through innovative
+              programs and advocacy efforts that enhance their access to quality
+              education, and dignified livelihood opportunities.
             </Typography>
           </CenteredBox>
           <br />

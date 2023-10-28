@@ -194,9 +194,12 @@ export default function Home() {
                 variant={isMobileView ? "subtitle1" : "h5"}
                 fontWeight={700}
               >
-                Our mission is to support youth (both men and women equally)
-                back to the path of regaining what insecurity, discrimination,
-                war, and disaster took away from them.
+                We believe that access to digital skills and economic
+                opportunities are a fundamental human right. SIR is a prominent
+                Refugee-led organization with a vision of a world where
+                refugees, despite the challenges they face, have the opportunity
+                to lead fulfilling lives, contribute to their communities, and
+                reach their full potential.
               </Typography>
             </Box>
             <br />

@@ -143,28 +143,28 @@ export default function HideAppBar(props: Props) {
     },
     {
       name: "Programmes",
-      url: "/programms",
+      url: "/programmes",
       hasMore: true,
       more: [
         {
           name: "Education",
-          url: "/education",
+          url: "/programmes/education",
         },
         {
-          name: "Livelihoods",
-          url: "/livelihoods",
+          name: "Women Empowerment & Livelihoods",
+          url: "/programmes/livelihoods",
         },
         {
           name: "Advocacy & Capacity Strengthening",
-          url: "/advocacy",
+          url: "/programmes/advocacy",
         },
         {
           name: "Climate Resilience",
-          url: "/climate",
+          url: "/programmes/climate",
         },
         {
           name: "Digital solutions & Innovation",
-          url: "/digital",
+          url: "/programmes/digital",
         },
       ],
     },
@@ -379,7 +379,20 @@ export default function HideAppBar(props: Props) {
               }}
             >
               {navItems.map((item, index) => (
-                <div
+                <Box
+                  sx={{
+                    // Boeder bottom to be red when pathname includes the url
+                    borderBottom: pathname
+                      .toLocaleLowerCase()
+                      .includes(item.url.toLowerCase() || "our-")
+                      ? `1px solid ${theme.palette.success.main}`
+                      : "none",
+                    // On hover,set the border bottom to be red with some transitaion animations
+                    "&:hover": {
+                      borderBottom: `1px solid ${theme.palette.success.main}`,
+                      transition: "border-bottom 0.3s ease",
+                    },
+                  }}
                   onMouseOver={() => {
                     if (!item.hasMore || !item.more) {
                       const updatedNavItems = navItems.map((item) => ({
@@ -438,7 +451,7 @@ export default function HideAppBar(props: Props) {
                       alignItems: "center",
                       gap: 1,
                     }}
-                    underline="hover"
+                    underline="none"
                   >
                     {item.name}
                     {item.hasMore && (
@@ -453,7 +466,7 @@ export default function HideAppBar(props: Props) {
                       </>
                     )}
                   </Link>
-                </div>
+                </Box>
               ))}
               <Box
                 sx={{
