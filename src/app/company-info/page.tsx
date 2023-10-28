@@ -1,6 +1,7 @@
 "use client";
 import {
   Box,
+  Button,
   Collapse,
   CssBaseline,
   Divider,
@@ -12,7 +13,7 @@ import {
   styled,
   useMediaQuery,
 } from "@mui/material";
-
+import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 
@@ -80,7 +81,7 @@ export default function Home() {
           </CenteredBox>
           <br />
           <Carousel
-            swipeable={false}
+            swipeable
             draggable={false}
             showDots={true}
             responsive={responsive}
@@ -169,8 +170,8 @@ export default function Home() {
             sx={{
               height: isMobileView ? 300 : 600,
               width: "100%",
-              backgroundImage: "url(/open.jpg)",
-              backgroundSize: "cover", // Initially set for larger screens
+              backgroundImage: "url(/open.png)",
+              // backgroundSize: "cover", // Initially set for larger screens
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -200,13 +201,13 @@ export default function Home() {
           <Box
             sx={{
               display: isMobileView ? "block" : "flex",
-              p: isMobileView ? 2 : 10,
+              p: isMobileView ? 2 : 8,
             }}
           >
-            <Box flex={0.6} p={isMobileView ? 0 : 5}>
-              <Typography variant={
-                isMobileView ? "h4" : "h3"
-              }>Our Principal</Typography>
+            <Box flex={0.6} p={isMobileView ? 0 : 8}>
+              <Typography variant={isMobileView ? "h4" : "h3"}>
+                Our Principal
+              </Typography>
               <Typography variant="body1">
                 These principles encapsulate our foundation and steer our
                 strategy in creating technology that enhances human interactions
@@ -221,19 +222,103 @@ export default function Home() {
               </Box>
             </Box>
             <Image
-              height={500}
-              width={300}
-              src={"/core_value.jpeg"}
-              alt="Young Girl"
+              height={800}
+              width={500}
+              src={"/jessy.jpeg"}
+              alt="Jessy"
               style={{
-                height: isMobileView ? "auto" : 500,
-                width: isMobileView ? "100%" : 300,
-                flex: 0.25,
+                height: isMobileView ? "auto" : 800,
+                width: isMobileView ? "100%" : 500,
+                flex: 0.4,
                 backgroundSize: "cover", // Initially set for larger screens
-                borderRadius: 5,
+                borderRadius: 15,
               }}
             />
           </Box>
+          {/* Leadership */}
+          <Toolbar />
+          <CenteredBox
+            sx={{
+              display: isMobileView ? "block" : "flex",
+              p: isMobileView ? 2 : 10,
+              textAlign: "start",
+            }}
+          >
+            <Image
+              height={800}
+              width={500}
+              src={"/img11.jpeg"}
+              alt="Bahana"
+              style={{
+                height: isMobileView ? "auto" : 500,
+                width: isMobileView ? "100%" : 250,
+                flex: 0.4,
+                backgroundSize: "cover", // Initially set for larger screens
+                borderRadius: 15,
+              }}
+            />
+            <Box flex={0.5} p={isMobileView ? 0 : 8}>
+              <Typography variant={isMobileView ? "h5" : "h4"}>
+                Our Leadership
+              </Typography>
+              <br />
+              <Typography variant="body1">
+                SIR&apos;s leaders are guiding our organization as we adapt to
+                the changing landscape of refugee empowerment, working towards
+                the next evolution of transformative impact.
+              </Typography>
+              <br />
+              <Button
+                sx={{
+                  textTransform: "none",
+                }}
+                color="inherit"
+                variant="text"
+                startIcon={<EastRoundedIcon />}
+                href="/our-team"
+              >
+                See more about our leadership team
+              </Button>
+            </Box>
+          </CenteredBox>
+          <CenteredBox>
+            <Typography
+              sx={{
+                color: "#1C2B33",
+              }}
+              variant={isMobileView ? "h5" : "h4"}
+              fontWeight={700}
+            >
+              Work at SIR
+            </Typography>
+            <br />
+            <Typography
+              sx={{
+                color: "#1C2B33",
+              }}
+              width={isMobileView ? "100%" : 600}
+              variant={isMobileView ? "body2" : "body1"}
+              fontWeight={500}
+            >
+              At SIR, we&apos;re developing inventive approaches to bring
+              refugees closer to opportunities and empowerment, and our
+              organization is a reflection of the diverse perspectives within
+              the refugee community we serve.
+            </Typography>
+            <br />
+            <Button
+              sx={{
+                textTransform: "none",
+              }}
+              color="inherit"
+              variant="text"
+              startIcon={<EastRoundedIcon />}
+              href="/join/carrers"
+            >
+              Explore current openings
+            </Button>
+          </CenteredBox>
+          <Toolbar />
         </Box>
       </HideAppBar>
     </ThemeProvider>
@@ -246,7 +331,6 @@ const CenteredBox = styled(Box)`
   height: auto;
   text-align: center;
 `;
-
 
 function SimpleCollapse({ body, title }: { title: string; body: string }) {
   const [checked, setChecked] = React.useState(false);
