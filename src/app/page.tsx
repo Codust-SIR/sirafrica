@@ -25,16 +25,10 @@ import {
   CircularProgress,
   Divider,
 } from "@mui/material";
-import EventRoundedIcon from "@mui/icons-material/EventRounded";
-import NewspaperRoundedIcon from "@mui/icons-material/NewspaperRounded";
 import { useMemo } from "react";
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
-import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
-import FeedRoundedIcon from "@mui/icons-material/FeedRounded";
-import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
 import {
   BlogNewsStory,
   Logo,
