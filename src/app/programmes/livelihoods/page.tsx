@@ -43,12 +43,13 @@ export default function Donate() {
     {
       image: "/img5.jpeg",
       name: "Mentorship and Remote Work",
-      description: "",
+      description:
+        "The Mentorship Program offers young girls a range of benefits, including access to diverse online job opportunities, sustainable incomes, and financial independence. By imparting essential digital skills, this program not only enhances their employability but also nurtures personal growth and confidence, enabling a brighter future in the digital age.",
     },
     {
       image: "/img6.jpeg",
       name: "Baby Care",
-      description: "",
+      description: "To offer added convenience to young mothers with infants, we have introduced a dedicated module known as \"Crèche.\" This component is deeply committed to supporting and empowering these mothers who aspire to work online while ensuring the safety and well-being of their children. The Crèche has effectively addressed the challenges young mothers encounter in harmonizing their work commitments with childcare responsibilities within our hub.",
     },
     {
       image: "/img6.jpeg",
