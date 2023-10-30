@@ -288,6 +288,38 @@ export default function HideAppBar(props: Props) {
             </ListItemButton>
           </ListItem>
         ))}
+        <Box
+          sx={{
+            "&:hover": {
+              boxShadow: 2,
+            },
+            boxShadow: 0,
+            border: `1px solid ${theme.palette.action.hover}`,
+            p: 1,
+            borderRadius: 2,
+            display: "flex",
+            gap: 1,
+            textAlign: "center",
+            justifyContent: "center",
+          }}
+          component={Link}
+          underline="none"
+          color="inherit"
+          href="/shop"
+          alignItems={"center"}
+        >
+          <Image
+            src={"/sir_shop.png"}
+            height={800}
+            width={1500}
+            style={{
+              height: isMobileView ? 50 : 30,
+              width: isMobileView ? 50 : 30,
+            }}
+            alt={"Shop for Changes"}
+          />
+          <Typography>Shop for Changes</Typography>
+        </Box>
       </List>
     </Box>
   );

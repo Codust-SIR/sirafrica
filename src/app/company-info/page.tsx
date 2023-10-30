@@ -206,7 +206,7 @@ export default function Home() {
           >
             <Box flex={0.6} p={isMobileView ? 0 : 8}>
               <Typography variant={isMobileView ? "h4" : "h3"}>
-                Our Principal
+                Our core values
               </Typography>
               <Typography variant="body1">
                 These principles encapsulate our foundation and steer our
