@@ -38,13 +38,14 @@ export default function Donate() {
     {
       image: "/img4.jpeg",
       name: "Digital Skills Training",
-      description: "",
+      description:
+        "The Digital Skills Empowerment Program aims to equip young girls with the necessary knowledge and expertise in various online tasks, enabling them to generate a stable income. Within this program, girls come to our center to undergo comprehensive training in a wide range of digital skills, encompassing platforms like Remotask, Upwork, transcription, and more.",
     },
     {
       image: "/img5.jpeg",
       name: "Social Emotional Learning",
       description:
-        "Nurturing emotional well-being and resilience among refugee students.",
+        "Social Emotional Learning (SEL) is a vital framework that empowers parents by emphasizing the significance of their involvement in their children's education and active participation in school-related activities. This proactive approach has yielded remarkable results, fostering a profound understanding and a sense of responsibility among parents towards their children's education. By engaging in educational initiatives within the community and actively collaborating with their children, parents have become more adept at taking ownership of their child's educational journey.",
     },
     {
       image: "/img6.jpeg",
@@ -148,7 +149,7 @@ export default function Donate() {
             ssr={true} // means to render carousel on server-side.
             infinite={true}
             autoPlay
-            autoPlaySpeed={4000}
+            autoPlaySpeed={5000}
             className="carousel"
             keyBoardControl={true}
             customTransition="all 1"
@@ -162,7 +163,7 @@ export default function Donate() {
             {subs.map((item) => (
               <Box
                 sx={{
-                  height: 500,
+                  height: isMobileView ? "100%" : 500,
                   width: "100%",
                   borderRadius: 1,
                   bgcolor: "#1C2B33",

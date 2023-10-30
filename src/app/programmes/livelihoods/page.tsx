@@ -171,7 +171,7 @@ export default function Donate() {
             {subs.map((item) => (
               <Box
                 sx={{
-                  height: 500,
+                  height: isMobileView ? "100%" : 500,
                   width: "100%",
                   borderRadius: 1,
                   bgcolor: "#1C2B33",
