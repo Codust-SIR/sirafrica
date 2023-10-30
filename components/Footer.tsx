@@ -153,8 +153,18 @@ const Footer = () => {
                 href="https://twitter.com/SolidarityInit1"
                 target="_blank"
                 size="large"
+                sx={{
+                  height: 30,
+                  width: 30,
+                }}
               >
-                <Image src="/x_icon.svg" height={30} width={30} alt="twitter" />
+                <Image
+                  style={{ backgroundColor: "white" }}
+                  src="/x_icon.svg"
+                  height={30}
+                  width={30}
+                  alt="twitter"
+                />
               </IconButton>
               <IconButton
                 href="https://www.facebook.com/soliref"

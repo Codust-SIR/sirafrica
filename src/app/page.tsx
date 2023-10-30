@@ -302,12 +302,13 @@ export default function Home() {
             <iframe
               width={isMobileView ? "100%" : "60%"}
               height={!isMobileView ? 400 : 250}
-              frameBorder="0"
-              src="https://www.youtube.com/embed/EBOwnrCu42I"
-              title="Supporting refugees preparing for their"
+              src="https://www.youtube.com/embed/ZtvW6TLbYZM"
+              title="Coding for Refugees  - Fundraising Call"
+              frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
+              
             ></iframe>
+
             <DonateCard />
           </Box>
           {/* SIR Initietives */}
@@ -563,7 +564,7 @@ function Programe({
               borderRadius: 0,
               width: "100%",
             }}
-            href={`/programs/${url}`}
+            href={`/programmes/${url}`}
             variant="text"
             size="large"
             endIcon={<EastRoundedIcon />}
@@ -728,7 +729,7 @@ function Problems() {
     {
       title: "Advocacy & Capacity Strengthening",
       description:
-        " Refugee-led organizations are often marginalized and lack the resources and capacity to advocate for their own rights and needs.",
+        "Refugee-led organizations (RLOs) are uniquely positioned to understand the needs of their communities and to develop effective solutions. However, they are often excluded from decision-making processes within the humanitarian sector.",
       imgUrl: "/mic.png",
     },
     {

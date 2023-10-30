@@ -217,6 +217,7 @@ export default function HideAppBar(props: Props) {
         },
       ],
     },
+    { name: "Contact", url: "/contact ", hasMore: false },
   ]);
   const container =
     window !== undefined ? () => window().document.body : undefined;
