@@ -91,7 +91,14 @@ export default function OurBoard() {
                   value={message}
                   onChange={(event) => setMessage(event.target.value)}
                 />
-                <Button color="success" variant="contained" type="submit">
+                <Button
+                  sx={{
+                    textTransform: "none",
+                  }}
+                  color="success"
+                  variant="contained"
+                  type="submit"
+                >
                   Submit
                 </Button>
               </form>
