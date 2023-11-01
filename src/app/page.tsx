@@ -71,7 +71,7 @@ export default function Home() {
     },
     {
       programe: "Digital solutions & Innovation",
-      programeImage: "https://axyya.com/wp-content/uploads/2021/03/web2.png",
+      programeImage: "/img20.png",
       url: "digital",
     },
     {
