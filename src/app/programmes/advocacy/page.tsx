@@ -113,13 +113,13 @@ export default function Donate() {
             </Box>
             <Grid sx={{ flex: 0.5 }}>
               <Image
-                height={800}
-                width={500}
+                height={1800}
+                width={1500}
                 src={"/img19.png"}
                 alt=""
                 style={{
-                  height: isMobileView ? "auto" : 500,
-                  width: isMobileView ? "100%" : 500,
+                  height: isMobileView ? "auto" : 550,
+                  width: isMobileView ? "100%" : 700,
                   backgroundSize: "cover", // Initially set for larger screens
                   borderRadius: 15,
                 }}
@@ -153,8 +153,8 @@ export default function Donate() {
                 <Image
                   src={"/img13.jpeg"}
                   alt=""
-                  height={800}
-                  width={500}
+                  height={1800}
+                  width={1500}
                   style={{
                     height: isMobileView ? "auto" : 500,
                     width: isMobileView ? "100%" : 600,
@@ -168,8 +168,8 @@ export default function Donate() {
                 <Image
                   src={"/img14.jpeg"}
                   alt=""
-                  height={800}
-                  width={500}
+                  height={1800}
+                  width={1500}
                   style={{
                     height: isMobileView ? "auto" : 500,
                     width: isMobileView ? "100%" : 600,
@@ -180,6 +180,37 @@ export default function Donate() {
                 />
               </Grid>
             </Grid>
+            <br />
+            <Typography
+              sx={{
+                color: "#0F2A3C",
+              }}
+              width={isMobileView ? "100%" : 1100}
+              variant={isMobileView ? "body1" : "subtitle1"}
+              fontWeight={500}
+            >
+              On 28 September2023, SIR co-organised and spearheaded the Voices
+              Rising: A Refugee-Led Solutions Conference. This conference aimed
+              to ensure that the voices of Refugee-led organizations (RLOs) are
+              heard. The conference brought together a diverse group of
+              stakeholders, including International NGOs (INGOs), county
+              government entities, UNHCR, Refugee-Led Organizations (RLOs), and
+              community leaders to showcase the work of RLOs and the challenges
+              they face. The conference report is currently being finalized and
+              will be shared once it’s available.
+            </Typography>
+            <br />
+            <Button
+              variant="contained"
+              sx={{
+                textTransform: "none",
+              }}
+              color="inherit"
+              target="_blank"
+              href="/impacts#report"
+            >
+              Learn more in report
+            </Button>
             <br />
             <br />
             <Typography
@@ -193,6 +224,7 @@ export default function Donate() {
               Refugee leaders training on Sustainable Development Goals (SDGs)
               and Design Thinking
             </Typography>
+
             <br />
             <br />
             <br />
@@ -201,8 +233,8 @@ export default function Donate() {
                 <Image
                   src={"/img15.jpg"}
                   alt=""
-                  height={800}
-                  width={500}
+                  height={1800}
+                  width={1500}
                   style={{
                     height: isMobileView ? "auto" : 500,
                     width: isMobileView ? "100%" : 600,
@@ -216,8 +248,8 @@ export default function Donate() {
                 <Image
                   src={"/img16.jpg"}
                   alt=""
-                  height={800}
-                  width={500}
+                  height={1800}
+                  width={1500}
                   style={{
                     height: isMobileView ? "auto" : 500,
                     width: isMobileView ? "100%" : 600,
@@ -228,6 +260,32 @@ export default function Donate() {
                 />
               </Grid>
             </Grid>
+            <br />
+            <Typography
+              sx={{
+                color: "#0F2A3C",
+              }}
+              width={isMobileView ? "100%" : 1100}
+              variant={isMobileView ? "body1" : "subtitle1"}
+              fontWeight={500}
+            >
+              This training program helps RLO leaders to develop the skills and
+              knowledge they need to contribute to the achievement of the SDGs
+              and to design innovative solutions to the challenges facing their
+              communities.
+            </Typography>
+            <br />
+            <Button
+              variant="contained"
+              sx={{
+                textTransform: "none",
+              }}
+              color="inherit"
+              target="_blank"
+              href="/impacts#report"
+            >
+              Learn more in report
+            </Button>
           </CenteredBox>
         </Box>
       </HideAppBar>
@@ -239,5 +297,4 @@ const CenteredBox = styled(Box)`
   display: grid;
   place-content: center;
   height: auto;
-  text-align: center;
 `;
