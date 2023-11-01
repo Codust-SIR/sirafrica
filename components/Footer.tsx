@@ -140,15 +140,32 @@ const Footer = () => {
             </Link>
             <br />
             <br />
-            <Link href="/partners" color="inherit" underline="hover">
-              Become a Partner
-            </Link>
           </Box>
           <Box>
             <Typography variant="h6">
               <b>Follow Us</b>
             </Typography>
-            <Box>
+            <Box
+              display={isMobileView ? "block" : "flex"}
+              gap={2}
+              alignItems={"center"}
+            >
+              <IconButton
+                href="https://opengates.app/@SIR"
+                target="_blank"
+                size="large"
+                sx={{
+                  height: 30,
+                  width: 30,
+                }}
+              >
+                <Image
+                  src="/open-gates-icon-a.png"
+                  height={30}
+                  width={30}
+                  alt="Open Gates"
+                />
+              </IconButton>
               <IconButton
                 href="https://twitter.com/SolidarityInit1"
                 target="_blank"
@@ -158,13 +175,7 @@ const Footer = () => {
                   width: 30,
                 }}
               >
-                <Image
-                  style={{ backgroundColor: "white" }}
-                  src="/x_icon.svg"
-                  height={30}
-                  width={30}
-                  alt="twitter"
-                />
+                <Image src="/x_icon.svg" height={30} width={30} alt="twitter" />
               </IconButton>
               <IconButton
                 href="https://www.facebook.com/soliref"
