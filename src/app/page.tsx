@@ -63,7 +63,7 @@ export default function Home() {
       url: "education",
     },
     {
-      programe: "Livelihoods ",
+      programe: "Women's Empowerment & Livelihoods ",
 
       programeImage:
         "https://images.pexels.com/photos/6457579/pexels-photo-6457579.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",

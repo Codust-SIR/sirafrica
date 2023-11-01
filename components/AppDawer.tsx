@@ -135,10 +135,6 @@ export default function HideAppBar(props: Props) {
           name: "Our Board",
           url: "/our-board",
         },
-        {
-          name: "Our Partners",
-          url: "our-parterns",
-        },
       ],
     },
     {
