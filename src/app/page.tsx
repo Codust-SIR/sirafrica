@@ -305,7 +305,6 @@ export default function Home() {
               src="https://www.youtube.com/embed/ZtvW6TLbYZM"
               title="Coding for Refugees  - Fundraising Call"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              
             ></iframe>
 
             <DonateCard />
@@ -592,7 +591,7 @@ function Parterns() {
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1, p: 2 }}>
+    <Box sx={{ flexGrow: 1, p: 18, pt: 2 }}>
       {loading ? (
         <Box
           display={"grid"}

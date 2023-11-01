@@ -19,15 +19,11 @@ import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { blue } from "@mui/material/colors";
 
 export default function Donate() {
-  const theme = useMemo(
-    () =>
-      createTheme({
-        typography: {
-          fontFamily: "inherit",
-        },
-      }),
-    []
-  );
+  const theme = createTheme({
+    typography: {
+      fontFamily: "inherit",
+    },
+  });
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
 
   return (
