@@ -223,23 +223,30 @@ export default function HideAppBar(props: Props) {
     window !== undefined ? () => window().document.body : undefined;
   interface ListItemLinkProps extends ListItemProps {
     to: string;
-    open?: boolean;
+    hasMore?: boolean;
+    isExpanded?: boolean;
     children?: React.ReactNode;
   }
 
   function ListItemLink(props: ListItemLinkProps) {
-    const { to, open, ...other } = props;
+    const { to, hasMore, isExpanded, ...other } = props;
 
     let icon = null;
-    if (open != null) {
-      icon = open ? <ExpandLess /> : <ExpandMore />;
+    if (hasMore != null) {
+      icon = isExpanded ? <ExpandLess /> : <ExpandMore />;
     }
 
     return (
       <li>
-        <ListItem {...other}>
+        <ListItem
+          href={!hasMore ? to : null}
+          button
+          component={Link}
+          underline="none"
+          {...other}
+        >
           <ListItemText primary={props.children} />
-          {icon}
+          {hasMore && icon}
         </ListItem>
       </li>
     );
@@ -317,7 +324,8 @@ export default function HideAppBar(props: Props) {
           <React.Fragment key={index}>
             <ListItemLink
               to={item.url}
-              open={item.hasMore && item.isExpanded}
+              hasMore={item.hasMore}
+              isExpanded={item.isExpanded}
               onClick={() => handleExpand(index)}
             >
               {item.name}
