@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Slide from "@mui/material/Slide";
 import {
   Button,
+  Collapse,
   Divider,
   Drawer,
   Fab,
@@ -20,6 +21,7 @@ import {
   List,
   ListItem,
   ListItemButton,
+  ListItemProps,
   ListItemText,
   useMediaQuery,
   useTheme,
@@ -31,6 +33,8 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import Image from "next/image";
 import ExpandLessRoundedIcon from "@mui/icons-material/ExpandLessRounded";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 import Footer from "./Footer";
 
 interface Props {
@@ -217,7 +221,41 @@ export default function HideAppBar(props: Props) {
   ]);
   const container =
     window !== undefined ? () => window().document.body : undefined;
+  interface ListItemLinkProps extends ListItemProps {
+    to: string;
+    open?: boolean;
+    children?: React.ReactNode;
+  }
 
+  function ListItemLink(props: ListItemLinkProps) {
+    const { to, open, ...other } = props;
+
+    let icon = null;
+    if (open != null) {
+      icon = open ? <ExpandLess /> : <ExpandMore />;
+    }
+
+    return (
+      <li>
+        <ListItem {...other}>
+          <ListItemText primary={props.children} />
+          {icon}
+        </ListItem>
+      </li>
+    );
+  }
+
+  const handleExpand = (index: number) => {
+    setNavItems((prev) =>
+      prev.map((item, i) => {
+        if (i === index) {
+          return { ...item, isExpanded: !item.isExpanded };
+        } else {
+          return { ...item, isExpanded: false };
+        }
+      })
+    );
+  };
   const drawer = (
     <Box>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -269,21 +307,48 @@ export default function HideAppBar(props: Props) {
         </IconButton>
       </Toolbar>
       <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item.name} disablePadding>
-            <ListItemButton
-              href={item.url}
-              sx={{
-                textAlign: "center",
-                border: item.url === pathname ? "1px dodgerblue solid" : "none",
-                m: 0.5,
-                borderRadius: 1,
-              }}
+      <List
+        sx={{
+          overflow: "auto",
+          height: "85vh",
+        }}
+      >
+        {navItems.map((item, index) => (
+          <React.Fragment key={index}>
+            <ListItemLink
+              to={item.url}
+              open={item.hasMore && item.isExpanded}
+              onClick={() => handleExpand(index)}
             >
-              <ListItemText primary={item.name} />
-            </ListItemButton>
-          </ListItem>
+              {item.name}
+            </ListItemLink>
+            {item.hasMore && (
+              <Collapse in={item.isExpanded} timeout="auto" unmountOnExit>
+                <ListItem>
+                  <Link
+                    color={theme.palette.success.main}
+                    href={item.url}
+                    sx={{
+                      fontWeight: 700,
+                    }}
+                  >
+                    Learn about {item.name.toLowerCase()}
+                  </Link>
+                </ListItem>
+                <List disablePadding>
+                  {item.more?.map((subItem, subIndex) => (
+                    <ListItemLink
+                      key={subIndex}
+                      sx={{ pl: 4 }}
+                      to={subItem.url}
+                    >
+                      {subItem.name}
+                    </ListItemLink>
+                  ))}
+                </List>
+              </Collapse>
+            )}
+          </React.Fragment>
         ))}
         <Box
           sx={{
@@ -641,7 +706,7 @@ export default function HideAppBar(props: Props) {
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: "70%",
+              width: "80%",
             },
           }}
         >
