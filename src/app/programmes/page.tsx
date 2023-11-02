@@ -149,8 +149,24 @@ const programmes: {
     ],
   },
   {
+    name: "Advocacy & Capacity Strengthening",
+    url: "/programmes/advocacy",
+    description: [
+      "The Solidarity Initiative for Refugees aims to create a world where refugees are at the center of humanitarian response and Refugee-led organizations (RLOs) are fully resourced and empowered to lead the way in providing assistance to their communities. Their Advocacy and Capacity Sharing Program supports RLOs in achieving a more just and equitable world for refugees and host communities by advocating for their inclusion and meaningful participation in decision-making processes at all levels. ",
+      "The program also shares expertise with other organizations to amplify collective impact and build stronger communities together. The organization believes that RLOs are best placed to provide assistance as they have a deep understanding of the needs and challenges faced by refugees and locals, making them more accountable to the communities they serve. Solidarity Initiative for Refugees is committed to supporting RLOs in leading the way in humanitarian response.",
+    ],
+  },
+  {
     name: "Climate Resilience",
     url: "/programmes/climate",
     description: [],
+  },
+  {
+    name: "Digital Solutions and Innovation",
+    url: "/programmes/climate",
+    description: [
+      "SIR has launched two impactful projects to support refugee youth in their pursuit of a brighter future. Open Gates, the first of these initiatives, acts as an invaluable resource hub, supplying refugee youth with vital information on education, scholarships, vocational training, internships, and job opportunities. By providing this essential information, Open Gates not only empowers refugees but also encourages their active participation in society, ultimately fostering self-reliance and long-term success.",
+      "Complementing Open Gates is SIR's Codedust project, a coding bootcamp designed to teach both refugees and local youth the skills necessary to become proficient software developers. Codedust addresses the digital skills gap while fostering inclusivity, bringing together individuals from diverse backgrounds to thrive in the competitive field of software development. These projects collectively represent SIR's commitment to promoting social integration and empowering marginalized communities, making a tangible difference in the lives of those they serve.",
+    ],
   },
 ];
