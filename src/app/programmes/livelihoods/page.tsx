@@ -48,13 +48,15 @@ export default function Donate() {
     },
     {
       image: "/img6.jpeg",
-      name: "Baby Care",
-      description: "To offer added convenience to young mothers with infants, we have introduced a dedicated module known as \"Crèche.\" This component is deeply committed to supporting and empowering these mothers who aspire to work online while ensuring the safety and well-being of their children. The Crèche has effectively addressed the challenges young mothers encounter in harmonizing their work commitments with childcare responsibilities within our hub.",
+      name: "Child Care",
+      description:
+        'To offer added convenience to young mothers with infants, we have introduced a dedicated module known as "Crèche." This component is deeply committed to supporting and empowering these mothers who aspire to work online while ensuring the safety and well-being of their children. The Crèche has effectively addressed the challenges young mothers encounter in harmonizing their work commitments with childcare responsibilities within our hub.',
     },
     {
       image: "/img6.jpeg",
       name: "Business Development ",
-      description: "",
+      description:
+        "We support our beneficiaries to establish Business Unit and We seek to establish an income generating activity which aims to boost the sustainability of our organization and programs",
     },
     {
       image: "/img6.jpeg",
