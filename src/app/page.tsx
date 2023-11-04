@@ -126,7 +126,7 @@ export default function Home() {
                 height: isMobileView ? 300 : 600,
                 width: "100%",
                 backgroundImage:
-                  "url(https://images.pexels.com/photos/11596973/pexels-photo-11596973.jpeg?auto=compress&cs=tinysrgb&w=1200)",
+                  "url(/img23.png)",
                 backgroundSize: "cover", // Initially set for larger screens
                 display: "flex",
                 flexDirection: "column",
