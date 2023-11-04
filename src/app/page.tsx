@@ -550,7 +550,7 @@ function Programe({
             margin: 0,
           }}
         >
-          <Typography p={1} gutterBottom variant={isMobileView ? "h5" : "h4"}>
+          <Typography p={1} variant={isMobileView ? "h6" : "h5"}>
             {programe}
           </Typography>
         </CardContent>
@@ -591,7 +591,7 @@ function Parterns() {
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1, p: 18, pt: 2 }}>
+    <Box sx={{ flexGrow: 1, p: 10, pt: 2 }}>
       {loading ? (
         <Box
           display={"grid"}
@@ -657,6 +657,7 @@ function Parterns() {
                           "cyber ",
                           "world",
                           "danish",
+                          "global",
                         ].some((substring) =>
                           item.name.toLowerCase().includes(substring)
                         )
@@ -679,7 +680,7 @@ function Parterns() {
                           borderRadius: 1,
                           width: isMobileView ? "100%" : "auto",
                           maxHeight: isMobileView ? 120 : 150,
-                          maxWidth: isMobileView ? 120 : 250,
+                          maxWidth: isMobileView ? 120 : 200,
                           objectFit: "contain",
                           // Background color should be picked from the image dominant color
                         }}

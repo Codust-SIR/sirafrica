@@ -7,7 +7,9 @@ const nunito = Nunito({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "SIR - Learn, Earn, Innovate",
   description: "",
-  icons: { icon: "/sirafrica_logo.png" },
+  icons: {
+    icon: "/sirafrica_logo.png",
+  },
 };
 
 export default function RootLayout({

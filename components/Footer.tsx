@@ -97,7 +97,9 @@ const Footer = () => {
         >
           <Box>
             <Typography variant="h6">
-              <b>Contact Us</b>
+              <Link href="/contact" color="inherit" underline="hover">
+                <b>Contact Us</b>
+              </Link>
             </Typography>
             <br />
             <Link href="tel:+254796761503" color="inherit" underline="hover">
@@ -130,12 +132,12 @@ const Footer = () => {
             </Typography>
             <br />
             <br />
-            <Link href="/donation" color="inherit" underline="hover">
+            <Link href="/donate" color="inherit" underline="hover">
               Donate
             </Link>
             <br />
             <br />
-            <Link href="/volunteer" color="inherit" underline="hover">
+            <Link href="/join/volunteer" color="inherit" underline="hover">
               Volunteer
             </Link>
             <br />

@@ -215,9 +215,9 @@ export default function HideAppBar(props: Props) {
           name: "Careers",
           url: "/join/carrers",
         },
+        { name: "Contact", url: "/contact " },
       ],
     },
-    { name: "Contact", url: "/contact ", hasMore: false },
   ]);
   const container =
     window !== undefined ? () => window().document.body : undefined;
