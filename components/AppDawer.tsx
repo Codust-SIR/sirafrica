@@ -317,7 +317,7 @@ export default function HideAppBar(props: Props) {
       <List
         sx={{
           overflow: "auto",
-          height: "85vh",
+          maxHeight: "75vh",
         }}
       >
         {navItems.map((item, index) => (
