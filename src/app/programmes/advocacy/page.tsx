@@ -14,11 +14,9 @@ import {
   Toolbar,
   styled,
 } from "@mui/material";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import { useMemo } from "react";
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import VolunteerActivismRoundedIcon from "@mui/icons-material/VolunteerActivismRounded";
 
 export default function Donate() {
   const theme = useMemo(
@@ -118,8 +116,8 @@ export default function Donate() {
                 src={"/img19.png"}
                 alt=""
                 style={{
-                  height: isMobileView ? "auto" : 550,
-                  width: isMobileView ? "100%" : 700,
+                  maxHeight: isMobileView ? 230 : 550,
+                  maxWidth: isMobileView ? "100%" : "100%",
                   backgroundSize: "cover", // Initially set for larger screens
                   borderRadius: 15,
                 }}
@@ -148,7 +146,13 @@ export default function Donate() {
             </Typography>
             <br />
             <br />
-            <Grid container spacing={isMobileView ? 0 : 3}>
+            <Box
+              sx={{
+                display: isMobileView ? "block" : "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: 2,
+              }}
+            >
               <Grid>
                 <Image
                   src={"/img13.jpeg"}
@@ -156,8 +160,8 @@ export default function Donate() {
                   height={1800}
                   width={1500}
                   style={{
-                    height: isMobileView ? "auto" : 500,
-                    width: isMobileView ? "100%" : 600,
+                    maxHeight: isMobileView ? 250 : 550,
+                    maxWidth: isMobileView ? "100%" : "100%",
                     flex: 0.5,
                     backgroundSize: "cover", // Initially set for larger screens
                     borderRadius: 15,
@@ -171,15 +175,15 @@ export default function Donate() {
                   height={1800}
                   width={1500}
                   style={{
-                    height: isMobileView ? "auto" : 500,
-                    width: isMobileView ? "100%" : 600,
+                    maxHeight: isMobileView ? 250 : 550,
+                    maxWidth: isMobileView ? "100%" : "100%",
                     flex: 0.5,
                     backgroundSize: "cover", // Initially set for larger screens
                     borderRadius: 15,
                   }}
                 />
               </Grid>
-            </Grid>
+            </Box>
             <br />
             <Typography
               sx={{
@@ -228,7 +232,13 @@ export default function Donate() {
             <br />
             <br />
             <br />
-            <Grid container spacing={isMobileView ? 0 : 3}>
+            <Box
+              sx={{
+                display: isMobileView ? "block" : "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: 2,
+              }}
+            >
               <Grid>
                 <Image
                   src={"/img15.jpg"}
@@ -236,8 +246,8 @@ export default function Donate() {
                   height={1800}
                   width={1500}
                   style={{
-                    height: isMobileView ? "auto" : 500,
-                    width: isMobileView ? "100%" : 600,
+                    maxHeight: isMobileView ? 250 : 550,
+                    maxWidth: isMobileView ? "100%" : "100%",
                     flex: 0.5,
                     backgroundSize: "cover", // Initially set for larger screens
                     borderRadius: 15,
@@ -251,15 +261,15 @@ export default function Donate() {
                   height={1800}
                   width={1500}
                   style={{
-                    height: isMobileView ? "auto" : 500,
-                    width: isMobileView ? "100%" : 600,
+                    maxHeight: isMobileView ? 250 : 550,
+                    maxWidth: isMobileView ? "100%" : "100%",
                     flex: 0.5,
                     backgroundSize: "cover", // Initially set for larger screens
                     borderRadius: 15,
                   }}
                 />
               </Grid>
-            </Grid>
+            </Box>
             <br />
             <Typography
               sx={{
