@@ -76,7 +76,7 @@ export default function Home() {
     },
     {
       programe: "Advocacy & Capacity Strengthening",
-      programeImage: "/bahydro5.jpg",
+      programeImage: "/jessy.jpg",
       url: "advocacy",
     },
     {

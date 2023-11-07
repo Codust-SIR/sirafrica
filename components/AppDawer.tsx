@@ -211,10 +211,7 @@ export default function HideAppBar(props: Props) {
           name: "Donate",
           url: "/donate",
         },
-        {
-          name: "Fundraise",
-          url: "/join/fundraise",
-        },
+        
         {
           name: "Careers",
           url: "/join/carrers",
