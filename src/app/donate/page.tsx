@@ -38,22 +38,18 @@ export default function Donate() {
     options: string[];
   }[] = [
     {
-      title: "M-PESA | KENYA",
+      title: "Bank Transfer",
       options: [
-        "Paybill No: 000000",
-        "Account: SIR",
-        "Amount: Please give generously",
+        " Account Number: 1650284680635",
+        "Equity Bank, (K) limited",
+        "Account: SOLIDARITY INITIATIVE FOR REFUGEES CBO",
+        "SWIFT code: EQBLKENA",
       ],
     },
     {
-      title: "Bank Transfer",
-      options: [
-        "Paybill No: 000000",
-        "Account: SIR",
-        "Amount: Please give generously",
-      ],
+      title: "M-PESA | KENYA",
+      options: ["Coming soon"],
     },
-    
   ];
 
   return (
@@ -113,16 +109,17 @@ export default function Donate() {
           </Box>
           <br />
           {/* Other ways to give */}
-          <Box sx={{ p: 9, pt: 3 }}>
+          <Box sx={{ p: isMobileView ? 1 : 9, pt: 3 }}>
             <Typography variant={isMobileView ? "h5" : "h4"} fontWeight="bold">
               Other ways to give
             </Typography>
 
             <Box
               sx={{
-                display: "grid",
+                display: isMobileView ? "flex" : "grid",
+                flexDirection: "column",
                 gridTemplateColumns: "repeat(auto-fit, minmax(100px,1fr))",
-                gap: 5,
+                gap: isMobileView ? 1 : 5,
                 // p: 9,
                 pt: 3,
               }}
@@ -189,11 +186,8 @@ export default function Donate() {
               <Collapse in={checked}>
                 <br />
                 Solidarity Initiative for Refugees (SIR) is a community-based
-                organization, founded in 2016 by young refugees. SIR&lsquo;s
-                mission is to empower refugee youth through technology-based
-                education and livelihood training, helping them rebuild their
-                lives after the impact of insecurity, discrimination, conflict,
-                and disaster.
+                organization established in 2016 in response to the pressing
+                challenges faced by refugees in Kakuma, Turkana County in Kenya.
               </Collapse>
             </Box>
           </Box>
