@@ -125,8 +125,7 @@ export default function Home() {
               sx={{
                 height: isMobileView ? 300 : 600,
                 width: "100%",
-                backgroundImage:
-                  "url(/img23.png)",
+                backgroundImage: "url(/jessy.jpg)",
                 backgroundSize: "cover", // Initially set for larger screens
                 display: "flex",
                 flexDirection: "column",
