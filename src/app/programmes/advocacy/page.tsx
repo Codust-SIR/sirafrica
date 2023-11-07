@@ -113,7 +113,7 @@ export default function Donate() {
               <Image
                 height={1800}
                 width={1500}
-                src={"/img19.png"}
+                src={"/jessy.jpg"}
                 alt=""
                 style={{
                   maxHeight: isMobileView ? 230 : 550,
