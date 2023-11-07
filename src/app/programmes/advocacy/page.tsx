@@ -160,7 +160,7 @@ export default function Donate() {
                   height={1800}
                   width={1500}
                   style={{
-                    maxHeight: isMobileView ? 250 : 550,
+                    maxHeight: isMobileView ? 250 : 500,
                     maxWidth: isMobileView ? "100%" : "100%",
                     flex: 0.5,
                     backgroundSize: "cover", // Initially set for larger screens
@@ -175,7 +175,7 @@ export default function Donate() {
                   height={1800}
                   width={1500}
                   style={{
-                    maxHeight: isMobileView ? 250 : 550,
+                    maxHeight: isMobileView ? 250 : 500,
                     maxWidth: isMobileView ? "100%" : "100%",
                     flex: 0.5,
                     backgroundSize: "cover", // Initially set for larger screens
@@ -241,12 +241,12 @@ export default function Donate() {
             >
               <Grid>
                 <Image
-                  src={"/img15.jpg"}
+                  src={"/img24.jpg"}
                   alt=""
                   height={1800}
                   width={1500}
                   style={{
-                    maxHeight: isMobileView ? 250 : 550,
+                    maxHeight: isMobileView ? 250 : 500,
                     maxWidth: isMobileView ? "100%" : "100%",
                     flex: 0.5,
                     backgroundSize: "cover", // Initially set for larger screens
@@ -261,7 +261,7 @@ export default function Donate() {
                   height={1800}
                   width={1500}
                   style={{
-                    maxHeight: isMobileView ? 250 : 550,
+                    maxHeight: isMobileView ? 250 : 500,
                     maxWidth: isMobileView ? "100%" : "100%",
                     flex: 0.5,
                     backgroundSize: "cover", // Initially set for larger screens
