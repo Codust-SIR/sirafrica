@@ -117,7 +117,7 @@ export default function Donate() {
           <Toolbar />
           <Toolbar />
           <Box
-            p={2}
+            p={isMobileView ? 2 : 10}
             sx={{
               display: "flex",
               flexDirection: isMobileView ? "column" : "row",
@@ -129,12 +129,9 @@ export default function Donate() {
               <Typography variant="h3">Volunteering</Typography>
               <br />
               <Typography variant="body1">
-                There should be no room for hunger in our world, and we all can
-                play a part. WFP relies entirely on voluntary donations, so
-                every contribution counts. You can also try Freerice, the trivia
-                game that allows you to raise 10 grains of rice to support WFP
-                with every right answer, or download the ShareTheMeal app to
-                feed someone with just US$.80 and a few taps on your phone.
+                We invite you to learn more about our organization and the
+                impact we&apos;re making. If you&apos;re interested, you can
+                join us by becoming a volunteer. We appreciate your support!
               </Typography>
               <Button
                 color="success"
@@ -168,61 +165,12 @@ export default function Donate() {
           </Box>
           {/* Donate */}
           <Toolbar />
-          <Toolbar />
-          <Box
-            p={2}
-            sx={{
-              display: "flex",
-              flexDirection: isMobileView ? "column" : "row",
-              gap: 2,
-            }}
-          >
-            <Image
-              src={
-                "https://images.pexels.com/photos/6591164/pexels-photo-6591164.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              }
-              width={isMobileView ? 400 : 800}
-              height={isMobileView ? 300 : 300}
-              alt={"Image"}
-              style={{
-                height: isMobileView ? "100%" : 300,
-                width: "100%",
-                objectFit: "contain",
-                flex: 0.5,
-                marginTop: isMobileView ? 0 : -55,
-              }}
-            />{" "}
-            <Box flex={0.5}>
-              <Typography variant="h3">Fundraise</Typography>
-              <br />
-              <Typography variant="body1">
-                There should be no room for hunger in our world, and we all can
-                play a part. WFP relies entirely on voluntary donations, so
-                every contribution counts. You can also try Freerice, the trivia
-                game that allows you to raise 10 grains of rice to support WFP
-                with every right answer, or download the ShareTheMeal app to
-                feed someone with just US$.80 and a few taps on your phone.
-              </Typography>
-              <Button
-                color="success"
-                sx={{
-                  textTransform: "none",
-                  borderRadius: 2,
-                  mt: 3,
-                }}
-                variant="contained"
-                endIcon={<EastRoundedIcon />}
-                href="/join/fundraise"
-              >
-                Learn more
-              </Button>
-            </Box>
-          </Box>
+
           {/* Carrer */}
-          <Toolbar />
+
           <Toolbar />
           <Box
-            p={2}
+            p={isMobileView ? 2 : 10}
             sx={{
               display: isMobileView ? "block" : "flex",
               flexDirection: isMobileView ? "column-reverse" : "row",
@@ -234,12 +182,11 @@ export default function Donate() {
               <Typography variant="h3">Carrer</Typography>
               <br />
               <Typography variant="body1">
-                There should be no room for hunger in our world, and we all can
-                play a part. WFP relies entirely on voluntary donations, so
-                every contribution counts. You can also try Freerice, the trivia
-                game that allows you to raise 10 grains of rice to support WFP
-                with every right answer, or download the ShareTheMeal app to
-                feed someone with just US$.80 and a few taps on your phone.
+                We invite you to learn more about our organization and the
+                impact we&apos;re making. If you&apos;re interested, you can
+                join us by exploring career opportunities at our organization.
+                We&apos;re always looking for passionate individuals to join our
+                team!
               </Typography>
               <Button
                 color="success"
@@ -256,9 +203,7 @@ export default function Donate() {
               </Button>
             </Box>
             <Image
-              src={
-                "https://images.pexels.com/photos/6591164/pexels-photo-6591164.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              }
+              src={"/ntf.jpeg"}
               width={isMobileView ? 400 : 800}
               height={isMobileView ? 300 : 300}
               alt={"Image"}

@@ -32,54 +32,70 @@ const Footer = () => {
         <br />
         <Box
           sx={{
-            display: "flex",
+            // display: "flex",
             flex: 0.4,
             // alignItems: "center",
             // marginLeft: isMobileView ? "auto" : "0",
             // marginRight: isMobileView ? "auto" : "0",
             gap: 2,
+            pr: isMobileView ? 0 : 5,
           }}
-          component={Link}
-          href="/"
-          underline="none"
         >
-          <Image
-            height={100}
-            width={100}
-            alt="SIR"
-            src="/sirafrica_logo_bw.png"
-            style={{
-              height: 45,
-              width: 45,
+          <Box
+            sx={{
+              display: "flex",
+              // alignItems: "center",
+              // marginLeft: isMobileView ? "auto" : "0",
+              // marginRight: isMobileView ? "auto" : "0",
+              gap: 2,
             }}
-          />
-          <Box>
-            <Typography
-              variant="h5"
-              component="h5"
-              sx={{
-                flexGrow: 1,
-                color: "white",
-                fontWeight: 800,
-                letterSpacing: 3,
+            component={Link}
+            href="/"
+            underline="none"
+          >
+            <Image
+              height={100}
+              width={100}
+              alt="SIR"
+              src="/sirafrica_logo_bw.png"
+              style={{
+                height: 45,
+                width: 45,
               }}
-            >
-              SIR
-            </Typography>
-            <Typography
-              variant="body2"
-              component="p"
-              sx={{
-                flexGrow: 1,
-                letterSpacing: 1,
-                color: "white",
-              }}
-            >
-              Learn, Earn, Innovate
-            </Typography>
+            />
+            <Box>
+              <Typography
+                variant="h5"
+                component="h5"
+                sx={{
+                  flexGrow: 1,
+                  color: "white",
+                  fontWeight: 800,
+                  letterSpacing: 3,
+                }}
+              >
+                SIR
+              </Typography>
+              <Typography
+                variant="body2"
+                component="p"
+                sx={{
+                  flexGrow: 1,
+                  letterSpacing: 1,
+                  color: "white",
+                }}
+              >
+                Learn, Earn, Innovate
+              </Typography>
+            </Box>{" "}
           </Box>
           <br />
           <br />
+          <Typography variant="body2" component="p">
+            Solidarity Initiative for Refugees (SIR) is a community-based
+            organization established in 2016 in response to the pressing
+            challenges faced by refugees in Kakuma, Turkana County in Kenya.
+          </Typography>
           <br />
           <br />
           <br />
