@@ -427,7 +427,7 @@ const BlogNewsStory = () => {
         ) : (
           <>
             <Carousel responsive={responsive2}>
-              {blogNewsStory.slice(0, 2).map((item, index) => (
+              {blogNewsStory.slice(0, 2).reverse().map((item, index) => (
                 <StoryBlogCard {...item} key={index} />
               ))}
             </Carousel>
