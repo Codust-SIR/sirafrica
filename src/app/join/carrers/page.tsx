@@ -1,7 +1,7 @@
 "use client";
 import HideAppBar from "../../../../components/AppDawer";
 import Image from "next/image";
-
+import TextTransition, { presets } from "react-text-transition";
 import {
   Box,
   CssBaseline,
@@ -32,15 +32,26 @@ export default function Carrers() {
   });
 
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
-  const [message, setMessage] = useState("");
 
   const texts = ["Work", "Advocate", "Contribute"];
 
+  const [index, setIndex] = useState(0);
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setMessage(texts[Math.floor(Math.random() * texts.length)]);
-    }, 3000);
-    return () => clearInterval(interval);
+    const intervalId = setInterval(
+      () => setIndex((index) => index + 1),
+      4000 // every 3 seconds
+    );
+    return () => clearTimeout(intervalId);
+  }, []);
+  const [index2, setIndex2] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(
+      () => setIndex2((index) => index + 1),
+      5000 // every 3 seconds
+    );
+    return () => clearTimeout(intervalId);
   }, []);
 
   const colorPick = (text: string) => {
@@ -86,6 +97,7 @@ export default function Carrers() {
     "We are looking for you",
     "Take part in our mission",
     "Join our team",
+    "We are hiring",
   ];
 
   function getStyles(name: string, item: readonly string[], theme: Theme) {
@@ -151,23 +163,24 @@ export default function Carrers() {
             bgcolor={grey[700]}
           >
             <CenteredBox alignItems={"center"} flex={0.4}>
-              <Typography variant={isMobileView ? "h4" : "h3"} color="white">
-                <Slide direction="up" in mountOnEnter unmountOnExit>
+              <Box>
+                <Typography variant={isMobileView ? "h4" : "h2"} color="white">
                   <b
                     className="animated-text"
                     style={{
-                      color: colorPick(message),
+                      color: colorPick(texts[index % texts.length]),
                       animation: "up-down 3s ease-in-out infinite",
                     }}
                   >
-                    {" "}
-                    {message}
+                    <TextTransition springConfig={presets.wobbly}>
+                      {texts[index % texts.length]}
+                    </TextTransition>
                   </b>
-                </Slide>
-
-                <br />
-                <b> for everyone</b>
-              </Typography>
+                </Typography>
+                <Typography variant={"h4"} color="white">
+                  for everyone
+                </Typography>
+              </Box>
               <Typography color="white" variant={isMobileView ? "h6" : "h5"}>
                 Find your next job at SIR
               </Typography>
@@ -194,7 +207,10 @@ export default function Carrers() {
               variant={isMobileView ? "h5" : "h3"}
               fontWeight="bold"
             >
-              {joinMessages[Math.floor(Math.random() * joinMessages.length)]}
+              <TextTransition springConfig={presets.wobbly}>
+                {joinMessages[index2 % joinMessages.length]}
+              </TextTransition>
+              {/* {joinMessages[Math.floor(Math.random() * joinMessages.length)]} */}
             </Typography>
             <Box
               sx={{
