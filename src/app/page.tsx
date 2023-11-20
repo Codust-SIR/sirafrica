@@ -427,7 +427,15 @@ const BlogNewsStory = () => {
         ) : (
           <>
             <Carousel responsive={responsive2}>
-              {blogNewsStory.slice(0, 2).reverse().map((item, index) => (
+              {blogNewsStory
+                .filter(
+                  (item, index) =>
+                    item._id == "95bf3c97-7a05-47c3-8a1b-887eac0f0b20"
+                )
+                .map((item, index) => (
+                  <StoryBlogCard {...item} key={index} />
+                ))}
+              {blogNewsStory.slice(0, 1).map((item, index) => (
                 <StoryBlogCard {...item} key={index} />
               ))}
             </Carousel>
@@ -440,9 +448,14 @@ const BlogNewsStory = () => {
               p={isMobileView ? 2 : 0}
               pt={isMobileView ? 0 : 4}
             >
-              {blogNewsStory.slice(2, 5).map((item, index) => (
-                <MoreBlogcard {...item} key={index} />
-              ))}
+              {blogNewsStory
+                .filter(
+                  (item) => item._id !== "95bf3c97-7a05-47c3-8a1b-887eac0f0b20"
+                )
+                .slice(1, 5)
+                .map((item, index) => (
+                  <MoreBlogcard {...item} key={index} />
+                ))}
             </Box>
           </>
         )}
