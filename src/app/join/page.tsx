@@ -197,7 +197,7 @@ export default function Donate() {
                 }}
                 variant="contained"
                 endIcon={<EastRoundedIcon />}
-                href="/join/carrer"
+                href="/join/carrers"
               >
                 Learn more
               </Button>
