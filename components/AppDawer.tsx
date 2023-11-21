@@ -211,11 +211,12 @@ export default function HideAppBar(props: Props) {
           name: "Donate",
           url: "/donate",
         },
-
+        
         {
           name: "Careers",
           url: "/join/carrers",
         },
+        { name: "Contact", url: "/contact " },
       ],
     },
   ]);
