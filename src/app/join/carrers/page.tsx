@@ -393,6 +393,9 @@ const JobComponent: FC<Job> = ({
   category,
   job_deadline,
 }) => {
+  const isMobileView = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
   return (
     <Box
       sx={{
@@ -423,7 +426,11 @@ const JobComponent: FC<Job> = ({
       <br />
       <Divider />
       <br />
-      <Box display="flex" alignItems="center" gap={1}>
+      <Box
+        display={isMobileView ? "grid" : "flex"}
+        alignItems="center"
+        gap={1}
+      >
         <Chip
           sx={
             {
