@@ -312,6 +312,9 @@ export interface Job {
   job_title: string;
   category: string;
   job_type: string;
+  job_location: string;
+  _id: string;
+  body: any;
 }
 
 export async function getJobs(): Promise<Job[]> {
@@ -320,6 +323,19 @@ export async function getJobs(): Promise<Job[]> {
   `);
 
   return jobs;
+}
+
+// Get job by id
+
+export async function getJobById(id: string): Promise<Job> {
+  let job: Job = await client.fetch(
+    `
+    *[_type == "jobs" && _id == $id][0]
+  `,
+    { id }
+  );
+
+  return job;
 }
 
 export interface Product {

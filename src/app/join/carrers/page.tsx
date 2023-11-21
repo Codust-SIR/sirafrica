@@ -17,11 +17,14 @@ import {
   Chip,
   MenuItem,
   CircularProgress,
+  Link,
+  Divider,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { green, deepOrange, red, yellow, grey } from "@mui/material/colors";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState, useEffect, FC, useRef } from "react";
+import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { Job, getJobs } from "../../../../services/sentry";
 
 export default function Carrers() {
@@ -181,7 +184,7 @@ export default function Carrers() {
                   for everyone
                 </Typography>
               </Box>
-              <Typography color="white" variant={isMobileView ? "h6" : "h5"}>
+              <Typography color="white" variant={"h6"}>
                 Find your next job at SIR
               </Typography>
             </CenteredBox>
@@ -196,6 +199,7 @@ export default function Carrers() {
                   height: isMobileView ? "100%" : 500,
                   width: "100%",
                   objectFit: "contain",
+                  borderRadius: 15,
                 }}
               />
             </CenteredBox>
@@ -380,7 +384,13 @@ const CenteredBox = styled(Box)`
   justify-content: center;
 `;
 
-const JobComponent: FC<Job> = ({ job_title, job_type }) => {
+const JobComponent: FC<Job> = ({
+  job_title,
+  job_type,
+  _id,
+  job_location,
+  category,
+}) => {
   return (
     <Box
       sx={{
@@ -392,25 +402,52 @@ const JobComponent: FC<Job> = ({ job_title, job_type }) => {
           border: `1px solid black`,
         },
       }}
+      component={Link}
+      underline="none"
+      color="inherit"
+      href={`/join/carrers/${_id}`}
     >
       <Typography
         variant="h5"
         fontWeight={600}
         sx={{
           "&:hover": {
-            color: yellow[800],
+            // color: yellow[800],
           },
         }}
       >
         {job_title}
       </Typography>
       <br />
-      <Chip
-        sx={{
-          bgcolor: yellow[800],
-        }}
-        label={job_type}
-      />
+      <Divider />
+      <br />
+      <Box display="flex" alignItems="center" gap={1}>
+        <Chip
+          sx={
+            {
+              // bgcolor: yellow[800],
+            }
+          }
+          label={job_type}
+        />
+        {/* Vericle divider */}
+        <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
+        {/* Location */}
+        <Typography
+          variant={"subtitle1"}
+          sx={{ display: "flex", alignItems: "center", gap: 0.3 }}
+        >
+          <PlaceOutlinedIcon /> {job_location}
+        </Typography>
+        <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
+        {/* Type */}
+        <Typography
+          variant={"subtitle1"}
+          sx={{ display: "flex", alignItems: "center", gap: 0.3 }}
+        >
+          {category}
+        </Typography>
+      </Box>
     </Box>
   );
 };
