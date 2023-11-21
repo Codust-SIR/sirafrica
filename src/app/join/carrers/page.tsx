@@ -26,6 +26,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState, useEffect, FC, useRef } from "react";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { Job, getJobs } from "../../../../services/sentry";
+import moment from "moment";
 
 export default function Carrers() {
   const theme = createTheme({
@@ -390,6 +391,7 @@ const JobComponent: FC<Job> = ({
   _id,
   job_location,
   category,
+  job_deadline,
 }) => {
   return (
     <Box
@@ -434,7 +436,7 @@ const JobComponent: FC<Job> = ({
         <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
         {/* Location */}
         <Typography
-          variant={"subtitle1"}
+          variant={"subtitle2"}
           sx={{ display: "flex", alignItems: "center", gap: 0.3 }}
         >
           <PlaceOutlinedIcon /> {job_location}
@@ -442,10 +444,14 @@ const JobComponent: FC<Job> = ({
         <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
         {/* Type */}
         <Typography
-          variant={"subtitle1"}
+          variant={"subtitle2"}
           sx={{ display: "flex", alignItems: "center", gap: 0.3 }}
         >
           {category}
+        </Typography>
+        <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
+        <Typography variant={"subtitle2"}>
+          Deadline: {moment(job_deadline).format("MMMM Do YYYY")}
         </Typography>
       </Box>
     </Box>
