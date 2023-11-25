@@ -315,6 +315,7 @@ export interface Job {
   job_location: string;
   _id: string;
   job_deadline: string;
+  link_og: string;
   body: any;
 }
 

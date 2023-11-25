@@ -392,6 +392,7 @@ const JobComponent: FC<Job> = ({
   job_location,
   category,
   job_deadline,
+  link_og,
 }) => {
   const isMobileView = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
@@ -410,7 +411,8 @@ const JobComponent: FC<Job> = ({
       component={Link}
       underline="none"
       color="inherit"
-      href={`/join/carrers/${_id}`}
+      href={`${link_og}`}
+      target="_blank"
     >
       <Typography
         variant="h5"
@@ -426,11 +428,7 @@ const JobComponent: FC<Job> = ({
       <br />
       <Divider />
       <br />
-      <Box
-        display={isMobileView ? "grid" : "flex"}
-        alignItems="center"
-        gap={1}
-      >
+      <Box display={isMobileView ? "grid" : "flex"} alignItems="center" gap={1}>
         <Chip
           sx={
             {
