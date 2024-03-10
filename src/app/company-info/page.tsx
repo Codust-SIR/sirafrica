@@ -74,9 +74,9 @@ export default function Home() {
               variant={isMobileView ? "h5" : "h4"}
               fontWeight={500}
             >
-              We are dedicated to empowering refugees and locals through innovative
-              programs and advocacy efforts that enhance their access to quality
-              education, and dignified livelihood opportunities.
+              We are dedicated to empowering refugees and locals through
+              innovative programs and advocacy efforts that enhance their access
+              to quality education, and dignified livelihood opportunities.
             </Typography>
           </CenteredBox>
           <br />
@@ -394,20 +394,28 @@ function SimpleCollapse({ body, title }: { title: string; body: string }) {
 
 const coreValues: { title: string; body: string }[] = [
   {
-    title: "Equal Opportunity Advocacy",
-    body: "We are passionate about championing equal access to information and opportunities for all, regardless of their background or circumstances. Our commitment to equality drives every aspect of our work.",
+    title: "Accountability",
+    body: "We hold ourselves accountable to our partners, beneficiaries, and host communities",
   },
   {
-    title: "Innovation for Impact",
-    body: "We embrace innovation as a force for positive change. We continuously seek new and creative ways to address challenges, striving to make a meaningful impact on the lives of those we serve.",
+    title: "Integrity",
+    body: "We value integrity, honesty, transparency, mutual respect, innovation, personal excellence, mutual respect, and teamwork",
   },
 
   {
-    title: "Collaborative Community",
-    body: "Collaboration is the cornerstone of our approach. By fostering partnerships with organizations, experts, and communities, we amplify our collective efforts to uplift and empower refugee youth.",
+    title: "Responsibility",
+    body: "We are responsible and accountable to the community, partners and adherence to do no harm principle",
   },
   {
-    title: "Resilience and Growth",
-    body: "We view challenges as opportunities for growth. With unwavering determination and resilience, we navigate obstacles, adapt, and continuously improve our solutions to create lasting change.",
+    title: "Commitment",
+    body: "We respect for guidelines and compliance and support to stakeholders.",
+  },
+  {
+    title: "Quality service provision",
+    body: "We are committed to excellent and quality service delivery to the communities that we serve",
+  },
+  {
+    title: "Equity and Innovation",
+    body: "We are committed to innovations and equitable use of technology",
   },
 ];
