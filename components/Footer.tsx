@@ -5,6 +5,7 @@ import {
   useMediaQuery,
   useTheme,
   IconButton,
+  Divider,
 } from "@mui/material";
 import Image from "next/image";
 import React from "react";
@@ -230,6 +231,36 @@ const Footer = () => {
         Copyright © {new Date().getFullYear()} Solidarity Initiative for
         Refugees
       </Typography>
+      <br />
+      <br />
+      <br />
+      <Divider
+        sx={{
+          bgcolor: "white",
+        }}
+      />
+      <Box
+        sx={{
+          pt: 6,
+          display: "grid",
+          placeItems: "center",
+        }}
+      >
+        <Typography>
+          Developed by{" "}
+          <Link
+            href="http://rama1.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              color: "white",
+            }}
+            underline="none"
+          >
+            Ramazani
+          </Link>
+        </Typography>
+      </Box>
     </Box>
   );
 };
