@@ -8,6 +8,7 @@ import {
   createTheme,
   useMediaQuery,
   Theme,
+  CircularProgress,
 } from "@mui/material";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { styled } from "@mui/system";
@@ -90,12 +91,25 @@ export default function Carrers() {
             </CenteredBox>
           </Box>
           <br />
-          <Box sx={{ p: isMobileView ? 1 : 35, pt: 3 }}>
-            <PortableText
-              value={job?.body}
-              components={myPortableTextComponents}
-            />
-          </Box>
+          {loadingJob ? (
+            <Box
+              sx={{
+                display: "grid",
+                placeItems: "center",
+                p: 40,
+                pt: 4,
+              }}
+            >
+              <CircularProgress size={40} color="success" />
+            </Box>
+          ) : (
+            <Box sx={{ p: isMobileView ? 1 : 35, pt: 3 }}>
+              <PortableText
+                value={job?.body}
+                components={myPortableTextComponents}
+              />
+            </Box>
+          )}
         </Box>
       </HideAppBar>
     </ThemeProvider>

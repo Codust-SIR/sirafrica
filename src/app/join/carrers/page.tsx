@@ -411,8 +411,7 @@ const JobComponent: FC<Job> = ({
       component={Link}
       underline="none"
       color="inherit"
-      href={`${link_og}`}
-      target="_blank"
+      href={`/join/carrers/${_id}`}
     >
       <Typography
         variant="h5"
