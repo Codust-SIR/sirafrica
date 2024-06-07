@@ -289,7 +289,7 @@ export default function Home() {
           </Box>
 
           {/* Stories News & Blogs */}
-          <BlogNewsStory />
+          <BlogNewsStoryComponent />
 
           {/* Get involved */}
           <Box
@@ -368,7 +368,7 @@ const CenteredBox = styled(Box)`
   text-align: center;
 `;
 
-const BlogNewsStory = () => {
+const BlogNewsStoryComponent = () => {
   const theme = useTheme();
   const isMobileView = useMediaQuery(() => theme.breakpoints.down("sm"));
   const [blogNewsStory, setBlogNewsStory] = React.useState<BlogNewsStory[]>([]);

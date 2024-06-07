@@ -212,7 +212,7 @@ export default function Shop() {
                       );
                     })
                     .map((item, index) => {
-                      return <Product key={index} {...item} />;
+                      return <ProductComponent key={index} {...item} />;
                     })
                 ) : (
                   <Box
@@ -235,7 +235,7 @@ export default function Shop() {
   );
 }
 
-function Product({ name, image, price, _id }: Product) {
+function ProductComponent({ name, image, price, _id }: Product) {
   const theme = createTheme({
     typography: {
       fontFamily: "inherit",
