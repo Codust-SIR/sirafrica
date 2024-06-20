@@ -374,7 +374,7 @@ const BlogNewsStoryComponent = () => {
   const [blogNewsStory, setBlogNewsStory] = React.useState<BlogNewsStory[]>([]);
   const [loading, setLoading] = React.useState(true);
   React.useEffect(() => {
-    getBlogsNewsAndReport("author").then((parterns) => {
+    getBlogsNewsAndReport().then((parterns) => {
       setBlogNewsStory(parterns);
       setLoading(false);
     });
@@ -430,14 +430,19 @@ const BlogNewsStoryComponent = () => {
               {blogNewsStory
                 .filter(
                   (item, index) =>
-                    item._id == "95bf3c97-7a05-47c3-8a1b-887eac0f0b20"
+                    item._id == "1ad2b008-4818-41e4-a39d-cc0777fca8d1"
                 )
                 .map((item, index) => (
                   <StoryBlogCard {...item} key={index} />
                 ))}
-              {blogNewsStory.slice(0, 1).map((item, index) => (
-                <StoryBlogCard {...item} key={index} />
-              ))}
+              {blogNewsStory
+                .filter(
+                  (item, index) =>
+                    item._id == "f2b317f3-7fe2-4d7a-b080-f92de260f9ec"
+                )
+                .map((item, index) => (
+                  <StoryBlogCard {...item} key={index} />
+                ))}
             </Carousel>
             <Box
               display={"grid"}
@@ -450,7 +455,7 @@ const BlogNewsStoryComponent = () => {
             >
               {blogNewsStory
                 .filter(
-                  (item) => item._id !== "95bf3c97-7a05-47c3-8a1b-887eac0f0b20"
+                  (item) => item._id !== "1ad2b008-4818-41e4-a39d-cc0777fca8d1"
                 )
                 .slice(1, 5)
                 .map((item, index) => (

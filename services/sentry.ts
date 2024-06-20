@@ -222,7 +222,6 @@ export interface BlogNewsStory {
 }
 
 export async function getBlogsNewsAndReport(
-  boardName: string
 ): Promise<BlogNewsStory[]> {
   let blogNewsStory: BlogNewsStory[] = await client.fetch(`
     *[_type == "blog_news_story"]
