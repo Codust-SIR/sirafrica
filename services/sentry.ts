@@ -221,25 +221,26 @@ export interface BlogNewsStory {
   };
 }
 
-export async function getBlogsNewsAndReport(
-): Promise<BlogNewsStory[]> {
+export async function getBlogsNewsAndReport(): Promise<BlogNewsStory[]> {
+  // Fetch the data
   let blogNewsStory: BlogNewsStory[] = await client.fetch(`
     *[_type == "blog_news_story"]
   `);
 
+  // Function to fetch the asset URL using the reference
   const imageUrl = async (_ref: string): Promise<string> => {
-    // Fetch the asset using the reference
     const asset = await client.fetch(`*[_id == $ref][0]`, {
       ref: _ref,
     });
-
     return asset.url;
   };
 
+  // Fetch all image URLs
   const imageUrls = await Promise.all(
     blogNewsStory.map((item) => imageUrl(item.cover.asset._ref))
   );
 
+  // Update blog news stories with image URLs
   const updatedBlogNewsStory: BlogNewsStory[] = blogNewsStory.map(
     (item, index) => {
       const coverImage = {
@@ -251,24 +252,18 @@ export async function getBlogsNewsAndReport(
         },
       };
       return {
-        _createdAt: item._createdAt,
-        _rev: item._rev,
-        _type: item._type,
-        _id: item._id,
-        description: item.description,
-        dateCreated: item.dateCreated,
-        title: item.title,
-        type: item.type,
+        ...item,
         cover: coverImage,
-        body: item.body,
-        author: item.author,
       };
     }
   );
 
-  blogNewsStory = updatedBlogNewsStory;
+  // Sort the data by _createdAt in descending order
+  updatedBlogNewsStory.sort((a, b) => {
+    return new Date(b._createdAt).getTime() - new Date(a._createdAt).getTime();
+  });
 
-  return blogNewsStory;
+  return updatedBlogNewsStory;
 }
 
 export const getBlogsNewsAndReportById = async (

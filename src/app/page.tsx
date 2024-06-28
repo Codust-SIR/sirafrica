@@ -435,14 +435,9 @@ const BlogNewsStoryComponent = () => {
                 .map((item, index) => (
                   <StoryBlogCard {...item} key={index} />
                 ))}
-              {blogNewsStory
-                .filter(
-                  (item, index) =>
-                    item._id == "f2b317f3-7fe2-4d7a-b080-f92de260f9ec"
-                )
-                .map((item, index) => (
-                  <StoryBlogCard {...item} key={index} />
-                ))}
+              {blogNewsStory.slice(0, 1).map((item, index) => (
+                <StoryBlogCard {...item} key={index} />
+              ))}
             </Carousel>
             <Box
               display={"grid"}

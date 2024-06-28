@@ -41,7 +41,7 @@ export default function Donate() {
   const [blogNewsStory, setBlogNewsStory] = useState<BlogNewsStory[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    getBlogsNewsAndReport("author").then((parterns) => {
+    getBlogsNewsAndReport().then((parterns) => {
       setBlogNewsStory(parterns);
       setLoading(false);
     });
