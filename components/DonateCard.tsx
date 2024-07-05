@@ -5,7 +5,6 @@ const DonateCard = () => {
     <iframe
       src="https://donorbox.org/embed/join-our-cause-4?default_interval=m&amount=30&hide_donation_meter=true"
       name="donorbox"
-      allowPaymentRequest
       style={{
         border: "none",
         maxWidth: "500px",
@@ -16,7 +15,7 @@ const DonateCard = () => {
       height="900"
       width="100%"
       allow="payment"
-    />
+    ></iframe>
   );
 };
 
