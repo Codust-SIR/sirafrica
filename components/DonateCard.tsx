@@ -6,7 +6,6 @@ const DonateCard = () => {
       src="https://donorbox.org/embed/join-our-cause-4?default_interval=m&amount=30&hide_donation_meter=true"
       name="donorbox"
       allowpaymentrequest="allowpaymentrequest"
-      seamless="seamless"
       frameborder="0"
       scrolling="no"
       height="900px"
