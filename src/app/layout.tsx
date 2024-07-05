@@ -20,6 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>{children}</body>
+      <script
+        src="https://donorbox.org/widget.js"
+        paypalExpress="false"
+      ></script>
     </html>
   );
 }
