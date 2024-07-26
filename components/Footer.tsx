@@ -249,7 +249,7 @@ const Footer = () => {
         <Typography>
           Developed by{" "}
           <Link
-            href="http://rama1.vercel.app"
+            href="https://pixart.live/"
             target="_blank"
             rel="noopener noreferrer"
             sx={{
@@ -257,7 +257,7 @@ const Footer = () => {
             }}
             underline="none"
           >
-            Ramazani
+            Pixart.
           </Link>
         </Typography>
       </Box>
